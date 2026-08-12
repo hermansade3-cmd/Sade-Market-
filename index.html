@@ -1,166 +1,369 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sade Market — Nunua, Uza na Pangisha kwa Urahisi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duka Langu — Bidhaa Mtandaoni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ================= REGISTER ================= -->
-  <section id="view-register" class="view">
-    <div class="topband">
-      <div class="brand"><span class="brand-navy">Sade</span><span class="brand-gold">Market</span></div>
-      <h1>Fungua Akaunti</h1>
-      <p class="subtitle">Anza kuuza na kununua leo hii</p>
-    </div>
-    <div class="card">
-      <form id="form-register">
-        <label>Jina kamili
-          <input type="text" name="fullName" placeholder="Mfano: Herman Sade" required />
-        </label>
-        <span class="error" data-error-for="fullName"></span>
+<div class="topbar">
+  <div class="brand"><span>Duka</span><span class="dot">Langu</span></div>
+  <div class="topbar-actions" id="authArea">
+    <a class="login-btn" href="login.html">Ingia</a>
+  </div>
+</div>
 
-        <label>Barua pepe
-          <input type="email" name="email" placeholder="wewe@mfano.com" required />
-        </label>
-        <span class="error" data-error-for="email"></span>
+<div class="hero">
+  <h1>Unatafuta nini leo?</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Andika jina la bidhaa...">
+    <button type="button" aria-label="Tafuta">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+  </div>
+</div>
 
-        <label>Namba ya simu
-          <input type="text" name="phone" placeholder="0712 345 678" required />
-        </label>
-        <span class="error" data-error-for="phone"></span>
+<div class="pill-row">
+  <div class="pill">🛍️ Bidhaa za Kila Mtu</div>
+  <div class="pill">✅ Wachuuzi Halisi</div>
+  <div class="pill">💬 Wasiliana Moja kwa Moja</div>
+</div>
 
-        <label>Password
-          <input type="password" name="password" placeholder="Angalau herufi 8" required />
-        </label>
-        <span class="error" data-error-for="password"></span>
+<div class="quick-add">
+  <button class="quick-tile" id="openAddFromTile" type="button">
+    <span class="tile-icon">＋</span>
+    <span class="label">Posti Bidhaa Yako</span>
+    <span class="sub">Weka picha, bei na namba yako ya WhatsApp</span>
+  </button>
+</div>
 
-        <p class="form-error" id="register-error"></p>
+<div class="section-head">
+  <h2>Bidhaa Zilizopo</h2>
+  <span id="statCount">0 bidhaa</span>
+</div>
 
-        <button type="submit" class="btn btn-primary" id="register-submit">Jisajili</button>
+<div class="toggle-row">
+  <button class="toggle-btn active" id="tabAll" type="button">Bidhaa Zote</button>
+  <button class="toggle-btn" id="tabMine" type="button">Bidhaa Zangu</button>
+</div>
 
-        <div class="divider"><span>au</span></div>
+<div id="loading">
+  <div class="spinner"></div>
+  Inapakia bidhaa...
+</div>
+<div id="empty">
+  <div class="ring">＋</div>
+  <h3 id="emptyTitle">Bado hakuna bidhaa</h3>
+  <p id="emptyText">Kuwa wa kwanza kuposti bidhaa dukani hapa.</p>
+</div>
+<div class="grid" id="grid"></div>
 
-        <button type="button" class="btn btn-google" id="register-google">Jisajili na Google</button>
+<!-- ===== BOTTOM NAV ===== -->
+<div class="bottom-nav">
+  <button class="active" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <span class="nav-icon">🏠</span>Nyumbani
+  </button>
+  <button type="button" onclick="document.getElementById('searchInput').focus();window.scrollTo({top:0,behavior:'smooth'})">
+    <span class="nav-icon">🔍</span>Tafuta
+  </button>
+  <button type="button" id="fabAdd">
+    <span class="center-fab">＋</span>
+  </button>
+  <button type="button" id="navMine">
+    <span class="nav-icon">📦</span>Zangu
+  </button>
+  <button type="button" id="navAccount">
+    <span class="nav-icon">👤</span>Akaunti
+  </button>
+</div>
 
-        <p class="switch-text">Una akaunti tayari? <a href="#" data-nav="login">Ingia</a></p>
-      </form>
-    </div>
-  </section>
-
-  <!-- ================= LOGIN ================= -->
-  <section id="view-login" class="view">
-    <div class="topband">
-      <div class="brand"><span class="brand-navy">Sade</span><span class="brand-gold">Market</span></div>
-      <h1>Karibu Tena</h1>
-      <p class="subtitle">Ingia kwenye akaunti yako</p>
-    </div>
-    <div class="card">
-      <form id="form-login">
-        <label>Barua pepe
-          <input type="email" name="email" placeholder="wewe@mfano.com" required />
-        </label>
-        <span class="error" data-error-for="email"></span>
-
-        <label>Password
-          <input type="password" name="password" placeholder="Password yako" required />
-        </label>
-        <span class="error" data-error-for="password"></span>
-
-        <p class="forgot"><a href="#" data-nav="forgot">Umesahau password?</a></p>
-
-        <p class="form-error" id="login-error"></p>
-
-        <button type="submit" class="btn btn-primary" id="login-submit">Ingia</button>
-
-        <div class="divider"><span>au</span></div>
-
-        <button type="button" class="btn btn-google" id="login-google">Ingia na Google</button>
-
-        <p class="switch-text">Hauna akaunti? <a href="#" data-nav="register">Jisajili</a></p>
-      </form>
-    </div>
-  </section>
-
-  <!-- ================= FORGOT PASSWORD ================= -->
-  <section id="view-forgot" class="view">
-    <div class="topband">
-      <div class="brand"><span class="brand-navy">Sade</span><span class="brand-gold">Market</span></div>
-      <h1>Rejesha Password</h1>
-      <p class="subtitle">Tutakutumia link ya kubadilisha password</p>
-    </div>
-    <div class="card">
-      <div id="forgot-sent" class="hidden">
-        <p class="info-text">Tumetuma link ya kubadilisha password kwenye barua pepe yako. Tafadhali angalia inbox yako (na spam folder).</p>
-        <button type="button" class="btn btn-primary" data-nav="login">Rudi kwenye Login</button>
+<!-- ===== ADD PRODUCT DRAWER ===== -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h2>Posti Bidhaa Yako</h2>
+    <button class="close-x" id="closeDrawer" type="button">✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="panel-block">
+      <div class="field">
+        <label for="pName">Jina la Bidhaa</label>
+        <input type="text" id="pName" placeholder="Mfano: Viatu vya ngozi">
       </div>
-      <form id="form-forgot">
-        <label>Barua pepe
-          <input type="email" name="email" placeholder="wewe@mfano.com" required />
-        </label>
-        <p class="form-error" id="forgot-error"></p>
-        <button type="submit" class="btn btn-primary" id="forgot-submit">Tuma Link</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ================= DASHBOARD ================= -->
-  <section id="view-dashboard" class="view">
-    <div class="dash-header">
-      <h1 id="dash-greeting">Karibu 👋</h1>
-      <p>Umeingia kwa mafanikio kwenye Sade Market.</p>
-    </div>
-    <div class="card">
-      <p class="info-text">Sehemu ya "Weka Tangazo", "Matangazo Yangu" na "Ujumbe" zitaongezwa kwenye Phase 3 na 6.</p>
-      <a href="#" data-nav="profile" class="link-arrow">Angalia Profile Yangu →</a>
-    </div>
-  </section>
-
-  <!-- ================= PROFILE ================= -->
-  <section id="view-profile" class="view">
-    <div class="profile-header">
-      <div class="avatar" id="profile-avatar">S</div>
-      <h1 id="profile-name">—</h1>
-    </div>
-    <div class="card">
-      <!-- Read mode -->
-      <div id="profile-view-mode">
-        <div class="row"><span>Barua pepe</span><span id="p-email">—</span></div>
-        <div class="row"><span>Simu</span><span id="p-phone">—</span></div>
-        <div class="row"><span>Mkoa</span><span id="p-region">—</span></div>
-        <div class="row"><span>Kuhusu</span><span id="p-about">—</span></div>
-        <div class="row"><span>Matangazo yaliyowekwa</span><span id="p-listings">0</span></div>
-        <div class="row"><span>Kiwango cha alama</span><span id="p-rating">Bado hakuna</span></div>
-
-        <div class="btn-row">
-          <button type="button" class="btn btn-outline" id="profile-edit-btn">Hariri Profile</button>
-          <button type="button" class="btn btn-outline btn-danger" id="profile-logout-btn">Toka</button>
-        </div>
+      <div class="field">
+        <label for="pPrice">Bei (TSh)</label>
+        <input type="number" id="pPrice" placeholder="25000">
       </div>
-
-      <!-- Edit mode -->
-      <form id="form-profile-edit" class="hidden">
-        <label>Jina kamili<input type="text" name="fullName" /></label>
-        <label>Kuhusu<input type="text" name="about" placeholder="Elezea kidogo kuhusu wewe au biashara yako" /></label>
-        <label>Mkoa<input type="text" name="region" placeholder="Mfano: Lindi" /></label>
-        <label>Wilaya<input type="text" name="district" /></label>
-        <div class="btn-row">
-          <button type="button" class="btn btn-outline" id="profile-cancel-btn">Ghairi</button>
-          <button type="submit" class="btn btn-primary" id="profile-save-btn">Hifadhi</button>
+      <div class="field">
+        <label for="pDesc">Maelezo</label>
+        <textarea id="pDesc" placeholder="Eleza kuhusu bidhaa hii..."></textarea>
+      </div>
+      <div class="field">
+        <label for="pPhone">Namba yako ya WhatsApp (mfano 2557XXXXXXXX)</label>
+        <input type="tel" id="pPhone" placeholder="255700000000">
+      </div>
+      <div class="field">
+        <label>Picha ya Bidhaa</label>
+        <div class="file-drop">
+          <input type="file" id="pImage" accept="image/*">
+          <span class="file-drop-label" id="fileLabel">Bonyeza kuchagua picha</span>
         </div>
-      </form>
+        <img id="pImagePreview" class="img-preview">
+      </div>
+      <button class="btn-full btn-orange" id="addProduct" type="button">Chapisha Bidhaa</button>
+      <p class="hint">Bidhaa yako itaonekana kwa kila mtu anayefungua duka hili. Namba yako ya WhatsApp itaonekana kwa mnunuzi anapobonyeza "Nunua Sasa".</p>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ================= LOADING ================= -->
-  <section id="view-loading" class="view">
-    <p class="loading-text">Inapakia...</p>
-  </section>
+<script type="module">
+  import {
+    auth, db, storage, onAuthStateChanged, signOut,
+    collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp,
+    ref, uploadBytes, getDownloadURL, deleteObject
+  } from "./firebase-init.js";
 
-  <script type="module" src="app.js"></script>
+  let currentUser = null;
+  let allProducts = [];
+  let searchTerm = '';
+  let viewMode = 'all'; // 'all' | 'mine'
+
+  // ===== AUTH STATE =====
+  const authArea = document.getElementById('authArea');
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    if(user){
+      const label = user.displayName || user.email || 'Mtumiaji';
+      const initial = label.trim().charAt(0).toUpperCase();
+      authArea.innerHTML = `
+        <div class="user-chip">
+          <span class="avatar">${initial}</span>
+          <span>${label.split('@')[0]}</span>
+        </div>
+        <button class="icon-btn" id="logoutBtn" title="Toka">⎋</button>
+      `;
+      document.getElementById('logoutBtn').addEventListener('click', async () => {
+        await signOut(auth);
+        viewMode = 'all';
+        setActiveTab();
+        render();
+      });
+    } else {
+      authArea.innerHTML = `<a class="login-btn" href="login.html">Ingia</a>`;
+      if(viewMode === 'mine'){ viewMode = 'all'; setActiveTab(); render(); }
+    }
+  });
+
+  // ===== DRAWER =====
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  function openDrawer(){
+    if(!currentUser){ window.location.href = 'login.html'; return; }
+    drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow='hidden';
+  }
+  function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow=''; }
+  document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  document.getElementById('openAddFromTile').addEventListener('click', openDrawer);
+  document.getElementById('fabAdd').addEventListener('click', openDrawer);
+  document.getElementById('navAccount').addEventListener('click', () => {
+    if(currentUser){ window.scrollTo({top:0,behavior:'smooth'}); }
+    else { window.location.href = 'login.html'; }
+  });
+  document.getElementById('navMine').addEventListener('click', () => {
+    if(!currentUser){ window.location.href = 'login.html'; return; }
+    viewMode = 'mine'; setActiveTab(); render();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  document.getElementById('tabAll').addEventListener('click', () => { viewMode='all'; setActiveTab(); render(); });
+  document.getElementById('tabMine').addEventListener('click', () => {
+    if(!currentUser){ window.location.href = 'login.html'; return; }
+    viewMode='mine'; setActiveTab(); render();
+  });
+  function setActiveTab(){
+    document.getElementById('tabAll').classList.toggle('active', viewMode==='all');
+    document.getElementById('tabMine').classList.toggle('active', viewMode==='mine');
+  }
+
+  // ===== IMAGE PREVIEW =====
+  let pendingFile = null;
+  document.getElementById('pImage').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    pendingFile = file;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = document.getElementById('pImagePreview');
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      document.getElementById('fileLabel').textContent = file.name;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ===== ADD PRODUCT =====
+  const addBtn = document.getElementById('addProduct');
+  addBtn.addEventListener('click', async () => {
+    if(!currentUser){ window.location.href = 'login.html'; return; }
+    const name = document.getElementById('pName').value.trim();
+    const price = document.getElementById('pPrice').value.trim();
+    const desc = document.getElementById('pDesc').value.trim();
+    const phone = document.getElementById('pPhone').value.trim().replace(/\D/g,'');
+
+    if(!name || !price || !phone){
+      alert('Tafadhali jaza jina la bidhaa, bei, na namba yako ya WhatsApp.');
+      return;
+    }
+
+    addBtn.disabled = true;
+    addBtn.textContent = 'Inachapisha...';
+
+    try{
+      let imageUrl = '';
+      if(pendingFile){
+        const path = `products/${currentUser.uid}/${Date.now()}_${pendingFile.name}`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, pendingFile);
+        imageUrl = await getDownloadURL(storageRef);
+      }
+
+      await addDoc(collection(db, 'products'), {
+        name, price, desc, phone, imageUrl,
+        ownerUid: currentUser.uid,
+        ownerName: currentUser.displayName || currentUser.email || 'Muuzaji',
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById('pName').value = '';
+      document.getElementById('pPrice').value = '';
+      document.getElementById('pDesc').value = '';
+      document.getElementById('pPhone').value = '';
+      document.getElementById('pImage').value = '';
+      document.getElementById('pImagePreview').style.display = 'none';
+      document.getElementById('fileLabel').textContent = 'Bonyeza kuchagua picha';
+      pendingFile = null;
+
+      closeDrawer();
+    } catch(err){
+      console.error(err);
+      alert('Samahani, imeshindikana kuchapisha bidhaa. Jaribu tena.');
+    } finally {
+      addBtn.disabled = false;
+      addBtn.textContent = 'Chapisha Bidhaa';
+    }
+  });
+
+  // ===== DELETE PRODUCT =====
+  window.removeProduct = async (id, imageUrl) => {
+    if(!confirm('Una uhakika unataka kuondoa bidhaa hii?')) return;
+    try{
+      await deleteDoc(doc(db, 'products', id));
+      if(imageUrl){
+        try{ await deleteObject(ref(storage, imageUrl)); } catch(e){ /* picha huenda tayari imefutwa */ }
+      }
+    } catch(err){
+      console.error(err);
+      alert('Imeshindikana kuondoa bidhaa. Jaribu tena.');
+    }
+  };
+
+  // ===== SEARCH =====
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchTerm = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  function escapeHtml(str){
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+  }
+
+  // ===== REALTIME LISTENER =====
+  const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
+  onSnapshot(q, (snapshot) => {
+    document.getElementById('loading').style.display = 'none';
+    allProducts = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    render();
+  }, (err) => {
+    console.error(err);
+    document.getElementById('loading').innerHTML = 'Imeshindikana kupakia bidhaa. Angalia mipangilio ya Firestore.';
+  });
+
+  function render(){
+    let list = allProducts;
+    if(viewMode === 'mine' && currentUser){
+      list = list.filter(p => p.ownerUid === currentUser.uid);
+    }
+    if(searchTerm){
+      list = list.filter(p => (p.name || '').toLowerCase().includes(searchTerm));
+    }
+
+    document.getElementById('statCount').textContent =
+      (viewMode === 'mine' ? list.length : allProducts.length) + ' bidhaa';
+
+    const grid = document.getElementById('grid');
+    const empty = document.getElementById('empty');
+    const emptyTitle = document.getElementById('emptyTitle');
+    const emptyText = document.getElementById('emptyText');
+
+    if(list.length === 0){
+      empty.style.display = 'block';
+      grid.innerHTML = '';
+      if(searchTerm){
+        emptyTitle.textContent = 'Hakuna kilicholingana';
+        emptyText.textContent = `Hatukupata bidhaa inayolingana na "${searchTerm}".`;
+      } else if(viewMode === 'mine'){
+        emptyTitle.textContent = 'Bado hujaposti bidhaa';
+        emptyText.textContent = 'Bonyeza kitufe cha "+" kuposti bidhaa yako ya kwanza.';
+      } else {
+        emptyTitle.textContent = 'Bado hakuna bidhaa';
+        emptyText.textContent = 'Kuwa wa kwanza kuposti bidhaa dukani hapa.';
+      }
+      return;
+    }
+    empty.style.display = 'none';
+
+    grid.innerHTML = list.map((p) => {
+      const isMine = currentUser && p.ownerUid === currentUser.uid;
+      const createdMs = p.createdAt && p.createdAt.toMillis ? p.createdAt.toMillis() : 0;
+      const isNew = createdMs && (Date.now() - createdMs) < 1000*60*60*24*2;
+
+      const imgHtml = p.imageUrl
+        ? `<img src="${p.imageUrl}" alt="${escapeHtml(p.name)}" loading="lazy">`
+        : `<div class="no-img">HAKUNA PICHA</div>`;
+
+      let buyBtn;
+      if(p.phone){
+        const msg = encodeURIComponent(`Habari, nataka kununua bidhaa: ${p.name} (TSh ${Number(p.price).toLocaleString()})`);
+        buyBtn = `<a class="buy-btn" href="https://wa.me/${p.phone}?text=${msg}" target="_blank" rel="noopener">Nunua Sasa</a>`;
+      } else {
+        buyBtn = `<span class="buy-btn disabled">Hakuna namba</span>`;
+      }
+
+      return `
+        <div class="card">
+          <div class="card-media">
+            ${isNew ? '<span class="badge-new">Mpya</span>' : ''}
+            ${isMine ? `<button class="fav-x" type="button" onclick="removeProduct('${p.id}','${(p.imageUrl||'').replace(/'/g,"\\'")}')" title="Ondoa bidhaa">✕</button>` : ''}
+            ${imgHtml}
+            ${isMine ? '<span class="badge-mine">Yako</span>' : ''}
+          </div>
+          <div class="card-body">
+            <div class="price">TSh ${Number(p.price).toLocaleString()}</div>
+            <div class="title">${escapeHtml(p.name)}</div>
+            <div class="seller">na ${escapeHtml(p.ownerName || 'Muuzaji')}</div>
+            ${buyBtn}
+          </div>
+        </div>`;
+    }).join('');
+  }
+</script>
+
 </body>
 </html>
