@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sade Market — Nunua, Uza na Pangisha kwa Urahisi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= REGISTER ================= -->
+  <section id="view-register" class="view">
+    <div class="topband">
+      <div class="brand"><span class="brand-navy">Sade</span><span class="brand-gold">Market</span></div>
+      <h1>Fungua Akaunti</h1>
+      <p class="subtitle">Anza kuuza na kununua leo hii</p>
+    </div>
+    <div class="card">
+      <form id="form-register">
+        <label>Jina kamili
+          <input type="text" name="fullName" placeholder="Mfano: Herman Sade" required />
+        </label>
+        <span class="error" data-error-for="fullName"></span>
+
+        <label>Barua pepe
+          <input type="email" name="email" placeholder="wewe@mfano.com" required />
+        </label>
+        <span class="error" data-error-for="email"></span>
+
+        <label>Namba ya simu
+          <input type="text" name="phone" placeholder="0712 345 678" required />
+        </label>
+        <span class="error" data-error-for="phone"></span>
+
+        <label>Password
+          <input type="password" name="password" placeholder="Angalau herufi 8" required />
+        </label>
+        <span class="error" data-error-for="password"></span>
+
+        <p class="form-error" id="register-error"></p>
+
+        <button type="submit" class="btn btn-primary" id="register-submit">Jisajili</button>
+
+        <div class="divider"><span>au</span></div>
+
+        <button type="button" class="btn btn-google" id="register-google">Jisajili na Google</button>
+
+        <p class="switch-text">Una akaunti tayari? <a href="#" data-nav="login">Ingia</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= LOGIN ================= -->
+  <section id="view-login" class="view">
+    <div class="topband">
+      <div class="brand"><span class="brand-navy">Sade</span><span class="brand-gold">Market</span></div>
+      <h1>Karibu Tena</h1>
+      <p class="subtitle">Ingia kwenye akaunti yako</p>
+    </div>
+    <div class="card">
+      <form id="form-login">
+        <label>Barua pepe
+          <input type="email" name="email" placeholder="wewe@mfano.com" required />
+        </label>
+        <span class="error" data-error-for="email"></span>
+
+        <label>Password
+          <input type="password" name="password" placeholder="Password yako" required />
+        </label>
+        <span class="error" data-error-for="password"></span>
+
+        <p class="forgot"><a href="#" data-nav="forgot">Umesahau password?</a></p>
+
+        <p class="form-error" id="login-error"></p>
+
+        <button type="submit" class="btn btn-primary" id="login-submit">Ingia</button>
+
+        <div class="divider"><span>au</span></div>
+
+        <button type="button" class="btn btn-google" id="login-google">Ingia na Google</button>
+
+        <p class="switch-text">Hauna akaunti? <a href="#" data-nav="register">Jisajili</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= FORGOT PASSWORD ================= -->
+  <section id="view-forgot" class="view">
+    <div class="topband">
+      <div class="brand"><span class="brand-navy">Sade</span><span class="brand-gold">Market</span></div>
+      <h1>Rejesha Password</h1>
+      <p class="subtitle">Tutakutumia link ya kubadilisha password</p>
+    </div>
+    <div class="card">
+      <div id="forgot-sent" class="hidden">
+        <p class="info-text">Tumetuma link ya kubadilisha password kwenye barua pepe yako. Tafadhali angalia inbox yako (na spam folder).</p>
+        <button type="button" class="btn btn-primary" data-nav="login">Rudi kwenye Login</button>
+      </div>
+      <form id="form-forgot">
+        <label>Barua pepe
+          <input type="email" name="email" placeholder="wewe@mfano.com" required />
+        </label>
+        <p class="form-error" id="forgot-error"></p>
+        <button type="submit" class="btn btn-primary" id="forgot-submit">Tuma Link</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= DASHBOARD ================= -->
+  <section id="view-dashboard" class="view">
+    <div class="dash-header">
+      <h1 id="dash-greeting">Karibu 👋</h1>
+      <p>Umeingia kwa mafanikio kwenye Sade Market.</p>
+    </div>
+    <div class="card">
+      <p class="info-text">Sehemu ya "Weka Tangazo", "Matangazo Yangu" na "Ujumbe" zitaongezwa kwenye Phase 3 na 6.</p>
+      <a href="#" data-nav="profile" class="link-arrow">Angalia Profile Yangu →</a>
+    </div>
+  </section>
+
+  <!-- ================= PROFILE ================= -->
+  <section id="view-profile" class="view">
+    <div class="profile-header">
+      <div class="avatar" id="profile-avatar">S</div>
+      <h1 id="profile-name">—</h1>
+      <span class="badge" id="profile-badge">Hajathibitishwa</span>
+    </div>
+    <div class="card">
+      <!-- Read mode -->
+      <div id="profile-view-mode">
+        <div class="row"><span>Barua pepe</span><span id="p-email">—</span></div>
+        <div class="row"><span>Simu</span><span id="p-phone">—</span></div>
+        <div class="row"><span>Mkoa</span><span id="p-region">—</span></div>
+        <div class="row"><span>Kuhusu</span><span id="p-about">—</span></div>
+        <div class="row"><span>Matangazo yaliyowekwa</span><span id="p-listings">0</span></div>
+        <div class="row"><span>Kiwango cha alama</span><span id="p-rating">Bado hakuna</span></div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-outline" id="profile-edit-btn">Hariri Profile</button>
+          <button type="button" class="btn btn-outline btn-danger" id="profile-logout-btn">Toka</button>
+        </div>
+      </div>
+
+      <!-- Edit mode -->
+      <form id="form-profile-edit" class="hidden">
+        <label>Jina kamili<input type="text" name="fullName" /></label>
+        <label>Kuhusu<input type="text" name="about" placeholder="Elezea kidogo kuhusu wewe au biashara yako" /></label>
+        <label>Mkoa<input type="text" name="region" placeholder="Mfano: Lindi" /></label>
+        <label>Wilaya<input type="text" name="district" /></label>
+        <div class="btn-row">
+          <button type="button" class="btn btn-outline" id="profile-cancel-btn">Ghairi</button>
+          <button type="submit" class="btn btn-primary" id="profile-save-btn">Hifadhi</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= LOADING ================= -->
+  <section id="view-loading" class="view">
+    <p class="loading-text">Inapakia...</p>
+  </section>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
