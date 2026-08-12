@@ -34,12 +34,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyCqOQQbxa4QkmaxTh8QCaJ1EN_ORkKNWPE",
+  authDomain: "world-technology-4d429.firebaseapp.com",
+  projectId: "world-technology-4d429",
+  storageBucket: "world-technology-4d429.firebasestorage.app",
+  messagingSenderId: "979647621854",
+  appId: "1:979647621854:web:bbac42ab1d8436ad71704f",
 };
 
 const app = initializeApp(FIREBASE_CONFIG);
