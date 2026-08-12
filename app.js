@@ -343,10 +343,9 @@ function renderProfile(profile) {
   document.getElementById("profile-avatar").textContent = (profile.fullName?.charAt(0) || "S").toUpperCase();
   document.getElementById("profile-name").textContent = profile.fullName || "—";
 
-  const badge = VERIFICATION_LABELS[profile.verificationLevel] || VERIFICATION_LABELS.unverified;
-  const badgeEl = document.getElementById("profile-badge");
-  badgeEl.textContent = badge.text;
-  badgeEl.classList.toggle("verified", badge.verified);
+  // Note: verification status is intentionally not shown on the user's own
+  // profile — it's not a requirement to act, just a trust signal shown to
+  // buyers on the listing page (added in a later phase).
 
   document.getElementById("p-email").textContent = profile.email || "—";
   document.getElementById("p-phone").textContent = profile.phone || "—";
