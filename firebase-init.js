@@ -17,10 +17,13 @@ import {
   getFirestore,
   collection,
   addDoc,
+  setDoc,
+  updateDoc,
   deleteDoc,
   doc,
   onSnapshot,
   query,
+  where,
   orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -52,10 +55,13 @@ export {
   signOut,
   collection,
   addDoc,
+  setDoc,
+  updateDoc,
   deleteDoc,
   doc,
   onSnapshot,
   query,
+  where,
   orderBy,
   serverTimestamp
 };
