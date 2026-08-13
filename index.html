@@ -1668,10 +1668,28 @@ async function moderateImageDataUrl(dataUrl){
       }
     );
 
-  if(!res.ok)
+  if(!res.ok){
+
+    let detail = "";
+
+    try{
+      const errBody =
+        await res.json();
+
+      detail =
+        errBody?.error?.message ||
+        JSON.stringify(errBody);
+    }
+    catch{
+      detail =
+        await res.text();
+    }
+
     throw new Error(
-      "Ukaguzi wa AI umeshindwa"
+      `xAI ${res.status}: ${detail}`
     );
+
+  }
 
   const data =
     await res.json();
