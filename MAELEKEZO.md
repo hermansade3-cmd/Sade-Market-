@@ -26,7 +26,12 @@ service cloud.firestore {
                     && request.resource.data.ownerUid == request.auth.uid;
       allow delete: if request.auth != null
                     && resource.data.ownerUid == request.auth.uid;
-      allow update: if false;
+      // Mmiliki anaweza kubadilisha chochote (jina, bei, picha, "imeuzwa", n.k).
+      // Mtu yeyote aliyeingia anaweza TU kuongeza hesabu ya 'views' (watazamaji).
+      allow update: if request.auth != null && (
+                      resource.data.ownerUid == request.auth.uid
+                      || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views'])
+                    );
     }
 
     match /conversations/{convoId} {
@@ -46,13 +51,30 @@ service cloud.firestore {
         allow update, delete: if false;
       }
     }
+
+    // Profile ya kila mtumiaji: jina, username, namba, picha, favorites, mipangilio ya privacy
+    match /users/{uid} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Arifa (mfano: "X amependa bidhaa yako"). Mtumaji anaandika kwa niaba ya mpokeaji,
+    // lakini ni mpokeaji tu ndiye anayeweza kusoma/kubadilisha (kuweka 'read: true') au kufuta.
+    match /notifications/{notifId} {
+      allow create: if request.auth != null
+                    && request.resource.data.fromUid == request.auth.uid;
+      allow read, update, delete: if request.auth != null
+                    && resource.data.toUid == request.auth.uid;
+    }
   }
 }
 ```
 
 Hii inaruhusu:
-- Kila mtu kuona bidhaa; kuongeza/kufuta bidhaa kunahitaji kuingia
+- Kila mtu kuona bidhaa; kuongeza/kufuta bidhaa kunahitaji kuingia; kubadilisha bidhaa (hariri/imeuzwa) ni kwa mmiliki tu, isipokuwa hesabu ya "views" ambayo mtu yeyote aliyeingia anaweza kuongeza
 - Mazungumzo (`conversations`) na ujumbe (`messages`) ndani yake kuonekana/kuandikwa tu na washiriki wawili wa mazungumzo hayo (mnunuzi na muuzaji)
+- Profile ya mtumiaji (`users/{uid}`) kuonekana na kila mtu (ili majina/picha za profile zionekane), lakini kuhaririwa na mwenyewe tu
+- Arifa (`notifications`) kuandikwa na yeyote (kwa niaba ya mtu mwingine, mfano "amependa bidhaa yako"), lakini kusomwa/kubadilishwa na mpokeaji pekee
 
 **Muhimu:** Firestore inaweza kukuomba "uunde composite index" mara ya kwanza mfumo wa Ujumbe unapotumika (kwa ajili ya kuorodhesha mazungumzo kwa `participants` + tarehe). Ukiona hitilafu kwenye Console ya browser yenye kiungo (link) cha "Create Index", bonyeza kiungo hicho kwenye kompyuta/simu ukiwa umeingia Firebase Console, subiri dakika chache index ijengwe, kisha jaribu tena.
 
@@ -80,3 +102,14 @@ Authentication → Settings → Authorized domains → ongeza domain utakayotumi
 - Wanunuzi wanaweza pia kubonyeza "✉️ Ujumbe" kwenye bidhaa yoyote (isipokuwa yao wenyewe) kutuma ujumbe wa maandishi kwa muuzaji **ndani ya tovuti yenyewe**, bila WhatsApp.
 - Muuzaji anapokea ujumbe huo kwenye sehemu ya "Ujumbe" (bottom nav), na anaweza kujibu papo hapo — mazungumzo yanaonekana kwa wote wawili kwa wakati halisi (real-time), kama chati ndogo.
 - Alama nyekundu (dot) kwenye "Ujumbe" inaonyesha kuna ujumbe mpya ambao bado haujasomwa.
+
+## Vipengele vya Akaunti (sehemu ya "Akaunti" — bottom nav)
+- **Profile** — picha, jina, username, namba ya simu, na kitufe cha "Hariri Profile"
+- **Matangazo Yangu** — orodha ya bidhaa ulizoposti zenye vitufe vya Hariri, Futa, na "Imeuzwa" (Mark as Sold), pamoja na idadi ya "views" za kila tangazo
+- **Pendwa (❤️ Favorites)** — bidhaa ulizohifadhi kwa kubonyeza moyo kwenye kadi; unaweza kuziondoa hapa pia
+- **Arifa (🔔 Notifications)** — inaonyesha: mtu ameulizia bidhaa yako (ujumbe usiosomwa), mtu amependa bidhaa yako, na kikumbusho endapo tangazo lako lina zaidi ya siku 30
+- **Mipangilio (⚙️ Settings)** — kubadili jina/username/namba (kupitia Profile), kubadili password (kwa akaunti za barua pepe pekee — akaunti za Google hazina password ya kubadili humu), privacy toggle (kuonyesha barua pepe hadharani au la), notifications toggle, na chaguo la lugha (Kiswahili kwa sasa; Kiingereza "hivi karibuni")
+
+**Kumbuka kuhusu mipangilio miwili isiyokamilika kikamilifu:**
+- Hakuna mfumo wa "kukubali/kukataa tangazo" (approval workflow) kwa sababu jukwaa hili halina timu ya usimamizi (admin) iliyojengwa bado — bidhaa zote zinachapishwa moja kwa moja. Tukihitaji hilo baadaye (mfano wewe kama msimamizi kupitisha kila tangazo kabla halijaonekana), ni kazi ya ziada tunayoweza kuijenga
+- Lugha ya Kiingereza bado ni "placeholder" tu — kubadilisha maandishi yote ya tovuti kuwa na lugha mbili (i18n kamili) ni kazi kubwa ya ziada isipokuwa uihitaji baadaye
