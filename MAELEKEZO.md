@@ -34,24 +34,16 @@ service cloud.firestore {
 
 Hii inaruhusu kila mtu kuona bidhaa, lakini kuongeza/kufuta bidhaa kunahitaji mtu kuingia (login) na anaweza kufuta bidhaa zake mwenyewe tu.
 
-## Hatua 4 — Wezesha Storage (kwa picha za bidhaa)
-1. Build → Storage → Get started
-2. Weka rules zifuatazo:
+## Hatua 4 — Picha za bidhaa (HAKUNA Storage inayohitajika)
+Mfumo huu **hautumii tena Firebase Storage** (ambayo inahitaji Blaze plan/kadi ya benki).
+Badala yake, picha ya bidhaa inabanwa (compressed) moja kwa moja kwenye kivinjari cha mtumiaji
+(kupitia canvas ya JavaScript) hadi iwe ndogo (chini ya ~450KB), kisha inahifadhiwa moja kwa moja
+ndani ya hati (document) ya Firestore kama maandishi ya base64. Hauitaji kufanya usanidi wowote
+wa ziada kwa hili — inafanya kazi papo hapo na Firestore ya bure uliyounda kwenye Hatua ya 2.
 
-```
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /products/{uid}/{fileName} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == uid
-                   && request.resource.size < 5 * 1024 * 1024;
-    }
-  }
-}
-```
-
-Hii inaruhusu kila mtu kuona picha, lakini kupakia picha kunahitaji mtu kuingia na kupakia kwenye folda yake mwenyewe (`products/{uid ya mtumiaji}/`).
+Kumbuka: kwa sababu kikomo cha hati moja ya Firestore ni 1MB, picha zinabanwa kiotomatiki
+kubaki chini ya kikomo hicho — hii inamaanisha picha zitakuwa na ubora wa wastani (siyo wa hali ya juu
+sana ukizizoom), lakini zitaonekana vizuri kwenye simu.
 
 ## Hatua 5 — Sanidi domain zilizoruhusiwa
 Authentication → Settings → Authorized domains → ongeza domain utakayotumia kuhifadhi tovuti (mfano `hermansade3-cmd.github.io`).
