@@ -78,8 +78,8 @@
   <button type="button" id="fabAdd">
     <span class="center-fab">＋</span>
   </button>
-  <button type="button" id="navMine">
-    <span class="nav-icon">📦</span>Zangu
+  <button type="button" id="navMessages">
+    <span class="nav-badge-wrap"><span class="nav-icon">✉️</span><span class="nav-dot" id="msgDot" style="display:none;"></span></span>Ujumbe
   </button>
   <button type="button" id="navAccount">
     <span class="nav-icon">👤</span>Akaunti
@@ -141,6 +141,36 @@
     <button class="close-x" data-close type="button">✕</button>
   </div>
   <div class="drawer-body" id="accountBody"></div>
+</div>
+
+<!-- ===== INBOX DRAWER (Ujumbe) ===== -->
+<div class="drawer" id="inboxDrawer">
+  <div class="drawer-head">
+    <h2>Ujumbe</h2>
+    <button class="close-x" data-close type="button">✕</button>
+  </div>
+  <div class="drawer-body" id="inboxBody" style="padding:.4rem 1.2rem 1.2rem;">
+    <p id="inboxEmpty">Bado huna ujumbe wowote.</p>
+  </div>
+</div>
+
+<!-- ===== CHAT DRAWER (mazungumzo ya bidhaa moja) ===== -->
+<div class="drawer" id="chatDrawer">
+  <div class="drawer-head">
+    <button class="close-x" id="chatBack" type="button" title="Rudi Ujumbe">‹</button>
+    <div class="chat-head-info">
+      <span class="chat-name" id="chatName">Muuzaji</span>
+      <span class="chat-product" id="chatProduct">Bidhaa</span>
+    </div>
+    <button class="close-x" data-close type="button">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <p id="chatEmpty">Andika ujumbe wako wa kwanza hapa chini.</p>
+  </div>
+  <div class="chat-input-row">
+    <textarea id="chatInput" rows="1" placeholder="Andika ujumbe..."></textarea>
+    <button class="chat-send-btn" id="chatSendBtn" type="button" title="Tuma">➤</button>
+  </div>
 </div>
 
 <script type="module">
@@ -227,9 +257,11 @@
         setActiveTab();
         render();
       });
+      startInboxListener();
     } else {
       authArea.innerHTML = `<a class="login-btn" href="login.html">Ingia</a>`;
       if(viewMode === 'mine'){ viewMode = 'all'; setActiveTab(); render(); }
+      stopInboxListener();
     }
   });
 
@@ -261,10 +293,9 @@
   document.getElementById('openAddFromTile').addEventListener('click', openDrawer);
   document.getElementById('fabAdd').addEventListener('click', openDrawer);
 
-  document.getElementById('navMine').addEventListener('click', () => {
+  document.getElementById('navMessages').addEventListener('click', () => {
     if(!currentUser){ window.location.href = 'login.html'; return; }
-    viewMode = 'mine'; setActiveTab(); render();
-    document.querySelector('.section-head').scrollIntoView({behavior:'smooth'});
+    openInbox();
   });
   document.getElementById('tabAll').addEventListener('click', () => { viewMode='all'; setActiveTab(); render(); });
   document.getElementById('tabMine').addEventListener('click', () => {
@@ -500,6 +531,9 @@
       } else {
         buyBtn = `<span class="buy-btn disabled">Hakuna namba</span>`;
       }
+      const msgBtn = !isMine
+        ? `<button class="msg-btn" type="button" onclick="openChatForProduct('${p.id}')">✉️ Ujumbe</button>`
+        : '';
 
       return `
         <div class="card">
@@ -513,11 +547,214 @@
             <div class="price">TSh ${Number(p.price).toLocaleString()}</div>
             <div class="title">${escapeHtml(p.name)}</div>
             <div class="seller">na ${escapeHtml(p.ownerName || 'Muuzaji')}</div>
-            ${buyBtn}
+            <div class="card-actions">${buyBtn}${msgBtn}</div>
           </div>
         </div>`;
     }).join('');
   }
+
+  // ================= MFUMO WA UJUMBE (CHAT) =================
+  const inboxDrawer = document.getElementById('inboxDrawer');
+  const chatDrawer = document.getElementById('chatDrawer');
+  allPanels.push(inboxDrawer, chatDrawer);
+
+  let myConversations = [];
+  let unsubInbox = null;
+  let unsubChatMsgs = null;
+  let currentConvoId = null;
+
+  function timeAgo(ms){
+    if(!ms) return '';
+    const diff = Date.now() - ms;
+    const min = Math.floor(diff/60000);
+    if(min < 1) return 'sasa hivi';
+    if(min < 60) return `dakika ${min}`;
+    const hr = Math.floor(min/60);
+    if(hr < 24) return `saa ${hr}`;
+    const d = Math.floor(hr/24);
+    if(d < 7) return `siku ${d}`;
+    return new Date(ms).toLocaleDateString('sw-TZ');
+  }
+
+  // ---- Anza kusikiliza "conversations" mara mtu akiingia ----
+  function startInboxListener(){
+    if(unsubInbox) unsubInbox();
+    const cq = query(collection(db, 'conversations'), where('participants', 'array-contains', currentUser.uid));
+    unsubInbox = onSnapshot(cq, (snap) => {
+      myConversations = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      myConversations.sort((a,b) => {
+        const at = a.lastMessageAt && a.lastMessageAt.toMillis ? a.lastMessageAt.toMillis() : 0;
+        const bt = b.lastMessageAt && b.lastMessageAt.toMillis ? b.lastMessageAt.toMillis() : 0;
+        return bt - at;
+      });
+      updateUnreadBadge();
+      if(inboxDrawer.classList.contains('open')) renderInbox();
+    }, (err) => console.error('inbox listener', err));
+  }
+  function stopInboxListener(){
+    if(unsubInbox){ unsubInbox(); unsubInbox = null; }
+    myConversations = [];
+    updateUnreadBadge();
+  }
+
+  function isConvoUnread(c){
+    const lastMs = c.lastMessageAt && c.lastMessageAt.toMillis ? c.lastMessageAt.toMillis() : 0;
+    const readMs = c.lastReadBy && c.lastReadBy[currentUser.uid] && c.lastReadBy[currentUser.uid].toMillis
+      ? c.lastReadBy[currentUser.uid].toMillis() : 0;
+    return lastMs > readMs && c.lastSenderUid !== currentUser.uid;
+  }
+  function updateUnreadBadge(){
+    const dot = document.getElementById('msgDot');
+    if(!currentUser){ dot.style.display = 'none'; return; }
+    const hasUnread = myConversations.some(isConvoUnread);
+    dot.style.display = hasUnread ? 'block' : 'none';
+  }
+
+  function openInbox(){
+    renderInbox();
+    openPanel(inboxDrawer);
+  }
+  function renderInbox(){
+    const body = document.getElementById('inboxBody');
+    if(myConversations.length === 0){
+      body.innerHTML = '<p id="inboxEmpty">Bado huna ujumbe wowote. Tuma ujumbe kwa muuzaji kutoka kwenye bidhaa unayoipenda.</p>';
+      return;
+    }
+    body.innerHTML = myConversations.map(c => {
+      const isSeller = c.sellerUid === currentUser.uid;
+      const otherName = isSeller ? (c.buyerName || 'Mnunuzi') : (c.sellerName || 'Muuzaji');
+      const initial = otherName.trim().charAt(0).toUpperCase();
+      const lastMs = c.lastMessageAt && c.lastMessageAt.toMillis ? c.lastMessageAt.toMillis() : 0;
+      const unread = isConvoUnread(c);
+      return `
+        <div class="inbox-item ${unread ? 'unread' : ''}" onclick="openChatFromInbox('${c.id}')">
+          <div class="inbox-avatar">${escapeHtml(initial)}</div>
+          <div class="inbox-info">
+            <div class="inbox-top">
+              <span class="inbox-name">${escapeHtml(otherName)}</span>
+              <span class="inbox-time">${timeAgo(lastMs)}</span>
+            </div>
+            <div class="inbox-product">${escapeHtml(c.productName || '')}</div>
+            <div class="inbox-preview">${escapeHtml(c.lastMessage || 'Anza mazungumzo...')}</div>
+          </div>
+          ${unread ? '<span class="inbox-unread-dot"></span>' : ''}
+        </div>`;
+    }).join('');
+  }
+
+  window.openChatFromInbox = (convoId) => {
+    const c = myConversations.find(x => x.id === convoId);
+    if(!c) return;
+    const isSeller = c.sellerUid === currentUser.uid;
+    const otherName = isSeller ? (c.buyerName || 'Mnunuzi') : (c.sellerName || 'Muuzaji');
+    openChat(convoId, otherName, c.productName || '', null);
+  };
+
+  window.openChatForProduct = (productId) => {
+    if(!currentUser){ window.location.href = 'login.html'; return; }
+    const p = allProducts.find(x => x.id === productId);
+    if(!p) return;
+    const convoId = `${productId}_${currentUser.uid}`;
+    const createData = {
+      productId: p.id,
+      productName: p.name,
+      sellerUid: p.ownerUid,
+      sellerName: p.ownerName || 'Muuzaji',
+      buyerUid: currentUser.uid,
+      buyerName: currentUser.displayName || currentUser.email || 'Mnunuzi',
+      participants: [p.ownerUid, currentUser.uid],
+      lastMessage: '',
+      lastMessageAt: serverTimestamp()
+    };
+    openChat(convoId, p.ownerName || 'Muuzaji', p.name, createData);
+  };
+
+  async function openChat(convoId, otherName, productName, createData){
+    currentConvoId = convoId;
+    document.getElementById('chatName').textContent = otherName;
+    document.getElementById('chatProduct').textContent = productName;
+    document.getElementById('chatBody').innerHTML = '<p id="chatEmpty">Inapakia mazungumzo...</p>';
+
+    try{
+      if(createData){
+        await setDoc(doc(db, 'conversations', convoId), createData, { merge: true });
+      }
+      updateDoc(doc(db, 'conversations', convoId), {
+        [`lastReadBy.${currentUser.uid}`]: serverTimestamp()
+      }).catch(() => {});
+
+      if(unsubChatMsgs) unsubChatMsgs();
+      const mq = query(collection(db, 'conversations', convoId, 'messages'), orderBy('createdAt', 'asc'));
+      unsubChatMsgs = onSnapshot(mq, (snap) => {
+        renderChatMessages(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      }, (err) => {
+        console.error('chat listener', err);
+        document.getElementById('chatBody').innerHTML = '<p id="chatEmpty">Imeshindikana kupakia mazungumzo.</p>';
+      });
+
+      openPanel(chatDrawer);
+    } catch(err){
+      console.error(err);
+      alert('Imeshindikana kufungua mazungumzo. Jaribu tena.');
+    }
+  }
+
+  function renderChatMessages(messages){
+    const body = document.getElementById('chatBody');
+    if(messages.length === 0){
+      body.innerHTML = '<p id="chatEmpty">Andika ujumbe wako wa kwanza hapa chini.</p>';
+      return;
+    }
+    body.innerHTML = messages.map(m => {
+      const mine = m.senderUid === currentUser.uid;
+      const ms = m.createdAt && m.createdAt.toMillis ? m.createdAt.toMillis() : Date.now();
+      const time = new Date(ms).toLocaleTimeString('sw-TZ', { hour: '2-digit', minute: '2-digit' });
+      return `<div class="bubble ${mine ? 'me' : 'them'}">${escapeHtml(m.text)}<span class="bubble-time">${time}</span></div>`;
+    }).join('');
+    body.scrollTop = body.scrollHeight;
+  }
+
+  const chatInput = document.getElementById('chatInput');
+  const chatSendBtn = document.getElementById('chatSendBtn');
+  chatInput.addEventListener('input', () => {
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+  });
+  chatInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendChatMessage(); }
+  });
+  chatSendBtn.addEventListener('click', sendChatMessage);
+
+  async function sendChatMessage(){
+    const text = chatInput.value.trim();
+    if(!text || !currentConvoId || !currentUser) return;
+    chatSendBtn.disabled = true;
+    try{
+      await addDoc(collection(db, 'conversations', currentConvoId, 'messages'), {
+        senderUid: currentUser.uid,
+        senderName: currentUser.displayName || currentUser.email || 'Mtumiaji',
+        text,
+        createdAt: serverTimestamp()
+      });
+      await updateDoc(doc(db, 'conversations', currentConvoId), {
+        lastMessage: text,
+        lastMessageAt: serverTimestamp(),
+        lastSenderUid: currentUser.uid,
+        [`lastReadBy.${currentUser.uid}`]: serverTimestamp()
+      });
+      chatInput.value = '';
+      chatInput.style.height = 'auto';
+    } catch(err){
+      console.error(err);
+      alert('Imeshindikana kutuma ujumbe. Jaribu tena.');
+    } finally {
+      chatSendBtn.disabled = false;
+    }
+  }
+
+  document.getElementById('chatBack').addEventListener('click', () => {
+    openPanel(inboxDrawer);
+  });
 </script>
 
 </body>
