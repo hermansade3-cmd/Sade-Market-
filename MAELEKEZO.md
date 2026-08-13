@@ -28,11 +28,33 @@ service cloud.firestore {
                     && resource.data.ownerUid == request.auth.uid;
       allow update: if false;
     }
+
+    match /conversations/{convoId} {
+      allow read: if request.auth != null
+                  && request.auth.uid in resource.data.participants;
+      allow create: if request.auth != null
+                    && request.auth.uid in request.resource.data.participants;
+      allow update: if request.auth != null
+                    && request.auth.uid in resource.data.participants;
+
+      match /messages/{messageId} {
+        allow read: if request.auth != null
+                    && request.auth.uid in get(/databases/$(database)/documents/conversations/$(convoId)).data.participants;
+        allow create: if request.auth != null
+                      && request.auth.uid in get(/databases/$(database)/documents/conversations/$(convoId)).data.participants
+                      && request.resource.data.senderUid == request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
   }
 }
 ```
 
-Hii inaruhusu kila mtu kuona bidhaa, lakini kuongeza/kufuta bidhaa kunahitaji mtu kuingia (login) na anaweza kufuta bidhaa zake mwenyewe tu.
+Hii inaruhusu:
+- Kila mtu kuona bidhaa; kuongeza/kufuta bidhaa kunahitaji kuingia
+- Mazungumzo (`conversations`) na ujumbe (`messages`) ndani yake kuonekana/kuandikwa tu na washiriki wawili wa mazungumzo hayo (mnunuzi na muuzaji)
+
+**Muhimu:** Firestore inaweza kukuomba "uunde composite index" mara ya kwanza mfumo wa Ujumbe unapotumika (kwa ajili ya kuorodhesha mazungumzo kwa `participants` + tarehe). Ukiona hitilafu kwenye Console ya browser yenye kiungo (link) cha "Create Index", bonyeza kiungo hicho kwenye kompyuta/simu ukiwa umeingia Firebase Console, subiri dakika chache index ijengwe, kisha jaribu tena.
 
 ## Hatua 4 — Picha za bidhaa (HAKUNA Storage inayohitajika)
 Mfumo huu **hautumii tena Firebase Storage** (ambayo inahitaji Blaze plan/kadi ya benki).
@@ -55,3 +77,6 @@ Authentication → Settings → Authorized domains → ongeza domain utakayotumi
 - Bidhaa zote zinaonekana papo hapo kwa kila mtu (real-time) kupitia Firestore.
 - Kila muuzaji anaona alama "Yako" kwenye bidhaa zake na anaweza kuzifuta.
 - Wanunuzi wanabonyeza "Nunua Sasa" na inafungua WhatsApp ya muuzaji husika moja kwa moja.
+- Wanunuzi wanaweza pia kubonyeza "✉️ Ujumbe" kwenye bidhaa yoyote (isipokuwa yao wenyewe) kutuma ujumbe wa maandishi kwa muuzaji **ndani ya tovuti yenyewe**, bila WhatsApp.
+- Muuzaji anapokea ujumbe huo kwenye sehemu ya "Ujumbe" (bottom nav), na anaweza kujibu papo hapo — mazungumzo yanaonekana kwa wote wawili kwa wakati halisi (real-time), kama chati ndogo.
+- Alama nyekundu (dot) kwenye "Ujumbe" inaonyesha kuna ujumbe mpya ambao bado haujasomwa.
