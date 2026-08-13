@@ -10,6 +10,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
   updateProfile,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -21,11 +24,16 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  getDoc,
   onSnapshot,
   query,
   where,
   orderBy,
-  serverTimestamp
+  limit,
+  serverTimestamp,
+  increment,
+  arrayUnion,
+  arrayRemove
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 // Kumbuka: Firebase Storage haitumiki tena kwenye mfumo huu (inahitaji Blaze plan).
 // Picha za bidhaa sasa zinabanwa (compress) kwa JavaScript kisha kuhifadhiwa
@@ -51,6 +59,9 @@ export {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
   updateProfile,
   signOut,
   collection,
@@ -59,9 +70,14 @@ export {
   updateDoc,
   deleteDoc,
   doc,
+  getDoc,
   onSnapshot,
   query,
   where,
   orderBy,
-  serverTimestamp
+  limit,
+  serverTimestamp,
+  increment,
+  arrayUnion,
+  arrayRemove
 };
