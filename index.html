@@ -1609,6 +1609,50 @@ function compressImage(
 
 
 /* =========================================================
+   AI IMAGE MODERATION (SOKO KUU AI)
+   ========================================================= */
+
+const SOKO_WORKER_URL =
+  "https://soko-kuu-ai.hermansade3.workers.dev/moderate-image";
+
+async function moderateImageDataUrl(dataUrl){
+
+  const parts =
+    dataUrl.split(",");
+
+  const mimeMatch =
+    parts[0].match(/data:(.*?);base64/);
+
+  const mimeType =
+    mimeMatch ? mimeMatch[1] : "image/jpeg";
+
+  const imageBase64 =
+    parts[1];
+
+  const res =
+    await fetch(SOKO_WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        imageBase64,
+        mimeType
+      })
+    });
+
+  if(!res.ok)
+    throw new Error(
+      "Ukaguzi wa AI umeshindwa"
+    );
+
+  return await res.json();
+  // { status: "safe" | "unsafe", reason: "..." }
+
+}
+
+
+/* =========================================================
    MULTIPLE IMAGES
    MAXIMUM = 3
    ========================================================= */
@@ -1642,7 +1686,11 @@ document
           "multiImagePreview"
         );
 
-      preview.innerHTML = "";
+      preview.innerHTML = `
+        <div id="sokoCheckingMsg" style="grid-column:1/-1;color:var(--sk-muted);font-size:.75rem;">
+          🔍 Inakagua picha, subiri...
+        </div>
+      `;
 
 
       for(const file of files){
@@ -1651,6 +1699,40 @@ document
 
           const compressed =
             await compressImage(file);
+
+          let modResult;
+
+          try{
+
+            modResult =
+              await moderateImageDataUrl(
+                compressed
+              );
+
+          }
+          catch(modErr){
+
+            console.error(modErr);
+
+            alert(
+              `⚠️ Imeshindikana kukagua picha "${file.name}": ${modErr.message}`
+            );
+
+            continue;
+
+          }
+
+
+          if(modResult.status !== "safe"){
+
+            alert(
+              `❌ Picha "${file.name}" imekataliwa: ${modResult.reason || "Haifai kwa SOKO KUU"}`
+            );
+
+            continue;
+
+          }
+
 
           pendingImages.push(
             compressed
@@ -1695,6 +1777,10 @@ document
               }
             );
 
+          document
+            .getElementById("sokoCheckingMsg")
+            ?.remove();
+
           preview.appendChild(item);
 
         }
@@ -1705,6 +1791,10 @@ document
         }
 
       }
+
+      document
+        .getElementById("sokoCheckingMsg")
+        ?.remove();
 
     }
   );
