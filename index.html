@@ -29,9 +29,9 @@
 </div>
 
 <div class="pill-row">
-  <div class="pill">🛍️ Bidhaa za Kila Mtu</div>
-  <div class="pill">✅ Wachuuzi Halisi</div>
-  <div class="pill">💬 Wasiliana Moja kwa Moja</div>
+  <button class="pill" id="pillAll" type="button">🛍️ Bidhaa za Kila Mtu</button>
+  <button class="pill" id="pillVerified" type="button">✅ Wachuuzi Halisi</button>
+  <button class="pill" id="pillContact" type="button">💬 Wasiliana Moja kwa Moja</button>
 </div>
 
 <div class="quick-add">
@@ -87,7 +87,7 @@
 <div class="drawer" id="drawer">
   <div class="drawer-head">
     <h2>Posti Bidhaa Yako</h2>
-    <button class="close-x" id="closeDrawer" type="button">✕</button>
+    <button class="close-x" data-close type="button">✕</button>
   </div>
   <div class="drawer-body">
     <div class="panel-block">
@@ -119,6 +119,24 @@
       <p class="hint">Bidhaa yako itaonekana kwa kila mtu anayefungua duka hili. Namba yako ya WhatsApp itaonekana kwa mnunuzi anapobonyeza "Nunua Sasa". Picha yako itabanwa kiotomatiki ili ipakie haraka.</p>
     </div>
   </div>
+</div>
+
+<!-- ===== INFO DRAWER (Wachuuzi Halisi / Wasiliana) ===== -->
+<div class="drawer" id="infoDrawer">
+  <div class="drawer-head">
+    <h2 id="infoTitle">Taarifa</h2>
+    <button class="close-x" data-close type="button">✕</button>
+  </div>
+  <div class="drawer-body" id="infoBody"></div>
+</div>
+
+<!-- ===== ACCOUNT DRAWER ===== -->
+<div class="drawer" id="accountDrawer">
+  <div class="drawer-head">
+    <h2>Akaunti Yangu</h2>
+    <button class="close-x" data-close type="button">✕</button>
+  </div>
+  <div class="drawer-body" id="accountBody"></div>
 </div>
 
 <script type="module">
@@ -211,26 +229,38 @@
     }
   });
 
-  // ===== DRAWER =====
+  // ===== DRAWERS (jumla kwa paneli zote zinazotelezea chini) =====
   const drawer = document.getElementById('drawer');
+  const infoDrawer = document.getElementById('infoDrawer');
+  const accountDrawer = document.getElementById('accountDrawer');
   const overlay = document.getElementById('overlay');
+  const allPanels = [drawer, infoDrawer, accountDrawer];
+
+  function openPanel(panel){
+    allPanels.forEach(p => p.classList.remove('open'));
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAllPanels(){
+    allPanels.forEach(p => p.classList.remove('open'));
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  overlay.addEventListener('click', closeAllPanels);
+  document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeAllPanels));
+
   function openDrawer(){
     if(!currentUser){ window.location.href = 'login.html'; return; }
-    drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow='hidden';
+    openPanel(drawer);
   }
-  function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow=''; }
-  document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
-  overlay.addEventListener('click', closeDrawer);
   document.getElementById('openAddFromTile').addEventListener('click', openDrawer);
   document.getElementById('fabAdd').addEventListener('click', openDrawer);
-  document.getElementById('navAccount').addEventListener('click', () => {
-    if(currentUser){ window.scrollTo({top:0,behavior:'smooth'}); }
-    else { window.location.href = 'login.html'; }
-  });
+
   document.getElementById('navMine').addEventListener('click', () => {
     if(!currentUser){ window.location.href = 'login.html'; return; }
     viewMode = 'mine'; setActiveTab(); render();
-    window.scrollTo({top:0,behavior:'smooth'});
+    document.querySelector('.section-head').scrollIntoView({behavior:'smooth'});
   });
   document.getElementById('tabAll').addEventListener('click', () => { viewMode='all'; setActiveTab(); render(); });
   document.getElementById('tabMine').addEventListener('click', () => {
@@ -240,6 +270,81 @@
   function setActiveTab(){
     document.getElementById('tabAll').classList.toggle('active', viewMode==='all');
     document.getElementById('tabMine').classList.toggle('active', viewMode==='mine');
+  }
+
+  // ===== PILLS (juu kabisa) =====
+  document.getElementById('pillAll').addEventListener('click', () => {
+    viewMode = 'all'; setActiveTab(); render();
+    document.querySelector('.section-head').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  document.getElementById('pillVerified').addEventListener('click', () => {
+    document.getElementById('infoTitle').textContent = 'Wachuuzi Halisi';
+    document.getElementById('infoBody').innerHTML = `
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:0;">
+        Duka hili ni jukwaa huru linalomruhusu mtu yeyote kuposti bidhaa zake. Ili kununua kwa usalama, fuata vidokezo hivi:
+      </p>
+      <ul style="padding-left:1.1rem;color:var(--muted);font-size:.88rem;line-height:2;margin:0;">
+        <li>Ongea na muuzaji kwa WhatsApp kabla ya kulipa chochote</li>
+        <li>Muombe picha au video za ziada za bidhaa halisi</li>
+        <li>Pendelea kukutana eneo la wazi kwa malipo ya mkono kwa mkono</li>
+        <li>Usitume malipo kabla ya kuridhika na bidhaa</li>
+        <li>Ripoti tabia ya kutiliwa shaka kwa kutoshirikiana na muuzaji huyo tena</li>
+      </ul>`;
+    openPanel(infoDrawer);
+  });
+  document.getElementById('pillContact').addEventListener('click', () => {
+    document.getElementById('infoTitle').textContent = 'Wasiliana Moja kwa Moja';
+    document.getElementById('infoBody').innerHTML = `
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:0;">
+        Huna haja ya kuwasiliana na sisi kununua — kila bidhaa ina namba ya WhatsApp ya muuzaji wake mwenyewe.
+      </p>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">
+        Bonyeza kitufe cha <b style="color:var(--ink);">"Nunua Sasa"</b> chini ya bidhaa unayoipenda ili kufungua mazungumzo ya WhatsApp moja kwa moja na muuzaji huyo.
+      </p>`;
+    openPanel(infoDrawer);
+  });
+
+  // ===== AKAUNTI =====
+  document.getElementById('navAccount').addEventListener('click', () => {
+    renderAccountDrawer();
+    openPanel(accountDrawer);
+  });
+  function renderAccountDrawer(){
+    const body = document.getElementById('accountBody');
+    if(currentUser){
+      const label = currentUser.displayName || currentUser.email || 'Mtumiaji';
+      const initial = label.trim().charAt(0).toUpperCase();
+      const myCount = allProducts.filter(p => p.ownerUid === currentUser.uid).length;
+      body.innerHTML = `
+        <div style="text-align:center;padding:.2rem 0 1.3rem;">
+          <div style="width:64px;height:64px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;margin:0 auto .8rem;">${initial}</div>
+          <div style="font-weight:800;font-size:1.05rem;">${escapeHtml(label)}</div>
+          ${currentUser.email ? `<div style="color:var(--muted);font-size:.82rem;">${escapeHtml(currentUser.email)}</div>` : ''}
+        </div>
+        <div class="panel-block" style="text-align:center;">
+          <div style="font-weight:800;font-size:1.5rem;color:var(--blue-dark);">${myCount}</div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;">Bidhaa Ulizoposti</div>
+        </div>
+        <button class="btn-full btn-blue" id="acctMyProducts" type="button" style="margin-bottom:.7rem;">Ona Bidhaa Zangu</button>
+        <button class="btn-full" id="acctLogout" type="button" style="background:#fdecec;color:var(--danger);">Toka Kwenye Akaunti</button>
+      `;
+      document.getElementById('acctMyProducts').addEventListener('click', () => {
+        viewMode = 'mine'; setActiveTab(); render(); closeAllPanels();
+        document.querySelector('.section-head').scrollIntoView({behavior:'smooth'});
+      });
+      document.getElementById('acctLogout').addEventListener('click', async () => {
+        await signOut(auth);
+        viewMode = 'all'; setActiveTab(); render();
+        closeAllPanels();
+      });
+    } else {
+      body.innerHTML = `
+        <p style="color:var(--muted);font-size:.9rem;text-align:center;padding:.5rem 0 1.2rem;line-height:1.6;">
+          Bado hujaingia. Ingia au jisajili ili uweze kuposti bidhaa na kuona akaunti yako.
+        </p>
+        <a class="btn-full btn-blue" href="login.html" style="display:block;text-align:center;">Ingia / Jisajili</a>
+      `;
+    }
   }
 
   // ===== IMAGE PREVIEW + KUBANA =====
@@ -297,7 +402,7 @@
       document.getElementById('fileLabel').textContent = 'Bonyeza kuchagua picha';
       pendingImageData = '';
 
-      closeDrawer();
+      closeAllPanels();
     } catch(err){
       console.error(err);
       alert('Samahani, imeshindikana kuchapisha bidhaa. Jaribu tena.');
