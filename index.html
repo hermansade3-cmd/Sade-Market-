@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duka Langu — Bidhaa Mtandaoni</title>
+<title>SOKO KUU — Bidhaa Mtandaoni</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
 <body>
 
 <div class="topbar">
-  <div class="brand"><span>Duka</span><span class="dot">Langu</span></div>
+  <div class="brand"><span>SOKO</span><span class="dot">KUU</span></div>
   <div class="topbar-actions" id="authArea">
     <a class="login-btn" href="login.html">Ingia</a>
   </div>
@@ -23,7 +23,10 @@
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="Andika jina la bidhaa...">
     <button type="button" aria-label="Tafuta">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
     </button>
   </div>
 </div>
@@ -34,13 +37,25 @@
   <button class="pill" id="pillContact" type="button">💬 Wasiliana Moja kwa Moja</button>
 </div>
 
-<div class="quick-add">
-  <button class="quick-tile" id="openAddFromTile" type="button">
-    <span class="tile-icon">＋</span>
-    <span class="label">Posti Bidhaa Yako</span>
-    <span class="sub">Weka picha, bei na namba yako ya WhatsApp</span>
-  </button>
-</div>
+<!-- =========================================================
+     CHAGUO LA SOKO KUU
+     HAPA ZITAONEKANA BIDHAA ZILIZOPENDWA NA OWNER PEKEE
+     OWNER EMAIL = hermansade3@gmail.com
+     SEHEMU HII INAONEKANA KWA KILA MTU
+========================================================= -->
+<section id="marketChoiceSection" style="padding:0 1.2rem 1.2rem;">
+  <div class="section-head" style="margin-top:.5rem;">
+    <h2>❤️ Chaguo la SOKO KUU</h2>
+    <span id="marketChoiceCount">0</span>
+  </div>
+
+  <p id="marketChoiceEmpty"
+     style="text-align:center;color:var(--muted);font-size:.84rem;padding:.8rem 0 1rem;">
+    Hakuna bidhaa zilizochaguliwa bado.
+  </p>
+
+  <div class="grid" id="marketChoiceGrid"></div>
+</section>
 
 <div class="section-head">
   <h2>Bidhaa Zilizopo</h2>
@@ -56,45 +71,67 @@
   <div class="spinner"></div>
   Inapakia bidhaa...
 </div>
+
 <div id="empty">
   <div class="ring">＋</div>
   <h3 id="emptyTitle">Bado hakuna bidhaa</h3>
-  <p id="emptyText">Kuwa wa kwanza kuposti bidhaa dukani hapa.</p>
+  <p id="emptyText">Kuwa wa kwanza kuposti bidhaa SOKO KUU hapa.</p>
 </div>
+
 <div class="grid" id="grid"></div>
 
 <p style="text-align:center;color:var(--muted);font-size:.78rem;padding:2rem 1.2rem 1rem;">
-  Kwa kutumia Duka Langu, unakubaliana na <a href="terms.html" style="color:var(--primary-dark);font-weight:700;">Masharti ya Matumizi</a>.
+  Kwa kutumia SOKO KUU, unakubaliana na
+  <a href="terms.html" style="color:var(--primary-dark);font-weight:700;">
+    Masharti ya Matumizi
+  </a>.
 </p>
 
 <!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-  <button class="active" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <button class="active" type="button"
+          onclick="window.scrollTo({top:0,behavior:'smooth'})">
     <span class="nav-icon">🏠</span>Nyumbani
   </button>
-  <button type="button" onclick="document.getElementById('searchInput').focus();window.scrollTo({top:0,behavior:'smooth'})">
+
+  <button type="button"
+          onclick="document.getElementById('searchInput').focus();window.scrollTo({top:0,behavior:'smooth'})">
     <span class="nav-icon">🔍</span>Tafuta
   </button>
+
   <button type="button" id="fabAdd">
     <span class="center-fab">＋</span>
   </button>
+
   <button type="button" id="navMessages">
-    <span class="nav-badge-wrap"><span class="nav-icon">✉️</span><span class="nav-dot" id="msgDot" style="display:none;"></span></span>Ujumbe
+    <span class="nav-badge-wrap">
+      <span class="nav-icon">✉️</span>
+      <span class="nav-dot" id="msgDot" style="display:none;"></span>
+    </span>
+    Ujumbe
   </button>
+
   <button type="button" id="navAccount">
-    <span class="nav-badge-wrap"><span class="nav-icon">👤</span><span class="nav-dot" id="acctDot" style="display:none;"></span></span>Akaunti
+    <span class="nav-badge-wrap">
+      <span class="nav-icon">👤</span>
+      <span class="nav-dot" id="acctDot" style="display:none;"></span>
+    </span>
+    Akaunti
   </button>
 </div>
 
 <!-- ===== ADD/EDIT PRODUCT DRAWER ===== -->
 <div class="overlay" id="overlay"></div>
+
 <div class="drawer" id="drawer">
   <div class="drawer-head">
     <h2 id="productDrawerTitle">Posti Bidhaa Yako</h2>
     <button class="close-x" data-close type="button">✕</button>
   </div>
+
   <div class="drawer-body">
     <div class="panel-block">
+
       <div class="field">
         <label for="pCategory">Aina ya Bidhaa</label>
         <select id="pCategory">
@@ -108,37 +145,55 @@
           <option value="nguo">👕 Nguo</option>
         </select>
       </div>
+
       <div class="field">
         <label for="pName">Jina la Bidhaa</label>
         <input type="text" id="pName" placeholder="Mfano: Viatu vya ngozi">
       </div>
+
       <div class="field">
         <label for="pPrice">Bei (TSh)</label>
         <input type="number" id="pPrice" placeholder="25000">
       </div>
+
       <div class="field">
         <label for="pDesc">Maelezo</label>
         <textarea id="pDesc" placeholder="Eleza kuhusu bidhaa hii..."></textarea>
       </div>
+
       <div class="field">
-        <label for="pPhone">Namba yako ya WhatsApp (mfano 2557XXXXXXXX)</label>
+        <label for="pPhone">
+          Namba yako ya WhatsApp (mfano 2557XXXXXXXX)
+        </label>
         <input type="tel" id="pPhone" placeholder="255700000000">
       </div>
+
       <div class="field">
         <label>Picha ya Bidhaa</label>
         <div class="file-drop">
           <input type="file" id="pImage" accept="image/*">
-          <span class="file-drop-label" id="fileLabel">Bonyeza kuchagua picha</span>
+          <span class="file-drop-label" id="fileLabel">
+            Bonyeza kuchagua picha
+          </span>
         </div>
         <img id="pImagePreview" class="img-preview">
       </div>
-      <button class="btn-full btn-orange" id="addProduct" type="button">Chapisha Bidhaa</button>
-      <p class="hint">Bidhaa yako itaonekana kwa kila mtu anayefungua duka hili. Namba yako ya WhatsApp itaonekana kwa mnunuzi anapobonyeza "Nunua Sasa". Picha yako itabanwa kiotomatiki ili ipakie haraka.</p>
+
+      <button class="btn-full btn-orange" id="addProduct" type="button">
+        Chapisha Bidhaa
+      </button>
+
+      <p class="hint">
+        Bidhaa yako itaonekana kwa kila mtu anayefungua SOKO KUU.
+        Namba yako ya WhatsApp itaonekana kwa mnunuzi anapobonyeza
+        "Nunua Sasa". Picha yako itabanwa kiotomatiki ili ipakie haraka.
+      </p>
+
     </div>
   </div>
 </div>
 
-<!-- ===== INFO DRAWER (Wachuuzi Halisi / Wasiliana) ===== -->
+<!-- ===== INFO DRAWER ===== -->
 <div class="drawer" id="infoDrawer">
   <div class="drawer-head">
     <h2 id="infoTitle">Taarifa</h2>
@@ -153,6 +208,7 @@
     <h2>Akaunti Yangu</h2>
     <button class="close-x" data-close type="button">✕</button>
   </div>
+
   <div class="acct-tabs" id="acctTabs">
     <button class="acct-tab" data-tab="profile">👤 Profile</button>
     <button class="acct-tab" data-tab="listings">📢 Matangazo</button>
@@ -160,1100 +216,4176 @@
     <button class="acct-tab" data-tab="notifications">🔔 Arifa</button>
     <button class="acct-tab" data-tab="settings">⚙️ Mipangilio</button>
   </div>
+
   <div class="drawer-body" id="accountBody"></div>
 </div>
 
-<!-- ===== INBOX DRAWER (Ujumbe) ===== -->
+<!-- ===== INBOX DRAWER ===== -->
 <div class="drawer" id="inboxDrawer">
   <div class="drawer-head">
     <h2>Ujumbe</h2>
     <button class="close-x" data-close type="button">✕</button>
   </div>
-  <div class="drawer-body" id="inboxBody" style="padding:.4rem 1.2rem 1.2rem;">
+
+  <div class="drawer-body" id="inboxBody"
+       style="padding:.4rem 1.2rem 1.2rem;">
     <p id="inboxEmpty">Bado huna ujumbe wowote.</p>
   </div>
 </div>
 
-<!-- ===== CHAT DRAWER (mazungumzo ya bidhaa moja) ===== -->
+<!-- ===== CHAT DRAWER ===== -->
 <div class="drawer" id="chatDrawer">
   <div class="drawer-head">
     <button class="close-x" id="chatBack" type="button" title="Rudi Ujumbe">‹</button>
+
     <div class="chat-head-info">
       <span class="chat-name" id="chatName">Muuzaji</span>
       <span class="chat-product" id="chatProduct">Bidhaa</span>
     </div>
+
     <button class="close-x" data-close type="button">✕</button>
   </div>
+
   <div class="chat-body" id="chatBody">
     <p id="chatEmpty">Andika ujumbe wako wa kwanza hapa chini.</p>
   </div>
+
   <div class="chat-input-row">
-    <textarea id="chatInput" rows="1" placeholder="Andika ujumbe..."></textarea>
-    <button class="chat-send-btn" id="chatSendBtn" type="button" title="Tuma">➤</button>
+    <textarea id="chatInput" rows="1"
+              placeholder="Andika ujumbe..."></textarea>
+    <button class="chat-send-btn" id="chatSendBtn"
+            type="button" title="Tuma">➤</button>
   </div>
 </div>
 
 <script type="module">
-  import {
-    auth, db, onAuthStateChanged, signOut,
-    collection, addDoc, setDoc, updateDoc, deleteDoc, doc, getDoc, onSnapshot,
-    query, where, orderBy, limit, serverTimestamp, increment, arrayUnion, arrayRemove,
-    EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile
-  } from "./firebase-init.js";
 
-  const CATEGORIES = {
-    nyumba: '🏠 Nyumba', gari: '🚗 Gari', pikipiki: '🏍️ Pikipiki', ardhi: '📐 Ardhi',
-    simu: '📱 Simu', tv: '📺 TV/Elektroniki', nguo: '👕 Nguo', nyingine: '📦 Nyingine'
-  };
+import {
+  auth,
+  db,
+  onAuthStateChanged,
+  signOut,
+  collection,
+  addDoc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+  serverTimestamp,
+  increment,
+  arrayUnion,
+  arrayRemove,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
+  updateProfile
+} from "./firebase-init.js";
 
-  // ===== KUBANA PICHA (bila Storage) =====
-  // Inapunguza ukubwa wa picha (upana wa juu 800px) na kuibana kama JPEG
-  // mpaka iwe chini ya kikomo cha KB, kisha inairejesha kama base64
-  // inayowekwa moja kwa moja ndani ya Firestore.
-  const MAX_IMAGE_KB = 450;
-  function compressImage(file, maxDim = 800, startQuality = 0.75){
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => reject(new Error('Imeshindikana kusoma picha'));
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onerror = () => reject(new Error('Picha si sahihi'));
-        img.onload = () => {
-          let { width, height } = img;
-          if(width > height && width > maxDim){ height = Math.round(height * (maxDim / width)); width = maxDim; }
-          else if(height > maxDim){ width = Math.round(width * (maxDim / height)); height = maxDim; }
 
-          const canvas = document.createElement('canvas');
-          canvas.width = width; canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
+/* =========================================================
+   MIPANGILIO MUHIMU
+========================================================= */
 
-          let quality = startQuality;
-          let dataUrl = canvas.toDataURL('image/jpeg', quality);
+const OWNER_EMAIL = "hermansade3@gmail.com";
 
-          // Punguza ubora hatua kwa hatua mpaka ifike chini ya kikomo cha KB
-          while(dataUrl.length * 0.75 / 1024 > MAX_IMAGE_KB && quality > 0.25){
-            quality -= 0.1;
-            dataUrl = canvas.toDataURL('image/jpeg', quality);
-          }
+/*
+  Hii ndiyo document ya kuhifadhi Pendwa za OWNER.
+  Collection:
+      siteSettings
 
-          // Ikiwa bado kubwa, punguza pia vipimo (dimensions)
-          let attempts = 0;
-          let curMax = maxDim;
-          while(dataUrl.length * 0.75 / 1024 > MAX_IMAGE_KB && attempts < 4){
-            curMax = Math.round(curMax * 0.8);
-            const c2 = document.createElement('canvas');
-            const w2 = width > height ? curMax : Math.round(width * (curMax / height));
-            const h2 = height >= width ? curMax : Math.round(height * (curMax / width));
-            c2.width = w2; c2.height = h2;
-            c2.getContext('2d').drawImage(canvas, 0, 0, w2, h2);
-            dataUrl = c2.toDataURL('image/jpeg', Math.max(quality, 0.4));
-            attempts++;
-          }
+  Document:
+      main
 
-          resolve(dataUrl);
-        };
-        img.src = e.target.result;
+  Field:
+      ownerFavorites: ["productId1", "productId2", ...]
+*/
+const MARKET_SETTINGS_REF = doc(db, "siteSettings", "main");
+
+
+const CATEGORIES = {
+  nyumba: '🏠 Nyumba',
+  gari: '🚗 Gari',
+  pikipiki: '🏍️ Pikipiki',
+  ardhi: '📐 Ardhi',
+  simu: '📱 Simu',
+  tv: '📺 TV/Elektroniki',
+  nguo: '👕 Nguo',
+  nyingine: '📦 Nyingine'
+};
+
+
+/* =========================================================
+   KUBANA PICHA
+========================================================= */
+
+const MAX_IMAGE_KB = 450;
+
+function compressImage(file, maxDim = 800, startQuality = 0.75){
+  return new Promise((resolve, reject) => {
+
+    const reader = new FileReader();
+
+    reader.onerror = () =>
+      reject(new Error('Imeshindikana kusoma picha'));
+
+    reader.onload = (e) => {
+
+      const img = new Image();
+
+      img.onerror = () =>
+        reject(new Error('Picha si sahihi'));
+
+      img.onload = () => {
+
+        let { width, height } = img;
+
+        if(width > height && width > maxDim){
+          height = Math.round(height * (maxDim / width));
+          width = maxDim;
+        }
+        else if(height > maxDim){
+          width = Math.round(width * (maxDim / height));
+          height = maxDim;
+        }
+
+        const canvas = document.createElement('canvas');
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        let quality = startQuality;
+
+        let dataUrl =
+          canvas.toDataURL('image/jpeg', quality);
+
+        while(
+          dataUrl.length * 0.75 / 1024 > MAX_IMAGE_KB &&
+          quality > 0.25
+        ){
+          quality -= 0.1;
+
+          dataUrl =
+            canvas.toDataURL('image/jpeg', quality);
+        }
+
+        let attempts = 0;
+        let curMax = maxDim;
+
+        while(
+          dataUrl.length * 0.75 / 1024 > MAX_IMAGE_KB &&
+          attempts < 4
+        ){
+
+          curMax = Math.round(curMax * 0.8);
+
+          const c2 =
+            document.createElement('canvas');
+
+          const w2 =
+            width > height
+              ? curMax
+              : Math.round(width * (curMax / height));
+
+          const h2 =
+            height >= width
+              ? curMax
+              : Math.round(height * (curMax / width));
+
+          c2.width = w2;
+          c2.height = h2;
+
+          c2.getContext('2d')
+            .drawImage(canvas, 0, 0, w2, h2);
+
+          dataUrl =
+            c2.toDataURL(
+              'image/jpeg',
+              Math.max(quality, 0.4)
+            );
+
+          attempts++;
+        }
+
+        resolve(dataUrl);
       };
-      reader.readAsDataURL(file);
-    });
-  }
 
-  let currentUser = null;
-  let allProducts = [];
-  let searchTerm = '';
-  let viewMode = 'all'; // 'all' | 'mine'
-  let myProfile = null;      // hati ya users/{uid}: {favorites, username, phone, photoBase64...}
-  let unsubProfile = null;
-  let myNotifications = [];
-  let unsubNotifications = null;
-  let currentAcctTab = 'profile';
-  let editingProductId = null; // ikiwa si null, drawer ya bidhaa iko kwenye hali ya "hariri"
-  const viewedThisSession = new Set(); // huzuia kuongeza 'views' mara kwa mara kwa bidhaa ile ile
+      img.src = e.target.result;
+    };
 
-  // ===== AUTH STATE =====
-  const authArea = document.getElementById('authArea');
-  onAuthStateChanged(auth, (user) => {
-    currentUser = user;
-    if(user){
-      const label = user.displayName || user.email || 'Mtumiaji';
-      const initial = label.trim().charAt(0).toUpperCase();
-      authArea.innerHTML = `
-        <div class="user-chip">
-          <span class="avatar">${initial}</span>
-          <span>${label.split('@')[0]}</span>
-        </div>
-        <button class="icon-btn" id="logoutBtn" title="Toka">⎋</button>
-      `;
-      document.getElementById('logoutBtn').addEventListener('click', async () => {
+    reader.readAsDataURL(file);
+  });
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let currentUser = null;
+
+let allProducts = [];
+
+let searchTerm = '';
+
+let viewMode = 'all';
+
+let myProfile = null;
+
+let unsubProfile = null;
+
+let myNotifications = [];
+
+let unsubNotifications = null;
+
+let currentAcctTab = 'profile';
+
+let editingProductId = null;
+
+let ownerFavoriteIds = [];
+
+let unsubMarketSettings = null;
+
+const viewedThisSession = new Set();
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+const authArea =
+  document.getElementById('authArea');
+
+
+onAuthStateChanged(auth, (user) => {
+
+  currentUser = user;
+
+  if(user){
+
+    const label =
+      user.displayName ||
+      user.email ||
+      'Mtumiaji';
+
+    const initial =
+      label.trim().charAt(0).toUpperCase();
+
+    authArea.innerHTML = `
+      <div class="user-chip">
+        <span class="avatar">${initial}</span>
+        <span>${label.split('@')[0]}</span>
+      </div>
+
+      <button class="icon-btn"
+              id="logoutBtn"
+              title="Toka">
+        ⎋
+      </button>
+    `;
+
+    document
+      .getElementById('logoutBtn')
+      .addEventListener('click', async () => {
+
         await signOut(auth);
+
         viewMode = 'all';
+
         setActiveTab();
+
         render();
       });
-      startInboxListener();
-      startProfileListener();
-      startNotificationsListener();
-    } else {
-      authArea.innerHTML = `<a class="login-btn" href="login.html">Ingia</a>`;
-      if(viewMode === 'mine'){ viewMode = 'all'; setActiveTab(); render(); }
-      stopInboxListener();
-      stopProfileListener();
-      stopNotificationsListener();
-    }
-  });
 
-  // ===== PROFILE (users/{uid}) — jina la mtumiaji, namba, picha, favorites =====
-  function startProfileListener(){
-    if(unsubProfile) unsubProfile();
-    unsubProfile = onSnapshot(doc(db, 'users', currentUser.uid), (snap) => {
-      myProfile = snap.exists() ? snap.data() : {};
+    startInboxListener();
+
+    startProfileListener();
+
+    startNotificationsListener();
+
+  }else{
+
+    authArea.innerHTML =
+      `<a class="login-btn" href="login.html">Ingia</a>`;
+
+    if(viewMode === 'mine'){
+
+      viewMode = 'all';
+
+      setActiveTab();
+
       render();
-      if(accountDrawer.classList.contains('open')) renderAccountDrawer(currentAcctTab);
-    }, (err) => console.error('profile listener', err));
-  }
-  function stopProfileListener(){
-    if(unsubProfile){ unsubProfile(); unsubProfile = null; }
-    myProfile = null;
-  }
-
-  // ===== ARIFA (Notifications) =====
-  function startNotificationsListener(){
-    if(unsubNotifications) unsubNotifications();
-    const nq = query(collection(db, 'notifications'), where('toUid', '==', currentUser.uid));
-    unsubNotifications = onSnapshot(nq, (snap) => {
-      myNotifications = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      myNotifications.sort((a,b) => {
-        const at = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
-        const bt = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
-        return bt - at;
-      });
-      updateNotifBadge();
-      if(accountDrawer.classList.contains('open') && currentAcctTab === 'notifications') renderAccountDrawer('notifications');
-    }, (err) => console.error('notif listener', err));
-  }
-  function stopNotificationsListener(){
-    if(unsubNotifications){ unsubNotifications(); unsubNotifications = null; }
-    myNotifications = [];
-    updateNotifBadge();
-  }
-  function updateNotifBadge(){
-    const dot = document.getElementById('acctDot');
-    if(!dot) return;
-    const hasUnread = myNotifications.some(n => !n.read);
-    dot.style.display = hasUnread ? 'block' : 'none';
-  }
-
-  // ===== DRAWERS (jumla kwa paneli zote zinazotelezea chini) =====
-  const drawer = document.getElementById('drawer');
-  const infoDrawer = document.getElementById('infoDrawer');
-  const accountDrawer = document.getElementById('accountDrawer');
-  const overlay = document.getElementById('overlay');
-  const allPanels = [drawer, infoDrawer, accountDrawer];
-
-  function openPanel(panel){
-    allPanels.forEach(p => p.classList.remove('open'));
-    panel.classList.add('open');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeAllPanels(){
-    allPanels.forEach(p => p.classList.remove('open'));
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  overlay.addEventListener('click', closeAllPanels);
-  document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeAllPanels));
-
-  function openDrawer(){
-    if(!currentUser){ window.location.href = 'login.html'; return; }
-    editingProductId = null;
-    document.getElementById('productDrawerTitle').textContent = 'Posti Bidhaa Yako';
-    document.getElementById('addProduct').textContent = 'Chapisha Bidhaa';
-    document.getElementById('pCategory').value = 'nyingine';
-    document.getElementById('pName').value = '';
-    document.getElementById('pPrice').value = '';
-    document.getElementById('pDesc').value = '';
-    document.getElementById('pPhone').value = '';
-    document.getElementById('pImage').value = '';
-    document.getElementById('pImagePreview').style.display = 'none';
-    document.getElementById('fileLabel').textContent = 'Bonyeza kuchagua picha';
-    pendingImageData = null;
-    openPanel(drawer);
-  }
-  window.openEditProduct = (id) => {
-    const p = allProducts.find(x => x.id === id);
-    if(!p || !currentUser || p.ownerUid !== currentUser.uid) return;
-    editingProductId = id;
-    document.getElementById('productDrawerTitle').textContent = 'Hariri Bidhaa';
-    document.getElementById('addProduct').textContent = 'Hifadhi Mabadiliko';
-    document.getElementById('pCategory').value = p.category || 'nyingine';
-    document.getElementById('pName').value = p.name || '';
-    document.getElementById('pPrice').value = p.price || '';
-    document.getElementById('pDesc').value = p.desc || '';
-    document.getElementById('pPhone').value = p.phone || '';
-    document.getElementById('pImage').value = '';
-    pendingImageData = null; // null = usibadilishe picha ya sasa isipokuwa mtu achague mpya
-    if(p.imageUrl){
-      document.getElementById('pImagePreview').src = p.imageUrl;
-      document.getElementById('pImagePreview').style.display = 'block';
-      document.getElementById('fileLabel').textContent = 'Picha ya sasa (bonyeza kubadilisha)';
-    } else {
-      document.getElementById('pImagePreview').style.display = 'none';
-      document.getElementById('fileLabel').textContent = 'Bonyeza kuchagua picha';
     }
-    openPanel(drawer);
-  };
-  document.getElementById('openAddFromTile').addEventListener('click', openDrawer);
-  document.getElementById('fabAdd').addEventListener('click', openDrawer);
 
-  document.getElementById('navMessages').addEventListener('click', () => {
-    if(!currentUser){ window.location.href = 'login.html'; return; }
+    stopInboxListener();
+
+    stopProfileListener();
+
+    stopNotificationsListener();
+  }
+
+  render();
+});
+
+
+/* =========================================================
+   OWNER PUBLIC FAVORITES
+========================================================= */
+
+/*
+  Hii listener inasoma:
+
+  siteSettings/main
+
+  ownerFavorites: [...]
+
+  Kwa sababu ni public settings,
+  kila visitor anaweza kuona bidhaa ambazo OWNER
+  amechagua.
+*/
+
+function startMarketSettingsListener(){
+
+  if(unsubMarketSettings){
+    unsubMarketSettings();
+  }
+
+  unsubMarketSettings =
+    onSnapshot(
+      MARKET_SETTINGS_REF,
+      (snap) => {
+
+        if(snap.exists()){
+
+          const data = snap.data();
+
+          ownerFavoriteIds =
+            Array.isArray(data.ownerFavorites)
+              ? data.ownerFavorites
+              : [];
+
+        }else{
+
+          ownerFavoriteIds = [];
+        }
+
+        renderMarketChoices();
+
+        render();
+
+      },
+      (err) => {
+
+        console.error(
+          'market settings listener',
+          err
+        );
+
+        ownerFavoriteIds = [];
+
+        renderMarketChoices();
+      }
+    );
+}
+
+
+startMarketSettingsListener();
+
+
+/*
+  Tambua kama huyu ndiye owner wa SOKO KUU.
+*/
+function isOwner(){
+
+  return !!(
+    currentUser &&
+    currentUser.email &&
+    currentUser.email.toLowerCase() ===
+      OWNER_EMAIL.toLowerCase()
+  );
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function startProfileListener(){
+
+  if(unsubProfile)
+    unsubProfile();
+
+  unsubProfile =
+    onSnapshot(
+      doc(db, 'users', currentUser.uid),
+      (snap) => {
+
+        myProfile =
+          snap.exists()
+            ? snap.data()
+            : {};
+
+        render();
+
+        renderMarketChoices();
+
+        if(
+          accountDrawer.classList.contains('open')
+        ){
+          renderAccountDrawer(
+            currentAcctTab
+          );
+        }
+      },
+      (err) =>
+        console.error(
+          'profile listener',
+          err
+        )
+    );
+}
+
+
+function stopProfileListener(){
+
+  if(unsubProfile){
+
+    unsubProfile();
+
+    unsubProfile = null;
+  }
+
+  myProfile = null;
+}
+
+
+/* =========================================================
+   ARIFA
+========================================================= */
+
+function startNotificationsListener(){
+
+  if(unsubNotifications)
+    unsubNotifications();
+
+  const nq =
+    query(
+      collection(db, 'notifications'),
+      where(
+        'toUid',
+        '==',
+        currentUser.uid
+      )
+    );
+
+  unsubNotifications =
+    onSnapshot(
+      nq,
+      (snap) => {
+
+        myNotifications =
+          snap.docs.map(d => ({
+            id: d.id,
+            ...d.data()
+          }));
+
+        myNotifications.sort((a,b) => {
+
+          const at =
+            a.createdAt &&
+            a.createdAt.toMillis
+              ? a.createdAt.toMillis()
+              : 0;
+
+          const bt =
+            b.createdAt &&
+            b.createdAt.toMillis
+              ? b.createdAt.toMillis()
+              : 0;
+
+          return bt - at;
+        });
+
+        updateNotifBadge();
+
+        if(
+          accountDrawer.classList.contains('open') &&
+          currentAcctTab === 'notifications'
+        ){
+          renderAccountDrawer(
+            'notifications'
+          );
+        }
+      },
+      (err) =>
+        console.error(
+          'notif listener',
+          err
+        )
+    );
+}
+
+
+function stopNotificationsListener(){
+
+  if(unsubNotifications){
+
+    unsubNotifications();
+
+    unsubNotifications = null;
+  }
+
+  myNotifications = [];
+
+  updateNotifBadge();
+}
+
+
+function updateNotifBadge(){
+
+  const dot =
+    document.getElementById('acctDot');
+
+  if(!dot) return;
+
+  const hasUnread =
+    myNotifications.some(
+      n => !n.read
+    );
+
+  dot.style.display =
+    hasUnread
+      ? 'block'
+      : 'none';
+}
+
+
+/* =========================================================
+   DRAWERS
+========================================================= */
+
+const drawer =
+  document.getElementById('drawer');
+
+const infoDrawer =
+  document.getElementById('infoDrawer');
+
+const accountDrawer =
+  document.getElementById('accountDrawer');
+
+const overlay =
+  document.getElementById('overlay');
+
+const allPanels = [
+  drawer,
+  infoDrawer,
+  accountDrawer
+];
+
+
+function openPanel(panel){
+
+  allPanels.forEach(p =>
+    p.classList.remove('open')
+  );
+
+  panel.classList.add('open');
+
+  overlay.classList.add('open');
+
+  document.body.style.overflow =
+    'hidden';
+}
+
+
+function closeAllPanels(){
+
+  allPanels.forEach(p =>
+    p.classList.remove('open')
+  );
+
+  overlay.classList.remove('open');
+
+  document.body.style.overflow =
+    '';
+}
+
+/*
+  Imewekwa global kwa sababu kuna sehemu za HTML
+  zinazotumia onclick.
+*/
+window.closeAllPanels =
+  closeAllPanels;
+
+
+overlay.addEventListener(
+  'click',
+  closeAllPanels
+);
+
+
+document
+  .querySelectorAll('[data-close]')
+  .forEach(btn =>
+    btn.addEventListener(
+      'click',
+      closeAllPanels
+    )
+  );
+
+
+function openDrawer(){
+
+  if(!currentUser){
+
+    window.location.href =
+      'login.html';
+
+    return;
+  }
+
+  editingProductId = null;
+
+  document
+    .getElementById('productDrawerTitle')
+    .textContent =
+      'Posti Bidhaa Yako';
+
+  document
+    .getElementById('addProduct')
+    .textContent =
+      'Chapisha Bidhaa';
+
+  document
+    .getElementById('pCategory')
+    .value =
+      'nyingine';
+
+  document
+    .getElementById('pName')
+    .value = '';
+
+  document
+    .getElementById('pPrice')
+    .value = '';
+
+  document
+    .getElementById('pDesc')
+    .value = '';
+
+  document
+    .getElementById('pPhone')
+    .value = '';
+
+  document
+    .getElementById('pImage')
+    .value = '';
+
+  document
+    .getElementById('pImagePreview')
+    .style.display =
+      'none';
+
+  document
+    .getElementById('fileLabel')
+    .textContent =
+      'Bonyeza kuchagua picha';
+
+  pendingImageData = null;
+
+  openPanel(drawer);
+}
+
+
+window.openEditProduct = (id) => {
+
+  const p =
+    allProducts.find(
+      x => x.id === id
+    );
+
+  if(
+    !p ||
+    !currentUser ||
+    p.ownerUid !== currentUser.uid
+  ) return;
+
+  editingProductId = id;
+
+  document
+    .getElementById('productDrawerTitle')
+    .textContent =
+      'Hariri Bidhaa';
+
+  document
+    .getElementById('addProduct')
+    .textContent =
+      'Hifadhi Mabadiliko';
+
+  document
+    .getElementById('pCategory')
+    .value =
+      p.category || 'nyingine';
+
+  document
+    .getElementById('pName')
+    .value =
+      p.name || '';
+
+  document
+    .getElementById('pPrice')
+    .value =
+      p.price || '';
+
+  document
+    .getElementById('pDesc')
+    .value =
+      p.desc || '';
+
+  document
+    .getElementById('pPhone')
+    .value =
+      p.phone || '';
+
+  document
+    .getElementById('pImage')
+    .value = '';
+
+  pendingImageData = null;
+
+  if(p.imageUrl){
+
+    document
+      .getElementById('pImagePreview')
+      .src =
+      p.imageUrl;
+
+    document
+      .getElementById('pImagePreview')
+      .style.display =
+      'block';
+
+    document
+      .getElementById('fileLabel')
+      .textContent =
+      'Picha ya sasa (bonyeza kubadilisha)';
+
+  }else{
+
+    document
+      .getElementById('pImagePreview')
+      .style.display =
+      'none';
+
+    document
+      .getElementById('fileLabel')
+      .textContent =
+      'Bonyeza kuchagua picha';
+  }
+
+  openPanel(drawer);
+};
+
+
+document
+  .getElementById('fabAdd')
+  .addEventListener(
+    'click',
+    openDrawer
+  );
+
+
+document
+  .getElementById('navMessages')
+  .addEventListener('click', () => {
+
+    if(!currentUser){
+
+      window.location.href =
+        'login.html';
+
+      return;
+    }
+
     openInbox();
   });
-  document.getElementById('tabAll').addEventListener('click', () => { viewMode='all'; setActiveTab(); render(); });
-  document.getElementById('tabMine').addEventListener('click', () => {
-    if(!currentUser){ window.location.href = 'login.html'; return; }
-    viewMode='mine'; setActiveTab(); render();
-  });
-  function setActiveTab(){
-    document.getElementById('tabAll').classList.toggle('active', viewMode==='all');
-    document.getElementById('tabMine').classList.toggle('active', viewMode==='mine');
-  }
 
-  // ===== PILLS (juu kabisa) =====
-  document.getElementById('pillAll').addEventListener('click', () => {
-    viewMode = 'all'; setActiveTab(); render();
-    document.querySelector('.section-head').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-  document.getElementById('pillVerified').addEventListener('click', () => {
-    document.getElementById('infoTitle').textContent = 'Wachuuzi Halisi';
-    document.getElementById('infoBody').innerHTML = `
-      <p style="color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:0;">
-        Duka hili ni jukwaa huru linalomruhusu mtu yeyote kuposti bidhaa zake. Ili kununua kwa usalama, fuata vidokezo hivi:
-      </p>
-      <ul style="padding-left:1.1rem;color:var(--muted);font-size:.88rem;line-height:2;margin:0;">
-        <li>Ongea na muuzaji kwa WhatsApp kabla ya kulipa chochote</li>
-        <li>Muombe picha au video za ziada za bidhaa halisi</li>
-        <li>Pendelea kukutana eneo la wazi kwa malipo ya mkono kwa mkono</li>
-        <li>Usitume malipo kabla ya kuridhika na bidhaa</li>
-        <li>Ripoti tabia ya kutiliwa shaka kwa kutoshirikiana na muuzaji huyo tena</li>
-      </ul>`;
-    openPanel(infoDrawer);
-  });
-  document.getElementById('pillContact').addEventListener('click', () => {
-    document.getElementById('infoTitle').textContent = 'Wasiliana Moja kwa Moja';
-    document.getElementById('infoBody').innerHTML = `
-      <p style="color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:0;">
-        Huna haja ya kuwasiliana na sisi kununua — kila bidhaa ina namba ya WhatsApp ya muuzaji wake mwenyewe.
-      </p>
-      <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">
-        Bonyeza kitufe cha <b style="color:var(--ink);">"Nunua Sasa"</b> chini ya bidhaa unayoipenda ili kufungua mazungumzo ya WhatsApp moja kwa moja na muuzaji huyo.
-      </p>`;
-    openPanel(infoDrawer);
+
+document
+  .getElementById('tabAll')
+  .addEventListener('click', () => {
+
+    viewMode = 'all';
+
+    setActiveTab();
+
+    render();
   });
 
-  // ===== AKAUNTI =====
-  const acctTabsEl = document.getElementById('acctTabs');
-  document.getElementById('navAccount').addEventListener('click', () => {
-    if(!currentUser){ window.location.href = 'login.html'; return; }
-    acctTabsEl.style.display = 'flex';
+
+document
+  .getElementById('tabMine')
+  .addEventListener('click', () => {
+
+    if(!currentUser){
+
+      window.location.href =
+        'login.html';
+
+      return;
+    }
+
+    viewMode = 'mine';
+
+    setActiveTab();
+
+    render();
+  });
+
+
+function setActiveTab(){
+
+  document
+    .getElementById('tabAll')
+    .classList.toggle(
+      'active',
+      viewMode === 'all'
+    );
+
+  document
+    .getElementById('tabMine')
+    .classList.toggle(
+      'active',
+      viewMode === 'mine'
+    );
+}
+
+
+/* =========================================================
+   PILLS
+========================================================= */
+
+document
+  .getElementById('pillAll')
+  .addEventListener('click', () => {
+
+    viewMode = 'all';
+
+    setActiveTab();
+
+    render();
+
+    document
+      .querySelector('.section-head')
+      .scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+  });
+
+
+document
+  .getElementById('pillVerified')
+  .addEventListener('click', () => {
+
+    document
+      .getElementById('infoTitle')
+      .textContent =
+      'Wachuuzi Halisi';
+
+    document
+      .getElementById('infoBody')
+      .innerHTML = `
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:0;">
+          SOKO KUU ni jukwaa huru linalomruhusu mtu yeyote kuposti bidhaa zake.
+          Ili kununua kwa usalama, fuata vidokezo hivi:
+        </p>
+
+        <ul style="padding-left:1.1rem;color:var(--muted);font-size:.88rem;line-height:2;margin:0;">
+          <li>Ongea na muuzaji kwa WhatsApp kabla ya kulipa chochote</li>
+          <li>Muombe picha au video za ziada za bidhaa halisi</li>
+          <li>Pendelea kukutana eneo la wazi kwa malipo ya mkono kwa mkono</li>
+          <li>Usitume malipo kabla ya kuridhika na bidhaa</li>
+          <li>Ripoti tabia ya kutiliwa shaka</li>
+        </ul>
+      `;
+
+    openPanel(infoDrawer);
+  });
+
+
+document
+  .getElementById('pillContact')
+  .addEventListener('click', () => {
+
+    document
+      .getElementById('infoTitle')
+      .textContent =
+      'Wasiliana Moja kwa Moja';
+
+    document
+      .getElementById('infoBody')
+      .innerHTML = `
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:0;">
+          Huna haja ya kuwasiliana na SOKO KUU kununua.
+          Kila bidhaa ina namba ya WhatsApp ya muuzaji wake mwenyewe.
+        </p>
+
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.65;">
+          Bonyeza kitufe cha
+          <b style="color:var(--ink);">"Nunua Sasa"</b>
+          chini ya bidhaa unayoipenda.
+        </p>
+      `;
+
+    openPanel(infoDrawer);
+  });
+
+
+/* =========================================================
+   AKAUNTI
+========================================================= */
+
+const acctTabsEl =
+  document.getElementById('acctTabs');
+
+
+document
+  .getElementById('navAccount')
+  .addEventListener('click', () => {
+
+    if(!currentUser){
+
+      window.location.href =
+        'login.html';
+
+      return;
+    }
+
+    acctTabsEl.style.display =
+      'flex';
+
     switchAcctTab('profile');
+
     openPanel(accountDrawer);
   });
-  acctTabsEl.addEventListener('click', (e) => {
-    const btn = e.target.closest('.acct-tab');
-    if(btn) switchAcctTab(btn.dataset.tab);
-  });
-  function switchAcctTab(tab){
-    currentAcctTab = tab;
-    document.querySelectorAll('.acct-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-    renderAccountDrawer(tab);
+
+
+acctTabsEl.addEventListener(
+  'click',
+  (e) => {
+
+    const btn =
+      e.target.closest('.acct-tab');
+
+    if(btn)
+      switchAcctTab(
+        btn.dataset.tab
+      );
   }
+);
 
-  function renderAccountDrawer(tab){
-    const body = document.getElementById('accountBody');
-    if(!currentUser){
-      acctTabsEl.style.display = 'none';
-      body.innerHTML = `
-        <p style="color:var(--muted);font-size:.9rem;text-align:center;padding:1.5rem 0 1.2rem;line-height:1.6;">
-          Bado hujaingia. Ingia au jisajili ili uweze kuposti bidhaa na kuona akaunti yako.
-        </p>
-        <a class="btn-full btn-primary" href="login.html" style="display:block;text-align:center;">Ingia / Jisajili</a>`;
-      return;
-    }
-    if(tab === 'profile') renderProfileTab(body);
-    else if(tab === 'listings') renderListingsTab(body);
-    else if(tab === 'favorites') renderFavoritesTab(body);
-    else if(tab === 'notifications') renderNotificationsTab(body);
-    else if(tab === 'settings') renderSettingsTab(body);
-  }
 
-  // ---------- TAB: PROFILE ----------
-  let profileEditing = false;
-  function renderProfileTab(body){
-    const displayName = currentUser.displayName || (myProfile && myProfile.name) || currentUser.email || 'Mtumiaji';
-    const initial = displayName.trim().charAt(0).toUpperCase();
-    const username = (myProfile && myProfile.username) || '';
-    const phone = (myProfile && myProfile.phone) || '';
-    const photo = myProfile && myProfile.photoBase64;
-    const myCount = allProducts.filter(p => p.ownerUid === currentUser.uid).length;
-    const soldCount = allProducts.filter(p => p.ownerUid === currentUser.uid && p.sold).length;
-    const totalViews = allProducts.filter(p => p.ownerUid === currentUser.uid).reduce((s,p) => s + (p.views||0), 0);
+function switchAcctTab(tab){
 
-    if(!profileEditing){
-      body.innerHTML = `
-        <div class="profile-head">
-          <div class="profile-avatar-wrap">
-            ${photo ? `<img class="profile-avatar" src="${photo}">` : `<div class="profile-avatar">${escapeHtml(initial)}</div>`}
-          </div>
-          <div class="profile-name">${escapeHtml(displayName)}</div>
-          ${username ? `<div class="profile-username">@${escapeHtml(username)}</div>` : ''}
-          <div class="profile-meta">${escapeHtml(currentUser.email || '')}</div>
-          ${phone ? `<div class="profile-meta">📞 ${escapeHtml(phone)}</div>` : ''}
-        </div>
-        <div class="profile-stats">
-          <div><b>${myCount}</b><span>Matangazo</span></div>
-          <div><b>${soldCount}</b><span>Yaliyouzwa</span></div>
-          <div><b>${totalViews}</b><span>Views Jumla</span></div>
-        </div>
-        <button class="btn-full btn-primary" id="editProfileBtn" type="button" style="margin-bottom:.7rem;">Hariri Profile (Edit Profile)</button>
-        <button class="btn-full" id="acctLogout" type="button" style="background:#fdecec;color:var(--danger);">Toka Kwenye Akaunti</button>
-      `;
-      document.getElementById('editProfileBtn').addEventListener('click', () => {
-        profileEditing = true;
-        renderProfileTab(body);
-      });
-      document.getElementById('acctLogout').addEventListener('click', async () => {
-        await signOut(auth);
-        viewMode = 'all'; setActiveTab(); render();
-        closeAllPanels();
-      });
-    } else {
-      body.innerHTML = `
-        <div class="profile-head">
-          <div class="profile-avatar-wrap">
-            ${photo ? `<img class="profile-avatar" id="editAvatarImg" src="${photo}">` : `<div class="profile-avatar" id="editAvatarImg">${escapeHtml(initial)}</div>`}
-            <label class="profile-avatar-edit" title="Badili picha">
-              ✏️<input type="file" accept="image/*" id="avatarInput" style="display:none;">
-            </label>
-          </div>
-        </div>
-        <div class="panel-block">
-          <div class="field">
-            <label for="editName">Jina</label>
-            <input type="text" id="editName" value="${escapeHtml(displayName)}" placeholder="Jina lako">
-          </div>
-          <div class="field">
-            <label for="editUsername">Username</label>
-            <input type="text" id="editUsername" value="${escapeHtml(username)}" placeholder="mfano: hermansade">
-          </div>
-          <div class="field">
-            <label for="editPhone">Namba ya Simu</label>
-            <input type="tel" id="editPhone" value="${escapeHtml(phone)}" placeholder="0712345678">
-          </div>
-          <button class="btn-full btn-primary" id="saveProfileBtn" type="button" style="margin-bottom:.6rem;">Hifadhi</button>
-          <button class="btn-full" id="cancelProfileBtn" type="button" style="background:var(--bg);color:var(--muted);">Ghairi</button>
-        </div>
-      `;
-      document.getElementById('avatarInput').addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if(!file) return;
-        try{
-          const compressed = await compressImage(file, 320, 0.8);
-          document.getElementById('editAvatarImg').outerHTML = `<img class="profile-avatar" id="editAvatarImg" src="${compressed}">`;
-          document.getElementById('avatarInput').dataset.pending = compressed;
-        } catch(err){ console.error(err); alert('Imeshindikana kusoma picha.'); }
-      });
-      document.getElementById('cancelProfileBtn').addEventListener('click', () => {
-        profileEditing = false;
-        renderProfileTab(body);
-      });
-      document.getElementById('saveProfileBtn').addEventListener('click', async () => {
-        const btn = document.getElementById('saveProfileBtn');
-        btn.disabled = true; btn.textContent = 'Inahifadhi...';
-        const newName = document.getElementById('editName').value.trim();
-        const newUsername = document.getElementById('editUsername').value.trim().replace(/\s+/g,'').toLowerCase();
-        const newPhone = document.getElementById('editPhone').value.trim();
-        const pendingAvatar = document.getElementById('avatarInput').dataset.pending;
-        try{
-          if(newName && newName !== currentUser.displayName){
-            await updateProfile(currentUser, { displayName: newName });
-          }
-          const userData = { name: newName, username: newUsername, phone: newPhone };
-          if(pendingAvatar) userData.photoBase64 = pendingAvatar;
-          await setDoc(doc(db, 'users', currentUser.uid), userData, { merge: true });
-          profileEditing = false;
-          renderProfileTab(body);
-        } catch(err){
-          console.error(err);
-          alert('Imeshindikana kuhifadhi profile. Jaribu tena.');
-          btn.disabled = false; btn.textContent = 'Hifadhi';
-        }
-      });
-    }
-  }
+  currentAcctTab = tab;
 
-  // ---------- TAB: MATANGAZO YANGU (Listings) ----------
-  function renderListingsTab(body){
-    const mine = allProducts.filter(p => p.ownerUid === currentUser.uid);
-    if(mine.length === 0){
-      body.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 0;">Bado hujaposti bidhaa. Bonyeza "+" kuposti ya kwanza.</p>`;
-      return;
-    }
-    body.innerHTML = mine.map(p => `
-      <div class="listing-row">
-        ${p.imageUrl ? `<img class="listing-thumb" src="${p.imageUrl}">` : `<div class="listing-thumb" style="display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--muted);">Hakuna</div>`}
-        <div class="listing-info">
-          <div class="listing-name">${escapeHtml(p.name)} ${p.sold ? '<span style="color:var(--danger);">(Imeuzwa)</span>' : ''}</div>
-          <div class="listing-meta">
-            <span>TSh ${Number(p.price).toLocaleString()}</span>
-            <span>👁 ${p.views || 0} views</span>
-          </div>
-        </div>
-        <div class="listing-actions">
-          <button class="icon-sq" title="Hariri" onclick="openEditProduct('${p.id}')">✏️</button>
-          <button class="icon-sq" title="${p.sold ? 'Rejesha' : 'Imeuzwa'}" onclick="toggleSold('${p.id}')">${p.sold ? '↩️' : '✅'}</button>
-          <button class="icon-sq" title="Futa" onclick="removeProduct('${p.id}')" style="color:var(--danger);">🗑️</button>
-        </div>
-      </div>`).join('');
-  }
+  document
+    .querySelectorAll('.acct-tab')
+    .forEach(b =>
+      b.classList.toggle(
+        'active',
+        b.dataset.tab === tab
+      )
+    );
 
-  // ---------- TAB: PENDWA (Favorites) ----------
-  function renderFavoritesTab(body){
-    const favIds = (myProfile && myProfile.favorites) || [];
-    const favs = allProducts.filter(p => favIds.includes(p.id));
-    if(favs.length === 0){
-      body.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 0;">Bado hujahifadhi bidhaa yoyote. Bonyeza 🤍 kwenye bidhaa unayoipenda kuihifadhi hapa.</p>`;
-      return;
-    }
-    body.innerHTML = favs.map(p => `
-      <div class="fav-row">
-        ${p.imageUrl ? `<img class="fav-thumb" src="${p.imageUrl}">` : `<div class="fav-thumb"></div>`}
-        <div class="fav-info">
-          <div class="fav-price">TSh ${Number(p.price).toLocaleString()}</div>
-          <div class="fav-name">${escapeHtml(p.name)}</div>
-        </div>
-        <button class="icon-sq" title="Ondoa" onclick="toggleFavorite('${p.id}')" style="color:var(--danger);">✕</button>
-      </div>`).join('');
-  }
+  renderAccountDrawer(tab);
+}
 
-  // ---------- TAB: ARIFA (Notifications) ----------
-  function renderNotificationsTab(body){
-    // ongeza arifa za "mtu ameulizia" kutoka kwenye mazungumzo yasiyosomwa
-    const msgNotifs = myConversations.filter(isConvoUnread).map(c => ({
-      icon: '💬', text: `<b>${escapeHtml(c.buyerName || c.sellerName || 'Mtu')}</b> ameulizia kuhusu <b>${escapeHtml(c.productName || 'bidhaa')}</b>`,
-      time: c.lastMessageAt, unread: true, isMsg: true, convoId: c.id
-    }));
-    const favNotifs = myNotifications.map(n => ({
-      icon: '❤️', text: `<b>${escapeHtml(n.fromName || 'Mtu')}</b> amependa bidhaa yako <b>${escapeHtml(n.productName || '')}</b>`,
-      time: n.createdAt, unread: !n.read, id: n.id
-    }));
-    // arifa ya "tangazo limeisha muda" — bidhaa zako zenye zaidi ya siku 30 na bado hazijauzwa
-    const staleNotifs = allProducts.filter(p => {
-      if(p.ownerUid !== currentUser.uid || p.sold) return false;
-      const ms = p.createdAt && p.createdAt.toMillis ? p.createdAt.toMillis() : 0;
-      return ms && (Date.now() - ms) > 1000*60*60*24*30;
-    }).map(p => ({
-      icon: '⏰', text: `Tangazo lako <b>${escapeHtml(p.name)}</b> lina zaidi ya siku 30 — fikiria kulisasisha au kuliweka "Imeuzwa" kama limekwisha.`,
-      time: p.createdAt, unread: false
-    }));
 
-    const all = [...msgNotifs, ...favNotifs, ...staleNotifs].sort((a,b) => {
-      const at = a.time && a.time.toMillis ? a.time.toMillis() : 0;
-      const bt = b.time && b.time.toMillis ? b.time.toMillis() : 0;
-      return bt - at;
-    });
+function renderAccountDrawer(tab){
 
-    if(all.length === 0){
-      body.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 0;">Hakuna arifa kwa sasa.</p>`;
-      return;
-    }
-    body.innerHTML = all.map(n => {
-      const ms = n.time && n.time.toMillis ? n.time.toMillis() : 0;
-      const clickAttr = n.isMsg ? ` onclick="closeAllPanels();openChatFromInbox('${n.convoId}')" style="cursor:pointer;"` :
-                         n.id ? ` onclick="markNotifRead('${n.id}')" style="cursor:pointer;"` : '';
-      return `
-        <div class="notif-row ${n.unread ? 'unread' : ''}"${clickAttr}>
-          <div class="notif-icon">${n.icon}</div>
-          <div class="notif-text">${n.text}<div class="notif-time">${timeAgo(ms)}</div></div>
-          ${n.unread ? '<span class="notif-dot-mini"></span>' : ''}
-        </div>`;
-    }).join('');
+  const body =
+    document.getElementById(
+      'accountBody'
+    );
 
-    // notification za favorite mpya ambazo bado hazijasomwa -> zisomwe baada ya kutazamwa hapa
-    myNotifications.filter(n => !n.read).forEach(n => {
-      updateDoc(doc(db, 'notifications', n.id), { read: true }).catch(() => {});
-    });
-  }
-  window.markNotifRead = (id) => {
-    updateDoc(doc(db, 'notifications', id), { read: true }).catch(() => {});
-  };
+  if(!currentUser){
 
-  // ---------- TAB: MIPANGILIO (Settings) ----------
-  function renderSettingsTab(body){
-    const hasPasswordProvider = currentUser.providerData.some(p => p.providerId === 'password');
-    const showEmail = myProfile ? !!myProfile.privacyShowEmail : false;
-    const notifOn = localStorage.getItem('duka_notif_pref') !== 'off';
-    const lang = localStorage.getItem('duka_lang') || 'sw';
+    acctTabsEl.style.display =
+      'none';
 
     body.innerHTML = `
-      <div class="panel-block" style="padding:0;">
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">Badili Jina na Username</div>
-            <div class="settings-sub">Fanya hivi kutoka kwenye "Profile"</div>
-          </div>
-          <button class="icon-sq" onclick="switchAcctTabGlobal('profile')">✏️</button>
+      <p style="color:var(--muted);font-size:.9rem;text-align:center;padding:1.5rem 0 1.2rem;line-height:1.6;">
+        Bado hujaingia. Ingia au jisajili ili uweze kuposti bidhaa na kuona akaunti yako.
+      </p>
+
+      <a class="btn-full btn-primary"
+         href="login.html"
+         style="display:block;text-align:center;">
+        Ingia / Jisajili
+      </a>
+    `;
+
+    return;
+  }
+
+  if(tab === 'profile')
+    renderProfileTab(body);
+
+  else if(tab === 'listings')
+    renderListingsTab(body);
+
+  else if(tab === 'favorites')
+    renderFavoritesTab(body);
+
+  else if(tab === 'notifications')
+    renderNotificationsTab(body);
+
+  else if(tab === 'settings')
+    renderSettingsTab(body);
+}
+
+
+/* =========================================================
+   PROFILE TAB
+========================================================= */
+
+let profileEditing = false;
+
+
+function renderProfileTab(body){
+
+  const displayName =
+    currentUser.displayName ||
+    (myProfile && myProfile.name) ||
+    currentUser.email ||
+    'Mtumiaji';
+
+  const initial =
+    displayName.trim()
+      .charAt(0)
+      .toUpperCase();
+
+  const username =
+    (myProfile && myProfile.username) ||
+    '';
+
+  const phone =
+    (myProfile && myProfile.phone) ||
+    '';
+
+  const photo =
+    myProfile &&
+    myProfile.photoBase64;
+
+  const myCount =
+    allProducts.filter(
+      p =>
+        p.ownerUid ===
+        currentUser.uid
+    ).length;
+
+  const soldCount =
+    allProducts.filter(
+      p =>
+        p.ownerUid === currentUser.uid &&
+        p.sold
+    ).length;
+
+  const totalViews =
+    allProducts
+      .filter(
+        p =>
+          p.ownerUid ===
+          currentUser.uid
+      )
+      .reduce(
+        (s,p) =>
+          s + (p.views || 0),
+        0
+      );
+
+
+  if(!profileEditing){
+
+    body.innerHTML = `
+      <div class="profile-head">
+
+        <div class="profile-avatar-wrap">
+          ${
+            photo
+              ? `<img class="profile-avatar" src="${photo}">`
+              : `<div class="profile-avatar">${escapeHtml(initial)}</div>`
+          }
         </div>
-        ${hasPasswordProvider ? `
-        <div class="settings-row" style="flex-direction:column;align-items:stretch;gap:.6rem;">
-          <div class="settings-label">Badili Password</div>
-          <input type="password" id="curPass" placeholder="Password ya sasa">
-          <input type="password" id="newPass" placeholder="Password mpya (angalau herufi 6)">
-          <button class="btn-full btn-primary" id="changePassBtn" type="button">Badili Password</button>
-        </div>` : `
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">Password</div>
-            <div class="settings-sub">Umeingia kwa Google — hakuna password ya kubadili hapa</div>
-          </div>
-        </div>`}
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">Email</div>
-            <div class="settings-sub">${escapeHtml(currentUser.email || '')}</div>
-          </div>
+
+        <div class="profile-name">
+          ${escapeHtml(displayName)}
         </div>
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">Privacy</div>
-            <div class="settings-sub">Onyesha barua pepe yangu kwa umma</div>
-          </div>
-          <div class="toggle-switch ${showEmail ? 'on' : ''}" id="privacyToggle"></div>
+
+        ${
+          username
+            ? `<div class="profile-username">@${escapeHtml(username)}</div>`
+            : ''
+        }
+
+        <div class="profile-meta">
+          ${escapeHtml(currentUser.email || '')}
         </div>
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">Notifications</div>
-            <div class="settings-sub">Onyesha alama ya arifa mpya</div>
-          </div>
-          <div class="toggle-switch ${notifOn ? 'on' : ''}" id="notifToggle"></div>
+
+        ${
+          phone
+            ? `<div class="profile-meta">📞 ${escapeHtml(phone)}</div>`
+            : ''
+        }
+
+      </div>
+
+      <div class="profile-stats">
+        <div>
+          <b>${myCount}</b>
+          <span>Matangazo</span>
         </div>
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">Language</div>
-            <div class="settings-sub">Lugha ya tovuti</div>
-          </div>
-          <select class="settings-select" id="langSelect">
-            <option value="sw" ${lang==='sw'?'selected':''}>Kiswahili</option>
-            <option value="en" ${lang==='en'?'selected':''}>English (hivi karibuni)</option>
-          </select>
+
+        <div>
+          <b>${soldCount}</b>
+          <span>Yaliyouzwa</span>
         </div>
+
+        <div>
+          <b>${totalViews}</b>
+          <span>Views Jumla</span>
+        </div>
+      </div>
+
+      <button class="btn-full btn-primary"
+              id="editProfileBtn"
+              type="button"
+              style="margin-bottom:.7rem;">
+        Hariri Profile (Edit Profile)
+      </button>
+
+      <button class="btn-full"
+              id="acctLogout"
+              type="button"
+              style="background:#fdecec;color:var(--danger);">
+        Toka Kwenye Akaunti
+      </button>
+    `;
+
+
+    document
+      .getElementById('editProfileBtn')
+      .addEventListener('click', () => {
+
+        profileEditing = true;
+
+        renderProfileTab(body);
+      });
+
+
+    document
+      .getElementById('acctLogout')
+      .addEventListener(
+        'click',
+        async () => {
+
+          await signOut(auth);
+
+          viewMode = 'all';
+
+          setActiveTab();
+
+          render();
+
+          closeAllPanels();
+        }
+      );
+
+  }else{
+
+    body.innerHTML = `
+      <div class="profile-head">
+
+        <div class="profile-avatar-wrap">
+
+          ${
+            photo
+              ? `<img class="profile-avatar" id="editAvatarImg" src="${photo}">`
+              : `<div class="profile-avatar" id="editAvatarImg">${escapeHtml(initial)}</div>`
+          }
+
+          <label class="profile-avatar-edit"
+                 title="Badili picha">
+            ✏️
+            <input type="file"
+                   accept="image/*"
+                   id="avatarInput"
+                   style="display:none;">
+          </label>
+
+        </div>
+      </div>
+
+      <div class="panel-block">
+
+        <div class="field">
+          <label for="editName">Jina</label>
+          <input type="text"
+                 id="editName"
+                 value="${escapeHtml(displayName)}"
+                 placeholder="Jina lako">
+        </div>
+
+        <div class="field">
+          <label for="editUsername">Username</label>
+          <input type="text"
+                 id="editUsername"
+                 value="${escapeHtml(username)}"
+                 placeholder="mfano: hermansade">
+        </div>
+
+        <div class="field">
+          <label for="editPhone">Namba ya Simu</label>
+          <input type="tel"
+                 id="editPhone"
+                 value="${escapeHtml(phone)}"
+                 placeholder="0712345678">
+        </div>
+
+        <button class="btn-full btn-primary"
+                id="saveProfileBtn"
+                type="button"
+                style="margin-bottom:.6rem;">
+          Hifadhi
+        </button>
+
+        <button class="btn-full"
+                id="cancelProfileBtn"
+                type="button"
+                style="background:var(--bg);color:var(--muted);">
+          Ghairi
+        </button>
+
       </div>
     `;
 
-    if(hasPasswordProvider){
-      document.getElementById('changePassBtn').addEventListener('click', async () => {
-        const curPass = document.getElementById('curPass').value;
-        const newPass = document.getElementById('newPass').value;
-        if(!curPass || !newPass || newPass.length < 6){
-          alert('Jaza password ya sasa na mpya (angalau herufi 6).');
+
+    document
+      .getElementById('avatarInput')
+      .addEventListener(
+        'change',
+        async (e) => {
+
+          const file =
+            e.target.files[0];
+
+          if(!file) return;
+
+          try{
+
+            const compressed =
+              await compressImage(
+                file,
+                320,
+                0.8
+              );
+
+            document
+              .getElementById(
+                'editAvatarImg'
+              )
+              .outerHTML =
+              `<img class="profile-avatar" id="editAvatarImg" src="${compressed}">`;
+
+            document
+              .getElementById(
+                'avatarInput'
+              )
+              .dataset.pending =
+              compressed;
+
+          }catch(err){
+
+            console.error(err);
+
+            alert(
+              'Imeshindikana kusoma picha.'
+            );
+          }
+        }
+      );
+
+
+    document
+      .getElementById('cancelProfileBtn')
+      .addEventListener(
+        'click',
+        () => {
+
+          profileEditing = false;
+
+          renderProfileTab(body);
+        }
+      );
+
+
+    document
+      .getElementById('saveProfileBtn')
+      .addEventListener(
+        'click',
+        async () => {
+
+          const btn =
+            document.getElementById(
+              'saveProfileBtn'
+            );
+
+          btn.disabled = true;
+
+          btn.textContent =
+            'Inahifadhi...';
+
+          const newName =
+            document
+              .getElementById(
+                'editName'
+              )
+              .value
+              .trim();
+
+          const newUsername =
+            document
+              .getElementById(
+                'editUsername'
+              )
+              .value
+              .trim()
+              .replace(/\s+/g,'')
+              .toLowerCase();
+
+          const newPhone =
+            document
+              .getElementById(
+                'editPhone'
+              )
+              .value
+              .trim();
+
+          const pendingAvatar =
+            document
+              .getElementById(
+                'avatarInput'
+              )
+              .dataset
+              .pending;
+
+          try{
+
+            if(
+              newName &&
+              newName !==
+                currentUser.displayName
+            ){
+
+              await updateProfile(
+                currentUser,
+                {
+                  displayName:
+                    newName
+                }
+              );
+            }
+
+            const userData = {
+              name: newName,
+              username: newUsername,
+              phone: newPhone
+            };
+
+            if(pendingAvatar)
+              userData.photoBase64 =
+                pendingAvatar;
+
+            await setDoc(
+              doc(
+                db,
+                'users',
+                currentUser.uid
+              ),
+              userData,
+              {
+                merge:true
+              }
+            );
+
+            profileEditing = false;
+
+            renderProfileTab(body);
+
+          }catch(err){
+
+            console.error(err);
+
+            alert(
+              'Imeshindikana kuhifadhi profile. Jaribu tena.'
+            );
+
+            btn.disabled = false;
+
+            btn.textContent =
+              'Hifadhi';
+          }
+        }
+      );
+  }
+}
+
+
+/* =========================================================
+   MATANGAZO YANGU
+========================================================= */
+
+function renderListingsTab(body){
+
+  const mine =
+    allProducts.filter(
+      p =>
+        p.ownerUid ===
+        currentUser.uid
+    );
+
+  if(mine.length === 0){
+
+    body.innerHTML = `
+      <p style="text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 0;">
+        Bado hujaposti bidhaa. Bonyeza "+" kuposti ya kwanza.
+      </p>
+    `;
+
+    return;
+  }
+
+  body.innerHTML =
+    mine.map(p => `
+
+      <div class="listing-row">
+
+        ${
+          p.imageUrl
+            ? `<img class="listing-thumb" src="${p.imageUrl}">`
+            : `<div class="listing-thumb" style="display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--muted);">Hakuna</div>`
+        }
+
+        <div class="listing-info">
+
+          <div class="listing-name">
+            ${escapeHtml(p.name)}
+
+            ${
+              p.sold
+                ? '<span style="color:var(--danger);">(Imeuzwa)</span>'
+                : ''
+            }
+          </div>
+
+          <div class="listing-meta">
+            <span>
+              TSh ${Number(p.price).toLocaleString()}
+            </span>
+
+            <span>
+              👁 ${p.views || 0} views
+            </span>
+          </div>
+
+        </div>
+
+        <div class="listing-actions">
+
+          <button class="icon-sq"
+                  title="Hariri"
+                  onclick="openEditProduct('${p.id}')">
+            ✏️
+          </button>
+
+          <button class="icon-sq"
+                  title="${p.sold ? 'Rejesha' : 'Imeuzwa'}"
+                  onclick="toggleSold('${p.id}')">
+            ${p.sold ? '↩️' : '✅'}
+          </button>
+
+          <button class="icon-sq"
+                  title="Futa"
+                  onclick="removeProduct('${p.id}')"
+                  style="color:var(--danger);">
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join('');
+}
+
+
+/* =========================================================
+   PENDWA PRIVATE
+========================================================= */
+
+function renderFavoritesTab(body){
+
+  const favIds =
+    (myProfile &&
+     Array.isArray(myProfile.favorites))
+      ? myProfile.favorites
+      : [];
+
+  const favs =
+    allProducts.filter(
+      p =>
+        favIds.includes(p.id)
+    );
+
+  if(favs.length === 0){
+
+    body.innerHTML = `
+      <p style="text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 0;">
+        Bado hujahifadhi bidhaa yoyote.
+        Bonyeza 🤍 kwenye bidhaa unayoipenda kuihifadhi hapa.
+      </p>
+    `;
+
+    return;
+  }
+
+  body.innerHTML =
+    favs.map(p => `
+
+      <div class="fav-row">
+
+        ${
+          p.imageUrl
+            ? `<img class="fav-thumb" src="${p.imageUrl}">`
+            : `<div class="fav-thumb"></div>`
+        }
+
+        <div class="fav-info">
+
+          <div class="fav-price">
+            TSh ${Number(p.price).toLocaleString()}
+          </div>
+
+          <div class="fav-name">
+            ${escapeHtml(p.name)}
+          </div>
+
+        </div>
+
+        <button class="icon-sq"
+                title="Ondoa"
+                onclick="toggleFavorite('${p.id}')"
+                style="color:var(--danger);">
+          ✕
+        </button>
+
+      </div>
+
+    `).join('');
+}
+
+
+/* =========================================================
+   ARIFA
+========================================================= */
+
+function renderNotificationsTab(body){
+
+  const msgNotifs =
+    myConversations
+      .filter(isConvoUnread)
+      .map(c => ({
+
+        icon:'💬',
+
+        text:
+          `<b>${escapeHtml(c.buyerName || c.sellerName || 'Mtu')}</b>
+           ameulizia kuhusu
+           <b>${escapeHtml(c.productName || 'bidhaa')}</b>`,
+
+        time:c.lastMessageAt,
+
+        unread:true,
+
+        isMsg:true,
+
+        convoId:c.id
+      }));
+
+
+  const favNotifs =
+    myNotifications.map(n => ({
+
+      icon:'❤️',
+
+      text:
+        `<b>${escapeHtml(n.fromName || 'Mtu')}</b>
+         amependa bidhaa yako
+         <b>${escapeHtml(n.productName || '')}</b>`,
+
+      time:n.createdAt,
+
+      unread:!n.read,
+
+      id:n.id
+    }));
+
+
+  const staleNotifs =
+    allProducts
+      .filter(p => {
+
+        if(
+          p.ownerUid !==
+            currentUser.uid ||
+          p.sold
+        ) return false;
+
+        const ms =
+          p.createdAt &&
+          p.createdAt.toMillis
+            ? p.createdAt.toMillis()
+            : 0;
+
+        return (
+          ms &&
+          Date.now() - ms >
+          1000*60*60*24*30
+        );
+      })
+      .map(p => ({
+
+        icon:'⏰',
+
+        text:
+          `Tangazo lako
+           <b>${escapeHtml(p.name)}</b>
+           lina zaidi ya siku 30.`,
+
+        time:p.createdAt,
+
+        unread:false
+      }));
+
+
+  const all =
+    [
+      ...msgNotifs,
+      ...favNotifs,
+      ...staleNotifs
+    ]
+    .sort((a,b) => {
+
+      const at =
+        a.time &&
+        a.time.toMillis
+          ? a.time.toMillis()
+          : 0;
+
+      const bt =
+        b.time &&
+        b.time.toMillis
+          ? b.time.toMillis()
+          : 0;
+
+      return bt - at;
+    });
+
+
+  if(all.length === 0){
+
+    body.innerHTML = `
+      <p style="text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 0;">
+        Hakuna arifa kwa sasa.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  body.innerHTML =
+    all.map(n => {
+
+      const ms =
+        n.time &&
+        n.time.toMillis
+          ? n.time.toMillis()
+          : 0;
+
+      const clickAttr =
+        n.isMsg
+          ? ` onclick="closeAllPanels();openChatFromInbox('${n.convoId}')" style="cursor:pointer;"`
+          : n.id
+            ? ` onclick="markNotifRead('${n.id}')" style="cursor:pointer;"`
+            : '';
+
+      return `
+
+        <div class="notif-row ${n.unread ? 'unread' : ''}"
+             ${clickAttr}>
+
+          <div class="notif-icon">
+            ${n.icon}
+          </div>
+
+          <div class="notif-text">
+
+            ${n.text}
+
+            <div class="notif-time">
+              ${timeAgo(ms)}
+            </div>
+
+          </div>
+
+          ${
+            n.unread
+              ? '<span class="notif-dot-mini"></span>'
+              : ''
+          }
+
+        </div>
+
+      `;
+
+    }).join('');
+
+
+  myNotifications
+    .filter(n => !n.read)
+    .forEach(n => {
+
+      updateDoc(
+        doc(
+          db,
+          'notifications',
+          n.id
+        ),
+        {
+          read:true
+        }
+      ).catch(() => {});
+    });
+}
+
+
+window.markNotifRead = (id) => {
+
+  updateDoc(
+    doc(
+      db,
+      'notifications',
+      id
+    ),
+    {
+      read:true
+    }
+  ).catch(() => {});
+};
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function renderSettingsTab(body){
+
+  const hasPasswordProvider =
+    currentUser.providerData.some(
+      p =>
+        p.providerId ===
+        'password'
+    );
+
+  const showEmail =
+    myProfile
+      ? !!myProfile.privacyShowEmail
+      : false;
+
+  const notifOn =
+    localStorage.getItem(
+      'soko_notif_pref'
+    ) !== 'off';
+
+  const lang =
+    localStorage.getItem(
+      'soko_lang'
+    ) || 'sw';
+
+
+  body.innerHTML = `
+
+    <div class="panel-block"
+         style="padding:0;">
+
+      <div class="settings-row">
+
+        <div>
+          <div class="settings-label">
+            Badili Jina na Username
+          </div>
+
+          <div class="settings-sub">
+            Fanya hivi kutoka kwenye "Profile"
+          </div>
+        </div>
+
+        <button class="icon-sq"
+                onclick="switchAcctTabGlobal('profile')">
+          ✏️
+        </button>
+
+      </div>
+
+
+      ${
+        hasPasswordProvider
+          ? `
+
+            <div class="settings-row"
+                 style="flex-direction:column;align-items:stretch;gap:.6rem;">
+
+              <div class="settings-label">
+                Badili Password
+              </div>
+
+              <input type="password"
+                     id="curPass"
+                     placeholder="Password ya sasa">
+
+              <input type="password"
+                     id="newPass"
+                     placeholder="Password mpya (angalau herufi 6)">
+
+              <button class="btn-full btn-primary"
+                      id="changePassBtn"
+                      type="button">
+                Badili Password
+              </button>
+
+            </div>
+
+          `
+          : `
+
+            <div class="settings-row">
+
+              <div>
+                <div class="settings-label">
+                  Password
+                </div>
+
+                <div class="settings-sub">
+                  Umeingia kwa Google — hakuna password ya kubadili hapa
+                </div>
+              </div>
+
+            </div>
+
+          `
+      }
+
+
+      <div class="settings-row">
+
+        <div>
+          <div class="settings-label">
+            Email
+          </div>
+
+          <div class="settings-sub">
+            ${escapeHtml(currentUser.email || '')}
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="settings-row">
+
+        <div>
+          <div class="settings-label">
+            Privacy
+          </div>
+
+          <div class="settings-sub">
+            Onyesha barua pepe yangu kwa umma
+          </div>
+        </div>
+
+        <div class="toggle-switch ${showEmail ? 'on' : ''}"
+             id="privacyToggle">
+        </div>
+
+      </div>
+
+
+      <div class="settings-row">
+
+        <div>
+          <div class="settings-label">
+            Notifications
+          </div>
+
+          <div class="settings-sub">
+            Onyesha alama ya arifa mpya
+          </div>
+        </div>
+
+        <div class="toggle-switch ${notifOn ? 'on' : ''}"
+             id="notifToggle">
+        </div>
+
+      </div>
+
+
+      <div class="settings-row">
+
+        <div>
+          <div class="settings-label">
+            Language
+          </div>
+
+          <div class="settings-sub">
+            Lugha ya tovuti
+          </div>
+        </div>
+
+        <select class="settings-select"
+                id="langSelect">
+
+          <option value="sw"
+                  ${lang === 'sw' ? 'selected' : ''}>
+            Kiswahili
+          </option>
+
+          <option value="en"
+                  ${lang === 'en' ? 'selected' : ''}>
+            English (hivi karibuni)
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+  `;
+
+
+  if(hasPasswordProvider){
+
+    document
+      .getElementById(
+        'changePassBtn'
+      )
+      .addEventListener(
+        'click',
+        async () => {
+
+          const curPass =
+            document
+              .getElementById(
+                'curPass'
+              )
+              .value;
+
+          const newPass =
+            document
+              .getElementById(
+                'newPass'
+              )
+              .value;
+
+          if(
+            !curPass ||
+            !newPass ||
+            newPass.length < 6
+          ){
+
+            alert(
+              'Jaza password ya sasa na mpya (angalau herufi 6).'
+            );
+
+            return;
+          }
+
+          const btn =
+            document
+              .getElementById(
+                'changePassBtn'
+              );
+
+          btn.disabled = true;
+
+          btn.textContent =
+            'Inabadili...';
+
+          try{
+
+            const cred =
+              EmailAuthProvider.credential(
+                currentUser.email,
+                curPass
+              );
+
+            await reauthenticateWithCredential(
+              currentUser,
+              cred
+            );
+
+            await updatePassword(
+              currentUser,
+              newPass
+            );
+
+            alert(
+              'Password imebadilishwa kikamilifu.'
+            );
+
+            document
+              .getElementById(
+                'curPass'
+              )
+              .value = '';
+
+            document
+              .getElementById(
+                'newPass'
+              )
+              .value = '';
+
+          }catch(err){
+
+            console.error(err);
+
+            alert(
+              'Imeshindikana: hakikisha password ya sasa ni sahihi.'
+            );
+
+          }finally{
+
+            btn.disabled = false;
+
+            btn.textContent =
+              'Badili Password';
+          }
+        }
+      );
+  }
+
+
+  document
+    .getElementById('privacyToggle')
+    .addEventListener(
+      'click',
+      async (e) => {
+
+        const el =
+          e.currentTarget;
+
+        const newVal =
+          !el.classList.contains('on');
+
+        el.classList.toggle(
+          'on',
+          newVal
+        );
+
+        await setDoc(
+          doc(
+            db,
+            'users',
+            currentUser.uid
+          ),
+          {
+            privacyShowEmail:
+              newVal
+          },
+          {
+            merge:true
+          }
+        ).catch(() => {});
+      }
+    );
+
+
+  document
+    .getElementById('notifToggle')
+    .addEventListener(
+      'click',
+      (e) => {
+
+        const el =
+          e.currentTarget;
+
+        const newVal =
+          !el.classList.contains('on');
+
+        el.classList.toggle(
+          'on',
+          newVal
+        );
+
+        localStorage.setItem(
+          'soko_notif_pref',
+          newVal
+            ? 'on'
+            : 'off'
+        );
+      }
+    );
+
+
+  document
+    .getElementById('langSelect')
+    .addEventListener(
+      'change',
+      (e) => {
+
+        if(e.target.value === 'en'){
+
+          alert(
+            'Lugha ya Kiingereza inakuja hivi karibuni. Kwa sasa tovuti inapatikana kwa Kiswahili pekee.'
+          );
+
+          e.target.value =
+            'sw';
+
           return;
         }
-        const btn = document.getElementById('changePassBtn');
-        btn.disabled = true; btn.textContent = 'Inabadili...';
-        try{
-          const cred = EmailAuthProvider.credential(currentUser.email, curPass);
-          await reauthenticateWithCredential(currentUser, cred);
-          await updatePassword(currentUser, newPass);
-          alert('Password imebadilishwa kikamilifu.');
-          document.getElementById('curPass').value = '';
-          document.getElementById('newPass').value = '';
-        } catch(err){
-          console.error(err);
-          alert('Imeshindikana: hakikisha password ya sasa ni sahihi.');
-        } finally {
-          btn.disabled = false; btn.textContent = 'Badili Password';
-        }
-      });
-    }
 
-    document.getElementById('privacyToggle').addEventListener('click', async (e) => {
-      const el = e.currentTarget;
-      const newVal = !el.classList.contains('on');
-      el.classList.toggle('on', newVal);
-      await setDoc(doc(db, 'users', currentUser.uid), { privacyShowEmail: newVal }, { merge: true }).catch(() => {});
-    });
-    document.getElementById('notifToggle').addEventListener('click', (e) => {
-      const el = e.currentTarget;
-      const newVal = !el.classList.contains('on');
-      el.classList.toggle('on', newVal);
-      localStorage.setItem('duka_notif_pref', newVal ? 'on' : 'off');
-    });
-    document.getElementById('langSelect').addEventListener('change', (e) => {
-      if(e.target.value === 'en'){
-        alert('Lugha ya Kiingereza inakuja hivi karibuni. Kwa sasa tovuti inapatikana kwa Kiswahili pekee.');
-        e.target.value = 'sw';
-        return;
+        localStorage.setItem(
+          'soko_lang',
+          'sw'
+        );
       }
-      localStorage.setItem('duka_lang', 'sw');
-    });
-  }
-  window.switchAcctTabGlobal = (t) => switchAcctTab(t);
+    );
+}
 
-  // ===== IMAGE PREVIEW + KUBANA =====
-  let pendingImageData = null; // null = usibadilishe picha (hariri), '' = hakuna picha, string = data ya picha
-  document.getElementById('pImage').addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if(!file) return;
-    document.getElementById('fileLabel').textContent = 'Inabana picha...';
-    try{
-      pendingImageData = await compressImage(file);
-      const sizeKB = Math.round(pendingImageData.length * 0.75 / 1024);
-      const img = document.getElementById('pImagePreview');
-      img.src = pendingImageData;
-      img.style.display = 'block';
-      document.getElementById('fileLabel').textContent = `${file.name} (~${sizeKB}KB baada ya kubanwa)`;
-    } catch(err){
-      console.error(err);
-      pendingImageData = '';
-      document.getElementById('fileLabel').textContent = 'Imeshindikana kusoma picha, jaribu nyingine';
+
+window.switchAcctTabGlobal =
+  (t) =>
+    switchAcctTab(t);
+
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+let pendingImageData = null;
+
+
+document
+  .getElementById('pImage')
+  .addEventListener(
+    'change',
+    async (e) => {
+
+      const file =
+        e.target.files[0];
+
+      if(!file) return;
+
+      document
+        .getElementById(
+          'fileLabel'
+        )
+        .textContent =
+        'Inabana picha...';
+
+      try{
+
+        pendingImageData =
+          await compressImage(file);
+
+        const sizeKB =
+          Math.round(
+            pendingImageData.length *
+            0.75 /
+            1024
+          );
+
+        const img =
+          document.getElementById(
+            'pImagePreview'
+          );
+
+        img.src =
+          pendingImageData;
+
+        img.style.display =
+          'block';
+
+        document
+          .getElementById(
+            'fileLabel'
+          )
+          .textContent =
+          `${file.name} (~${sizeKB}KB baada ya kubanwa)`;
+
+      }catch(err){
+
+        console.error(err);
+
+        pendingImageData = '';
+
+        document
+          .getElementById(
+            'fileLabel'
+          )
+          .textContent =
+          'Imeshindikana kusoma picha, jaribu nyingine';
+      }
     }
-  });
+  );
 
-  // ===== ADD/EDIT PRODUCT =====
-  const addBtn = document.getElementById('addProduct');
-  addBtn.addEventListener('click', async () => {
-    if(!currentUser){ window.location.href = 'login.html'; return; }
-    const category = document.getElementById('pCategory').value;
-    const name = document.getElementById('pName').value.trim();
-    const price = document.getElementById('pPrice').value.trim();
-    const desc = document.getElementById('pDesc').value.trim();
-    const phone = document.getElementById('pPhone').value.trim().replace(/\D/g,'');
 
-    if(!name || !price || !phone){
-      alert('Tafadhali jaza jina la bidhaa, bei, na namba yako ya WhatsApp.');
+/* =========================================================
+   ADD / EDIT PRODUCT
+========================================================= */
+
+const addBtn =
+  document.getElementById(
+    'addProduct'
+  );
+
+
+addBtn.addEventListener(
+  'click',
+  async () => {
+
+    if(!currentUser){
+
+      window.location.href =
+        'login.html';
+
       return;
     }
 
+    const category =
+      document
+        .getElementById(
+          'pCategory'
+        )
+        .value;
+
+    const name =
+      document
+        .getElementById(
+          'pName'
+        )
+        .value
+        .trim();
+
+    const price =
+      document
+        .getElementById(
+          'pPrice'
+        )
+        .value
+        .trim();
+
+    const desc =
+      document
+        .getElementById(
+          'pDesc'
+        )
+        .value
+        .trim();
+
+    const phone =
+      document
+        .getElementById(
+          'pPhone'
+        )
+        .value
+        .trim()
+        .replace(/\D/g,'');
+
+
+    if(!name || !price || !phone){
+
+      alert(
+        'Tafadhali jaza jina la bidhaa, bei, na namba yako ya WhatsApp.'
+      );
+
+      return;
+    }
+
+
     addBtn.disabled = true;
-    addBtn.textContent = editingProductId ? 'Inahifadhi...' : 'Inachapisha...';
+
+    addBtn.textContent =
+      editingProductId
+        ? 'Inahifadhi...'
+        : 'Inachapisha...';
+
 
     try{
+
       if(editingProductId){
-        const updateData = { category, name, price, desc, phone };
-        if(pendingImageData !== null){ updateData.imageUrl = pendingImageData || ''; }
-        await updateDoc(doc(db, 'products', editingProductId), updateData);
-      } else {
-        await addDoc(collection(db, 'products'), {
-          category, name, price, desc, phone,
-          imageUrl: pendingImageData || '',
-          ownerUid: currentUser.uid,
-          ownerName: currentUser.displayName || currentUser.email || 'Muuzaji',
-          sold: false,
-          views: 0,
-          createdAt: serverTimestamp()
-        });
+
+        const updateData = {
+          category,
+          name,
+          price,
+          desc,
+          phone
+        };
+
+        if(
+          pendingImageData !==
+          null
+        ){
+
+          updateData.imageUrl =
+            pendingImageData || '';
+        }
+
+        await updateDoc(
+          doc(
+            db,
+            'products',
+            editingProductId
+          ),
+          updateData
+        );
+
+      }else{
+
+        await addDoc(
+          collection(
+            db,
+            'products'
+          ),
+          {
+            category,
+            name,
+            price,
+            desc,
+            phone,
+
+            imageUrl:
+              pendingImageData || '',
+
+            ownerUid:
+              currentUser.uid,
+
+            ownerName:
+              currentUser.displayName ||
+              currentUser.email ||
+              'Muuzaji',
+
+            sold:false,
+
+            views:0,
+
+            createdAt:
+              serverTimestamp()
+          }
+        );
       }
 
-      document.getElementById('pName').value = '';
-      document.getElementById('pPrice').value = '';
-      document.getElementById('pDesc').value = '';
-      document.getElementById('pPhone').value = '';
-      document.getElementById('pImage').value = '';
-      document.getElementById('pImagePreview').style.display = 'none';
-      document.getElementById('fileLabel').textContent = 'Bonyeza kuchagua picha';
+
+      document
+        .getElementById('pName')
+        .value = '';
+
+      document
+        .getElementById('pPrice')
+        .value = '';
+
+      document
+        .getElementById('pDesc')
+        .value = '';
+
+      document
+        .getElementById('pPhone')
+        .value = '';
+
+      document
+        .getElementById('pImage')
+        .value = '';
+
+      document
+        .getElementById(
+          'pImagePreview'
+        )
+        .style.display =
+        'none';
+
+      document
+        .getElementById(
+          'fileLabel'
+        )
+        .textContent =
+        'Bonyeza kuchagua picha';
+
       pendingImageData = null;
+
       editingProductId = null;
 
       closeAllPanels();
-    } catch(err){
+
+    }catch(err){
+
       console.error(err);
-      alert('Samahani, imeshindikana kuchapisha bidhaa. Jaribu tena.');
-    } finally {
+
+      alert(
+        'Samahani, imeshindikana kuchapisha bidhaa. Jaribu tena.'
+      );
+
+    }finally{
+
       addBtn.disabled = false;
-      addBtn.textContent = editingProductId ? 'Hifadhi Mabadiliko' : 'Chapisha Bidhaa';
+
+      addBtn.textContent =
+        editingProductId
+          ? 'Hifadhi Mabadiliko'
+          : 'Chapisha Bidhaa';
     }
-  });
-
-  // ===== DELETE PRODUCT =====
-  window.removeProduct = async (id) => {
-    if(!confirm('Una uhakika unataka kuondoa bidhaa hii?')) return;
-    try{
-      await deleteDoc(doc(db, 'products', id));
-    } catch(err){
-      console.error(err);
-      alert('Imeshindikana kuondoa bidhaa. Jaribu tena.');
-    }
-  };
-
-  // ===== MARK AS SOLD =====
-  window.toggleSold = async (id) => {
-    const p = allProducts.find(x => x.id === id);
-    if(!p || !currentUser || p.ownerUid !== currentUser.uid) return;
-    try{
-      await updateDoc(doc(db, 'products', id), { sold: !p.sold });
-    } catch(err){
-      console.error(err);
-      alert('Imeshindikana kubadilisha hali ya bidhaa. Jaribu tena.');
-    }
-  };
-
-  // ===== FAVORITES (Pendwa) =====
-  window.toggleFavorite = async (id) => {
-    if(!currentUser){ window.location.href = 'login.html'; return; }
-    const p = allProducts.find(x => x.id === id);
-    if(!p) return;
-    const isFav = myProfile && Array.isArray(myProfile.favorites) && myProfile.favorites.includes(id);
-    const userRef = doc(db, 'users', currentUser.uid);
-    try{
-      await setDoc(userRef, {
-        favorites: isFav ? arrayRemove(id) : arrayUnion(id)
-      }, { merge: true });
-
-      if(!isFav && p.ownerUid !== currentUser.uid){
-        addDoc(collection(db, 'notifications'), {
-          toUid: p.ownerUid,
-          fromUid: currentUser.uid,
-          type: 'favorite',
-          productId: id,
-          productName: p.name,
-          fromName: currentUser.displayName || currentUser.email || 'Mtumiaji',
-          read: false,
-          createdAt: serverTimestamp()
-        }).catch(() => {});
-      }
-    } catch(err){
-      console.error(err);
-      alert('Imeshindikana kuhifadhi. Jaribu tena.');
-    }
-  };
-
-  function registerView(p){
-    if(!currentUser || !p || p.ownerUid === currentUser.uid) return;
-    if(viewedThisSession.has(p.id)) return;
-    viewedThisSession.add(p.id);
-    updateDoc(doc(db, 'products', p.id), { views: increment(1) }).catch(() => {});
   }
+);
 
-  // ===== SEARCH =====
-  document.getElementById('searchInput').addEventListener('input', (e) => {
-    searchTerm = e.target.value.trim().toLowerCase();
-    render();
-  });
 
-  function escapeHtml(str){
-    const d = document.createElement('div');
-    d.textContent = str || '';
-    return d.innerHTML;
-  }
+/* =========================================================
+   DELETE PRODUCT
+========================================================= */
 
-  // ===== REALTIME LISTENER =====
-  const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
-  onSnapshot(q, (snapshot) => {
-    document.getElementById('loading').style.display = 'none';
-    allProducts = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-    render();
-  }, (err) => {
-    console.error(err);
-    document.getElementById('loading').innerHTML = 'Imeshindikana kupakia bidhaa. Angalia mipangilio ya Firestore.';
-  });
+window.removeProduct =
+  async (id) => {
 
-  function render(){
-    let list = allProducts;
-    if(viewMode === 'mine' && currentUser){
-      list = list.filter(p => p.ownerUid === currentUser.uid);
-    }
-    if(searchTerm){
-      list = list.filter(p => (p.name || '').toLowerCase().includes(searchTerm));
-    }
+    if(
+      !confirm(
+        'Una uhakika unataka kuondoa bidhaa hii?'
+      )
+    ) return;
 
-    document.getElementById('statCount').textContent =
-      (viewMode === 'mine' ? list.length : allProducts.length) + ' bidhaa';
+    try{
 
-    const grid = document.getElementById('grid');
-    const empty = document.getElementById('empty');
-    const emptyTitle = document.getElementById('emptyTitle');
-    const emptyText = document.getElementById('emptyText');
+      /*
+        Kama bidhaa ilikuwa kwenye
+        Chaguo la SOKO KUU,
+        iondoe pia humo.
+      */
 
-    if(list.length === 0){
-      empty.style.display = 'block';
-      grid.innerHTML = '';
-      if(searchTerm){
-        emptyTitle.textContent = 'Hakuna kilicholingana';
-        emptyText.textContent = `Hatukupata bidhaa inayolingana na "${searchTerm}".`;
-      } else if(viewMode === 'mine'){
-        emptyTitle.textContent = 'Bado hujaposti bidhaa';
-        emptyText.textContent = 'Bonyeza kitufe cha "+" kuposti bidhaa yako ya kwanza.';
-      } else {
-        emptyTitle.textContent = 'Bado hakuna bidhaa';
-        emptyText.textContent = 'Kuwa wa kwanza kuposti bidhaa dukani hapa.';
+      if(
+        ownerFavoriteIds.includes(id)
+      ){
+
+        await updateDoc(
+          MARKET_SETTINGS_REF,
+          {
+            ownerFavorites:
+              arrayRemove(id)
+          }
+        );
       }
-      return;
+
+      await deleteDoc(
+        doc(
+          db,
+          'products',
+          id
+        )
+      );
+
+    }catch(err){
+
+      console.error(err);
+
+      alert(
+        'Imeshindikana kuondoa bidhaa. Jaribu tena.'
+      );
     }
-    empty.style.display = 'none';
+  };
 
-    grid.innerHTML = list.map((p) => {
-      const isMine = currentUser && p.ownerUid === currentUser.uid;
-      const createdMs = p.createdAt && p.createdAt.toMillis ? p.createdAt.toMillis() : 0;
-      const isNew = createdMs && (Date.now() - createdMs) < 1000*60*60*24*2;
-      const isFav = currentUser && myProfile && Array.isArray(myProfile.favorites) && myProfile.favorites.includes(p.id);
-      const catLabel = CATEGORIES[p.category] || '';
 
-      if(!isMine) registerView(p);
+/* =========================================================
+   MARK AS SOLD
+========================================================= */
 
-      const imgHtml = p.imageUrl
-        ? `<img src="${p.imageUrl}" alt="${escapeHtml(p.name)}" loading="lazy">`
-        : `<div class="no-img">HAKUNA PICHA</div>`;
+window.toggleSold =
+  async (id) => {
 
-      const heartBtn = `<button class="heart-btn ${isFav ? 'active' : ''}" type="button" onclick="toggleFavorite('${p.id}')" title="Hifadhi Pendwa">${isFav ? '❤️' : '🤍'}</button>`;
+    const p =
+      allProducts.find(
+        x => x.id === id
+      );
 
-      let actionsHtml;
-      if(isMine){
-        actionsHtml = `
-          <div class="card-actions">
-            <button class="owner-btn" type="button" onclick="openEditProduct('${p.id}')">✏️ Hariri</button>
-            <button class="owner-btn ${p.sold ? 'active' : ''}" type="button" onclick="toggleSold('${p.id}')">${p.sold ? '↩️ Rejesha' : '✅ Imeuzwa'}</button>
-            <button class="owner-btn danger" type="button" onclick="removeProduct('${p.id}')">🗑️</button>
-          </div>`;
-      } else if(p.sold){
-        actionsHtml = `<div class="card-actions"><span class="buy-btn disabled">Bidhaa Imeuzwa</span></div>`;
-      } else {
-        let buyBtn;
-        if(p.phone){
-          const msg = encodeURIComponent(`Habari, nataka kununua bidhaa: ${p.name} (TSh ${Number(p.price).toLocaleString()})`);
-          buyBtn = `<a class="buy-btn" href="https://wa.me/${p.phone}?text=${msg}" target="_blank" rel="noopener">Nunua Sasa</a>`;
-        } else {
-          buyBtn = `<span class="buy-btn disabled">Hakuna namba</span>`;
+    if(
+      !p ||
+      !currentUser ||
+      p.ownerUid !==
+        currentUser.uid
+    ) return;
+
+    try{
+
+      await updateDoc(
+        doc(
+          db,
+          'products',
+          id
+        ),
+        {
+          sold:!p.sold
         }
-        const msgBtn = `<button class="msg-btn" type="button" onclick="openChatForProduct('${p.id}')">✉️ Ujumbe</button>`;
-        actionsHtml = `<div class="card-actions">${buyBtn}${msgBtn}</div>`;
-      }
+      );
 
-      return `
-        <div class="card">
-          <div class="card-media">
-            ${p.sold ? '<span class="badge-sold">IMEUZWA</span>' : (isNew ? '<span class="badge-new">Mpya</span>' : '')}
-            ${heartBtn}
-            ${imgHtml}
-            ${isMine ? '<span class="badge-mine">Yako</span>' : ''}
-          </div>
-          <div class="card-body">
-            ${catLabel ? `<div class="cat-tag">${catLabel}</div>` : ''}
-            <div class="price">TSh ${Number(p.price).toLocaleString()}</div>
-            <div class="title">${escapeHtml(p.name)}</div>
-            <div class="seller-row">
-              <span class="seller">na ${escapeHtml(p.ownerName || 'Muuzaji')}</span>
-              <span class="views">👁 ${p.views || 0}</span>
-            </div>
-            ${actionsHtml}
-          </div>
-        </div>`;
-    }).join('');
-  }
+    }catch(err){
 
-  // ================= MFUMO WA UJUMBE (CHAT) =================
-  const inboxDrawer = document.getElementById('inboxDrawer');
-  const chatDrawer = document.getElementById('chatDrawer');
-  allPanels.push(inboxDrawer, chatDrawer);
+      console.error(err);
 
-  let myConversations = [];
-  let unsubInbox = null;
-  let unsubChatMsgs = null;
-  let currentConvoId = null;
-
-  function timeAgo(ms){
-    if(!ms) return '';
-    const diff = Date.now() - ms;
-    const min = Math.floor(diff/60000);
-    if(min < 1) return 'sasa hivi';
-    if(min < 60) return `dakika ${min}`;
-    const hr = Math.floor(min/60);
-    if(hr < 24) return `saa ${hr}`;
-    const d = Math.floor(hr/24);
-    if(d < 7) return `siku ${d}`;
-    return new Date(ms).toLocaleDateString('sw-TZ');
-  }
-
-  // ---- Anza kusikiliza "conversations" mara mtu akiingia ----
-  function startInboxListener(){
-    if(unsubInbox) unsubInbox();
-    const cq = query(collection(db, 'conversations'), where('participants', 'array-contains', currentUser.uid));
-    unsubInbox = onSnapshot(cq, (snap) => {
-      myConversations = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      myConversations.sort((a,b) => {
-        const at = a.lastMessageAt && a.lastMessageAt.toMillis ? a.lastMessageAt.toMillis() : 0;
-        const bt = b.lastMessageAt && b.lastMessageAt.toMillis ? b.lastMessageAt.toMillis() : 0;
-        return bt - at;
-      });
-      updateUnreadBadge();
-      if(inboxDrawer.classList.contains('open')) renderInbox();
-    }, (err) => console.error('inbox listener', err));
-  }
-  function stopInboxListener(){
-    if(unsubInbox){ unsubInbox(); unsubInbox = null; }
-    myConversations = [];
-    updateUnreadBadge();
-  }
-
-  function isConvoUnread(c){
-    const lastMs = c.lastMessageAt && c.lastMessageAt.toMillis ? c.lastMessageAt.toMillis() : 0;
-    const readMs = c.lastReadBy && c.lastReadBy[currentUser.uid] && c.lastReadBy[currentUser.uid].toMillis
-      ? c.lastReadBy[currentUser.uid].toMillis() : 0;
-    return lastMs > readMs && c.lastSenderUid !== currentUser.uid;
-  }
-  function updateUnreadBadge(){
-    const dot = document.getElementById('msgDot');
-    if(!currentUser){ dot.style.display = 'none'; return; }
-    const hasUnread = myConversations.some(isConvoUnread);
-    dot.style.display = hasUnread ? 'block' : 'none';
-  }
-
-  function openInbox(){
-    renderInbox();
-    openPanel(inboxDrawer);
-  }
-  function renderInbox(){
-    const body = document.getElementById('inboxBody');
-    if(myConversations.length === 0){
-      body.innerHTML = '<p id="inboxEmpty">Bado huna ujumbe wowote. Tuma ujumbe kwa muuzaji kutoka kwenye bidhaa unayoipenda.</p>';
-      return;
+      alert(
+        'Imeshindikana kubadilisha hali ya bidhaa. Jaribu tena.'
+      );
     }
-    body.innerHTML = myConversations.map(c => {
-      const isSeller = c.sellerUid === currentUser.uid;
-      const otherName = isSeller ? (c.buyerName || 'Mnunuzi') : (c.sellerName || 'Muuzaji');
-      const initial = otherName.trim().charAt(0).toUpperCase();
-      const lastMs = c.lastMessageAt && c.lastMessageAt.toMillis ? c.lastMessageAt.toMillis() : 0;
-      const unread = isConvoUnread(c);
-      return `
-        <div class="inbox-item ${unread ? 'unread' : ''}" onclick="openChatFromInbox('${c.id}')">
-          <div class="inbox-avatar">${escapeHtml(initial)}</div>
-          <div class="inbox-info">
-            <div class="inbox-top">
-              <span class="inbox-name">${escapeHtml(otherName)}</span>
-              <span class="inbox-time">${timeAgo(lastMs)}</span>
-            </div>
-            <div class="inbox-product">${escapeHtml(c.productName || '')}</div>
-            <div class="inbox-preview">${escapeHtml(c.lastMessage || 'Anza mazungumzo...')}</div>
-          </div>
-          ${unread ? '<span class="inbox-unread-dot"></span>' : ''}
-        </div>`;
-    }).join('');
-  }
-
-  window.openChatFromInbox = (convoId) => {
-    const c = myConversations.find(x => x.id === convoId);
-    if(!c) return;
-    const isSeller = c.sellerUid === currentUser.uid;
-    const otherName = isSeller ? (c.buyerName || 'Mnunuzi') : (c.sellerName || 'Muuzaji');
-    openChat(convoId, otherName, c.productName || '', null);
   };
 
-  window.openChatForProduct = (productId) => {
-    if(!currentUser){ window.location.href = 'login.html'; return; }
-    const p = allProducts.find(x => x.id === productId);
+
+/* =========================================================
+   ❤️ FAVORITES SYSTEM
+========================================================= */
+
+/*
+=============================================================
+OWNER
+=============================================================
+
+OWNER = hermansade3@gmail.com
+
+Owner akibonyeza ❤️:
+
+    product
+       ↓
+      ❤️
+       ↓
+siteSettings/main
+       ↓
+ownerFavorites
+       ↓
+❤️ Chaguo la SOKO KUU
+
+HAINGII kwenye users/{uid}.favorites.
+Kwa hiyo ni PUBLIC.
+*/
+
+
+/*
+=============================================================
+WATUMIAJI WENGINE
+=============================================================
+
+Mtumiaji mwingine akibonyeza ❤️:
+
+    product
+       ↓
+      ❤️
+       ↓
+users/{uid}
+       ↓
+favorites
+
+Hii ni PRIVATE.
+*/
+
+
+window.toggleFavorite =
+  async (id) => {
+
+    if(!currentUser){
+
+      window.location.href =
+        'login.html';
+
+      return;
+    }
+
+
+    const p =
+      allProducts.find(
+        x => x.id === id
+      );
+
     if(!p) return;
-    const convoId = `${productId}_${currentUser.uid}`;
-    const createData = {
-      productId: p.id,
-      productName: p.name,
-      sellerUid: p.ownerUid,
-      sellerName: p.ownerName || 'Muuzaji',
-      buyerUid: currentUser.uid,
-      buyerName: currentUser.displayName || currentUser.email || 'Mnunuzi',
-      participants: [p.ownerUid, currentUser.uid],
-      lastMessage: '',
-      lastMessageAt: serverTimestamp()
-    };
-    openChat(convoId, p.ownerName || 'Muuzaji', p.name, createData);
-  };
 
-  async function openChat(convoId, otherName, productName, createData){
-    currentConvoId = convoId;
-    document.getElementById('chatName').textContent = otherName;
-    document.getElementById('chatProduct').textContent = productName;
-    document.getElementById('chatBody').innerHTML = '<p id="chatEmpty">Inapakia mazungumzo...</p>';
 
-    try{
-      if(createData){
-        await setDoc(doc(db, 'conversations', convoId), createData, { merge: true });
+    /* =====================================================
+       OWNER FAVORITE
+    ===================================================== */
+
+    if(isOwner()){
+
+      const isOwnerFav =
+        ownerFavoriteIds.includes(id);
+
+      try{
+
+        if(isOwnerFav){
+
+          await updateDoc(
+            MARKET_SETTINGS_REF,
+            {
+              ownerFavorites:
+                arrayRemove(id)
+            }
+          );
+
+        }else{
+
+          /*
+            Kama document haipo,
+            setDoc itaianzisha.
+          */
+
+          await setDoc(
+            MARKET_SETTINGS_REF,
+            {
+              ownerFavorites:
+                arrayUnion(id)
+            },
+            {
+              merge:true
+            }
+          );
+        }
+
+      }catch(err){
+
+        console.error(
+          'owner favorite',
+          err
+        );
+
+        alert(
+          'Imeshindikana kuhifadhi Chaguo la SOKO KUU. Jaribu tena.'
+        );
       }
-      updateDoc(doc(db, 'conversations', convoId), {
-        [`lastReadBy.${currentUser.uid}`]: serverTimestamp()
-      }).catch(() => {});
 
-      if(unsubChatMsgs) unsubChatMsgs();
-      const mq = query(collection(db, 'conversations', convoId, 'messages'), orderBy('createdAt', 'asc'));
-      unsubChatMsgs = onSnapshot(mq, (snap) => {
-        renderChatMessages(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-      }, (err) => {
-        console.error('chat listener', err);
-        document.getElementById('chatBody').innerHTML = '<p id="chatEmpty">Imeshindikana kupakia mazungumzo.</p>';
-      });
-
-      openPanel(chatDrawer);
-    } catch(err){
-      console.error(err);
-      alert('Imeshindikana kufungua mazungumzo. Jaribu tena.');
-    }
-  }
-
-  function renderChatMessages(messages){
-    const body = document.getElementById('chatBody');
-    if(messages.length === 0){
-      body.innerHTML = '<p id="chatEmpty">Andika ujumbe wako wa kwanza hapa chini.</p>';
       return;
     }
-    body.innerHTML = messages.map(m => {
-      const mine = m.senderUid === currentUser.uid;
-      const ms = m.createdAt && m.createdAt.toMillis ? m.createdAt.toMillis() : Date.now();
-      const time = new Date(ms).toLocaleTimeString('sw-TZ', { hour: '2-digit', minute: '2-digit' });
-      return `<div class="bubble ${mine ? 'me' : 'them'}">${escapeHtml(m.text)}<span class="bubble-time">${time}</span></div>`;
-    }).join('');
-    body.scrollTop = body.scrollHeight;
+
+
+    /* =====================================================
+       PRIVATE USER FAVORITE
+    ===================================================== */
+
+    const isFav =
+      myProfile &&
+      Array.isArray(
+        myProfile.favorites
+      ) &&
+      myProfile.favorites.includes(id);
+
+
+    const userRef =
+      doc(
+        db,
+        'users',
+        currentUser.uid
+      );
+
+
+    try{
+
+      await setDoc(
+        userRef,
+        {
+          favorites:
+            isFav
+              ? arrayRemove(id)
+              : arrayUnion(id)
+        },
+        {
+          merge:true
+        }
+      );
+
+
+      /*
+        Notification bado ipo kama zamani:
+        seller anaambiwa mtu ameipenda bidhaa yake.
+      */
+
+      if(
+        !isFav &&
+        p.ownerUid !==
+          currentUser.uid
+      ){
+
+        addDoc(
+          collection(
+            db,
+            'notifications'
+          ),
+          {
+
+            toUid:
+              p.ownerUid,
+
+            fromUid:
+              currentUser.uid,
+
+            type:
+              'favorite',
+
+            productId:
+              id,
+
+            productName:
+              p.name,
+
+            fromName:
+              currentUser.displayName ||
+              currentUser.email ||
+              'Mtumiaji',
+
+            read:false,
+
+            createdAt:
+              serverTimestamp()
+          }
+        ).catch(() => {});
+      }
+
+    }catch(err){
+
+      console.error(err);
+
+      alert(
+        'Imeshindikana kuhifadhi. Jaribu tena.'
+      );
+    }
+  };
+
+
+/* =========================================================
+   VIEW COUNT
+========================================================= */
+
+function registerView(p){
+
+  if(
+    !currentUser ||
+    !p ||
+    p.ownerUid ===
+      currentUser.uid
+  ) return;
+
+  if(
+    viewedThisSession.has(
+      p.id
+    )
+  ) return;
+
+  viewedThisSession.add(
+    p.id
+  );
+
+  updateDoc(
+    doc(
+      db,
+      'products',
+      p.id
+    ),
+    {
+      views:
+        increment(1)
+    }
+  ).catch(() => {});
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document
+  .getElementById(
+    'searchInput'
+  )
+  .addEventListener(
+    'input',
+    (e) => {
+
+      searchTerm =
+        e.target.value
+          .trim()
+          .toLowerCase();
+
+      render();
+    }
+  );
+
+
+function escapeHtml(str){
+
+  const d =
+    document.createElement(
+      'div'
+    );
+
+  d.textContent =
+    str || '';
+
+  return d.innerHTML;
+}
+
+
+/* =========================================================
+   PRODUCTS REALTIME LISTENER
+========================================================= */
+
+const q =
+  query(
+    collection(
+      db,
+      'products'
+    ),
+    orderBy(
+      'createdAt',
+      'desc'
+    )
+  );
+
+
+onSnapshot(
+  q,
+  (snapshot) => {
+
+    document
+      .getElementById(
+        'loading'
+      )
+      .style.display =
+      'none';
+
+    allProducts =
+      snapshot.docs.map(
+        d => ({
+          id:d.id,
+          ...d.data()
+        })
+      );
+
+    renderMarketChoices();
+
+    render();
+
+  },
+  (err) => {
+
+    console.error(err);
+
+    document
+      .getElementById(
+        'loading'
+      )
+      .innerHTML =
+      'Imeshindikana kupakia bidhaa. Angalia mipangilio ya Firestore.';
+  }
+);
+
+
+/* =========================================================
+   ❤️ CHAGUO LA SOKO KUU
+========================================================= */
+
+function renderMarketChoices(){
+
+  const section =
+    document.getElementById(
+      'marketChoiceSection'
+    );
+
+  const grid =
+    document.getElementById(
+      'marketChoiceGrid'
+    );
+
+  const empty =
+    document.getElementById(
+      'marketChoiceEmpty'
+    );
+
+  const count =
+    document.getElementById(
+      'marketChoiceCount'
+    );
+
+
+  /*
+    Pata bidhaa ambazo OWNER
+    amezipenda.
+  */
+
+  let choices =
+    allProducts.filter(
+      p =>
+        ownerFavoriteIds.includes(
+          p.id
+        )
+    );
+
+
+  /*
+    Ondoa bidhaa ambazo hazipo tena
+    kwenye products.
+  */
+
+  count.textContent =
+    `${choices.length} bidhaa`;
+
+
+  if(choices.length === 0){
+
+    empty.style.display =
+      'block';
+
+    grid.innerHTML = '';
+
+    return;
   }
 
-  const chatInput = document.getElementById('chatInput');
-  const chatSendBtn = document.getElementById('chatSendBtn');
-  chatInput.addEventListener('input', () => {
-    chatInput.style.height = 'auto';
-    chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
-  });
-  chatInput.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendChatMessage(); }
-  });
-  chatSendBtn.addEventListener('click', sendChatMessage);
 
-  async function sendChatMessage(){
-    const text = chatInput.value.trim();
-    if(!text || !currentConvoId || !currentUser) return;
-    chatSendBtn.disabled = true;
-    try{
-      await addDoc(collection(db, 'conversations', currentConvoId, 'messages'), {
-        senderUid: currentUser.uid,
-        senderName: currentUser.displayName || currentUser.email || 'Mtumiaji',
-        text,
-        createdAt: serverTimestamp()
-      });
-      await updateDoc(doc(db, 'conversations', currentConvoId), {
-        lastMessage: text,
-        lastMessageAt: serverTimestamp(),
-        lastSenderUid: currentUser.uid,
-        [`lastReadBy.${currentUser.uid}`]: serverTimestamp()
-      });
-      chatInput.value = '';
-      chatInput.style.height = 'auto';
-    } catch(err){
-      console.error(err);
-      alert('Imeshindikana kutuma ujumbe. Jaribu tena.');
-    } finally {
-      chatSendBtn.disabled = false;
+  empty.style.display =
+    'none';
+
+
+  grid.innerHTML =
+    choices.map(
+      p =>
+        createProductCard(
+          p,
+          true
+        )
+    ).join('');
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+========================================================= */
+
+function createProductCard(
+  p,
+  marketChoice = false
+){
+
+  const isMine =
+    currentUser &&
+    p.ownerUid ===
+      currentUser.uid;
+
+
+  const createdMs =
+    p.createdAt &&
+    p.createdAt.toMillis
+      ? p.createdAt.toMillis()
+      : 0;
+
+
+  const isNew =
+    createdMs &&
+    (
+      Date.now() -
+      createdMs
+    ) <
+    1000*60*60*24*2;
+
+
+  /*
+    MUHIMU:
+
+    Owner:
+      heart = ownerFavoriteIds
+
+    User mwingine:
+      heart = myProfile.favorites
+  */
+
+  let isFav = false;
+
+  if(isOwner()){
+
+    isFav =
+      ownerFavoriteIds.includes(
+        p.id
+      );
+
+  }else if(currentUser){
+
+    isFav =
+      myProfile &&
+      Array.isArray(
+        myProfile.favorites
+      ) &&
+      myProfile.favorites.includes(
+        p.id
+      );
+  }
+
+
+  const catLabel =
+    CATEGORIES[p.category] || '';
+
+
+  if(!isMine)
+    registerView(p);
+
+
+  const imgHtml =
+    p.imageUrl
+      ? `
+        <img src="${p.imageUrl}"
+             alt="${escapeHtml(p.name)}"
+             loading="lazy">
+        `
+      : `
+        <div class="no-img">
+          HAKUNA PICHA
+        </div>
+        `;
+
+
+  const heartBtn = `
+
+    <button
+      class="heart-btn ${isFav ? 'active' : ''}"
+      type="button"
+      onclick="toggleFavorite('${p.id}')"
+      title="${
+        isOwner()
+          ? 'Chaguo la SOKO KUU'
+          : 'Hifadhi Pendwa'
+      }">
+
+      ${isFav ? '❤️' : '🤍'}
+
+    </button>
+
+  `;
+
+
+  let actionsHtml;
+
+
+  if(isMine){
+
+    actionsHtml = `
+
+      <div class="card-actions">
+
+        <button class="owner-btn"
+                type="button"
+                onclick="openEditProduct('${p.id}')">
+          ✏️ Hariri
+        </button>
+
+        <button
+          class="owner-btn ${p.sold ? 'active' : ''}"
+          type="button"
+          onclick="toggleSold('${p.id}')">
+
+          ${
+            p.sold
+              ? '↩️ Rejesha'
+              : '✅ Imeuzwa'
+          }
+
+        </button>
+
+        <button
+          class="owner-btn danger"
+          type="button"
+          onclick="removeProduct('${p.id}')">
+          🗑️
+        </button>
+
+      </div>
+
+    `;
+
+  }else if(p.sold){
+
+    actionsHtml = `
+
+      <div class="card-actions">
+        <span class="buy-btn disabled">
+          Bidhaa Imeuzwa
+        </span>
+      </div>
+
+    `;
+
+  }else{
+
+    let buyBtn;
+
+
+    if(p.phone){
+
+      const msg =
+        encodeURIComponent(
+          `Habari, nataka kununua bidhaa: ${p.name} (TSh ${Number(p.price).toLocaleString()})`
+        );
+
+
+      buyBtn = `
+
+        <a class="buy-btn"
+           href="https://wa.me/${p.phone}?text=${msg}"
+           target="_blank"
+           rel="noopener">
+          Nunua Sasa
+        </a>
+
+      `;
+
+    }else{
+
+      buyBtn = `
+
+        <span class="buy-btn disabled">
+          Hakuna namba
+        </span>
+
+      `;
+    }
+
+
+    const msgBtn = `
+
+      <button
+        class="msg-btn"
+        type="button"
+        onclick="openChatForProduct('${p.id}')">
+        ✉️ Ujumbe
+      </button>
+
+    `;
+
+
+    actionsHtml = `
+
+      <div class="card-actions">
+        ${buyBtn}
+        ${msgBtn}
+      </div>
+
+    `;
+  }
+
+
+  return `
+
+    <div class="card">
+
+      <div class="card-media">
+
+        ${
+          p.sold
+            ? '<span class="badge-sold">IMEUZWA</span>'
+            : (
+                isNew
+                  ? '<span class="badge-new">Mpya</span>'
+                  : ''
+              )
+        }
+
+        ${heartBtn}
+
+        ${imgHtml}
+
+        ${
+          isMine
+            ? '<span class="badge-mine">Yako</span>'
+            : ''
+        }
+
+        ${
+          marketChoice
+            ? `
+              <span class="badge-new"
+                    style="left:.6rem;right:auto;">
+                ❤️ SOKO KUU
+              </span>
+            `
+            : ''
+        }
+
+      </div>
+
+
+      <div class="card-body">
+
+        ${
+          catLabel
+            ? `
+              <div class="cat-tag">
+                ${catLabel}
+              </div>
+            `
+            : ''
+        }
+
+
+        <div class="price">
+          TSh ${Number(p.price).toLocaleString()}
+        </div>
+
+
+        <div class="title">
+          ${escapeHtml(p.name)}
+        </div>
+
+
+        <div class="seller-row">
+
+          <span class="seller">
+            na ${escapeHtml(
+              p.ownerName ||
+              'Muuzaji'
+            )}
+          </span>
+
+          <span class="views">
+            👁 ${p.views || 0}
+          </span>
+
+        </div>
+
+
+        ${actionsHtml}
+
+      </div>
+
+    </div>
+
+  `;
+}
+
+
+/* =========================================================
+   MAIN RENDER
+========================================================= */
+
+function render(){
+
+  let list =
+    allProducts;
+
+
+  if(
+    viewMode === 'mine' &&
+    currentUser
+  ){
+
+    list =
+      list.filter(
+        p =>
+          p.ownerUid ===
+          currentUser.uid
+      );
+  }
+
+
+  if(searchTerm){
+
+    list =
+      list.filter(
+        p =>
+          (p.name || '')
+            .toLowerCase()
+            .includes(
+              searchTerm
+            )
+      );
+  }
+
+
+  document
+    .getElementById(
+      'statCount'
+    )
+    .textContent =
+      (
+        viewMode === 'mine'
+          ? list.length
+          : allProducts.length
+      ) +
+      ' bidhaa';
+
+
+  const grid =
+    document.getElementById(
+      'grid'
+    );
+
+  const empty =
+    document.getElementById(
+      'empty'
+    );
+
+  const emptyTitle =
+    document.getElementById(
+      'emptyTitle'
+    );
+
+  const emptyText =
+    document.getElementById(
+      'emptyText'
+    );
+
+
+  if(list.length === 0){
+
+    empty.style.display =
+      'block';
+
+    grid.innerHTML = '';
+
+
+    if(searchTerm){
+
+      emptyTitle.textContent =
+        'Hakuna kilicholingana';
+
+      emptyText.textContent =
+        `Hatukupata bidhaa inayolingana na "${searchTerm}".`;
+
+    }else if(viewMode === 'mine'){
+
+      emptyTitle.textContent =
+        'Bado hujaposti bidhaa';
+
+      emptyText.textContent =
+        'Bonyeza kitufe cha "+" kuposti bidhaa yako ya kwanza.';
+
+    }else{
+
+      emptyTitle.textContent =
+        'Bado hakuna bidhaa';
+
+      emptyText.textContent =
+        'Kuwa wa kwanza kuposti bidhaa SOKO KUU hapa.';
+    }
+
+    return;
+  }
+
+
+  empty.style.display =
+    'none';
+
+
+  grid.innerHTML =
+    list
+      .map(
+        p =>
+          createProductCard(
+            p,
+            false
+          )
+      )
+      .join('');
+}
+
+
+/* =========================================================
+   CHAT / UJUMBE
+========================================================= */
+
+const inboxDrawer =
+  document.getElementById(
+    'inboxDrawer'
+  );
+
+const chatDrawer =
+  document.getElementById(
+    'chatDrawer'
+  );
+
+
+allPanels.push(
+  inboxDrawer,
+  chatDrawer
+);
+
+
+let myConversations = [];
+
+let unsubInbox = null;
+
+let unsubChatMsgs = null;
+
+let currentConvoId = null;
+
+
+function timeAgo(ms){
+
+  if(!ms) return '';
+
+  const diff =
+    Date.now() - ms;
+
+  const min =
+    Math.floor(
+      diff / 60000
+    );
+
+  if(min < 1)
+    return 'sasa hivi';
+
+  if(min < 60)
+    return `dakika ${min}`;
+
+  const hr =
+    Math.floor(
+      min / 60
+    );
+
+  if(hr < 24)
+    return `saa ${hr}`;
+
+  const d =
+    Math.floor(
+      hr / 24
+    );
+
+  if(d < 7)
+    return `siku ${d}`;
+
+  return new Date(ms)
+    .toLocaleDateString(
+      'sw-TZ'
+    );
+}
+
+
+/* =========================================================
+   INBOX LISTENER
+========================================================= */
+
+function startInboxListener(){
+
+  if(unsubInbox)
+    unsubInbox();
+
+  const cq =
+    query(
+      collection(
+        db,
+        'conversations'
+      ),
+      where(
+        'participants',
+        'array-contains',
+        currentUser.uid
+      )
+    );
+
+
+  unsubInbox =
+    onSnapshot(
+      cq,
+      (snap) => {
+
+        myConversations =
+          snap.docs.map(
+            d => ({
+              id:d.id,
+              ...d.data()
+            })
+          );
+
+        myConversations.sort(
+          (a,b) => {
+
+            const at =
+              a.lastMessageAt &&
+              a.lastMessageAt.toMillis
+                ? a.lastMessageAt.toMillis()
+                : 0;
+
+            const bt =
+              b.lastMessageAt &&
+              b.lastMessageAt.toMillis
+                ? b.lastMessageAt.toMillis()
+                : 0;
+
+            return bt - at;
+          }
+        );
+
+        updateUnreadBadge();
+
+        if(
+          inboxDrawer.classList.contains(
+            'open'
+          )
+        ){
+          renderInbox();
+        }
+      },
+      (err) =>
+        console.error(
+          'inbox listener',
+          err
+        )
+    );
+}
+
+
+function stopInboxListener(){
+
+  if(unsubInbox){
+
+    unsubInbox();
+
+    unsubInbox = null;
+  }
+
+  myConversations = [];
+
+  updateUnreadBadge();
+}
+
+
+function isConvoUnread(c){
+
+  const lastMs =
+    c.lastMessageAt &&
+    c.lastMessageAt.toMillis
+      ? c.lastMessageAt.toMillis()
+      : 0;
+
+  const readMs =
+    c.lastReadBy &&
+    c.lastReadBy[currentUser.uid] &&
+    c.lastReadBy[currentUser.uid].toMillis
+      ? c.lastReadBy[currentUser.uid].toMillis()
+      : 0;
+
+  return (
+    lastMs > readMs &&
+    c.lastSenderUid !==
+      currentUser.uid
+  );
+}
+
+
+function updateUnreadBadge(){
+
+  const dot =
+    document.getElementById(
+      'msgDot'
+    );
+
+  if(!currentUser){
+
+    dot.style.display =
+      'none';
+
+    return;
+  }
+
+  const hasUnread =
+    myConversations.some(
+      isConvoUnread
+    );
+
+  dot.style.display =
+    hasUnread
+      ? 'block'
+      : 'none';
+}
+
+
+function openInbox(){
+
+  renderInbox();
+
+  openPanel(
+    inboxDrawer
+  );
+}
+
+
+function renderInbox(){
+
+  const body =
+    document.getElementById(
+      'inboxBody'
+    );
+
+
+  if(
+    myConversations.length === 0
+  ){
+
+    body.innerHTML =
+      '<p id="inboxEmpty">Bado huna ujumbe wowote. Tuma ujumbe kwa muuzaji kutoka kwenye bidhaa unayoipenda.</p>';
+
+    return;
+  }
+
+
+  body.innerHTML =
+    myConversations
+      .map(c => {
+
+        const isSeller =
+          c.sellerUid ===
+          currentUser.uid;
+
+        const otherName =
+          isSeller
+            ? (
+                c.buyerName ||
+                'Mnunuzi'
+              )
+            : (
+                c.sellerName ||
+                'Muuzaji'
+              );
+
+        const initial =
+          otherName
+            .trim()
+            .charAt(0)
+            .toUpperCase();
+
+        const lastMs =
+          c.lastMessageAt &&
+          c.lastMessageAt.toMillis
+            ? c.lastMessageAt.toMillis()
+            : 0;
+
+        const unread =
+          isConvoUnread(c);
+
+
+        return `
+
+          <div class="inbox-item ${unread ? 'unread' : ''}"
+               onclick="openChatFromInbox('${c.id}')">
+
+            <div class="inbox-avatar">
+              ${escapeHtml(initial)}
+            </div>
+
+            <div class="inbox-info">
+
+              <div class="inbox-top">
+
+                <span class="inbox-name">
+                  ${escapeHtml(otherName)}
+                </span>
+
+                <span class="inbox-time">
+                  ${timeAgo(lastMs)}
+                </span>
+
+              </div>
+
+              <div class="inbox-product">
+                ${escapeHtml(c.productName || '')}
+              </div>
+
+              <div class="inbox-preview">
+                ${escapeHtml(c.lastMessage || 'Anza mazungumzo...')}
+              </div>
+
+            </div>
+
+            ${
+              unread
+                ? '<span class="inbox-unread-dot"></span>'
+                : ''
+            }
+
+          </div>
+
+        `;
+      })
+      .join('');
+}
+
+
+window.openChatFromInbox =
+  (convoId) => {
+
+    const c =
+      myConversations.find(
+        x =>
+          x.id ===
+          convoId
+      );
+
+    if(!c) return;
+
+    const isSeller =
+      c.sellerUid ===
+      currentUser.uid;
+
+    const otherName =
+      isSeller
+        ? (
+            c.buyerName ||
+            'Mnunuzi'
+          )
+        : (
+            c.sellerName ||
+            'Muuzaji'
+          );
+
+    openChat(
+      convoId,
+      otherName,
+      c.productName || '',
+      null
+    );
+  };
+
+
+window.openChatForProduct =
+  (productId) => {
+
+    if(!currentUser){
+
+      window.location.href =
+        'login.html';
+
+      return;
+    }
+
+    const p =
+      allProducts.find(
+        x =>
+          x.id ===
+          productId
+      );
+
+    if(!p) return;
+
+    const convoId =
+      `${productId}_${currentUser.uid}`;
+
+    const createData = {
+
+      productId:p.id,
+
+      productName:p.name,
+
+      sellerUid:p.ownerUid,
+
+      sellerName:
+        p.ownerName ||
+        'Muuzaji',
+
+      buyerUid:
+        currentUser.uid,
+
+      buyerName:
+        currentUser.displayName ||
+        currentUser.email ||
+        'Mnunuzi',
+
+      participants:[
+        p.ownerUid,
+        currentUser.uid
+      ],
+
+      lastMessage:'',
+
+      lastMessageAt:
+        serverTimestamp()
+    };
+
+
+    openChat(
+      convoId,
+      p.ownerName ||
+        'Muuzaji',
+      p.name,
+      createData
+    );
+  };
+
+
+async function openChat(
+  convoId,
+  otherName,
+  productName,
+  createData
+){
+
+  currentConvoId =
+    convoId;
+
+  document
+    .getElementById(
+      'chatName'
+    )
+    .textContent =
+    otherName;
+
+  document
+    .getElementById(
+      'chatProduct'
+    )
+    .textContent =
+    productName;
+
+  document
+    .getElementById(
+      'chatBody'
+    )
+    .innerHTML =
+    '<p id="chatEmpty">Inapakia mazungumzo...</p>';
+
+
+  try{
+
+    if(createData){
+
+      await setDoc(
+        doc(
+          db,
+          'conversations',
+          convoId
+        ),
+        createData,
+        {
+          merge:true
+        }
+      );
+    }
+
+
+    updateDoc(
+      doc(
+        db,
+        'conversations',
+        convoId
+      ),
+      {
+        [`lastReadBy.${currentUser.uid}`]:
+          serverTimestamp()
+      }
+    ).catch(() => {});
+
+
+    if(unsubChatMsgs)
+      unsubChatMsgs();
+
+
+    const mq =
+      query(
+        collection(
+          db,
+          'conversations',
+          convoId,
+          'messages'
+        ),
+        orderBy(
+          'createdAt',
+          'asc'
+        )
+      );
+
+
+    unsubChatMsgs =
+      onSnapshot(
+        mq,
+        (snap) => {
+
+          renderChatMessages(
+            snap.docs.map(
+              d => ({
+                id:d.id,
+                ...d.data()
+              })
+            )
+          );
+        },
+        (err) => {
+
+          console.error(
+            'chat listener',
+            err
+          );
+
+          document
+            .getElementById(
+              'chatBody'
+            )
+            .innerHTML =
+            '<p id="chatEmpty">Imeshindikana kupakia mazungumzo.</p>';
+        }
+      );
+
+
+    openPanel(
+      chatDrawer
+    );
+
+  }catch(err){
+
+    console.error(err);
+
+    alert(
+      'Imeshindikana kufungua mazungumzo. Jaribu tena.'
+    );
+  }
+}
+
+
+function renderChatMessages(
+  messages
+){
+
+  const body =
+    document.getElementById(
+      'chatBody'
+    );
+
+
+  if(messages.length === 0){
+
+    body.innerHTML =
+      '<p id="chatEmpty">Andika ujumbe wako wa kwanza hapa chini.</p>';
+
+    return;
+  }
+
+
+  body.innerHTML =
+    messages.map(m => {
+
+      const mine =
+        m.senderUid ===
+        currentUser.uid;
+
+      const ms =
+        m.createdAt &&
+        m.createdAt.toMillis
+          ? m.createdAt.toMillis()
+          : Date.now();
+
+      const time =
+        new Date(ms)
+          .toLocaleTimeString(
+            'sw-TZ',
+            {
+              hour:'2-digit',
+              minute:'2-digit'
+            }
+          );
+
+
+      return `
+
+        <div class="bubble ${mine ? 'me' : 'them'}">
+
+          ${escapeHtml(m.text)}
+
+          <span class="bubble-time">
+            ${time}
+          </span>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+
+  body.scrollTop =
+    body.scrollHeight;
+}
+
+
+/* =========================================================
+   CHAT SEND
+========================================================= */
+
+const chatInput =
+  document.getElementById(
+    'chatInput'
+  );
+
+const chatSendBtn =
+  document.getElementById(
+    'chatSendBtn'
+  );
+
+
+chatInput.addEventListener(
+  'input',
+  () => {
+
+    chatInput.style.height =
+      'auto';
+
+    chatInput.style.height =
+      Math.min(
+        chatInput.scrollHeight,
+        100
+      ) + 'px';
+  }
+);
+
+
+chatInput.addEventListener(
+  'keydown',
+  (e) => {
+
+    if(
+      e.key === 'Enter' &&
+      !e.shiftKey
+    ){
+
+      e.preventDefault();
+
+      sendChatMessage();
     }
   }
+);
 
-  document.getElementById('chatBack').addEventListener('click', () => {
-    openPanel(inboxDrawer);
-  });
+
+chatSendBtn.addEventListener(
+  'click',
+  sendChatMessage
+);
+
+
+async function sendChatMessage(){
+
+  const text =
+    chatInput.value.trim();
+
+  if(
+    !text ||
+    !currentConvoId ||
+    !currentUser
+  ) return;
+
+
+  chatSendBtn.disabled =
+    true;
+
+
+  try{
+
+    await addDoc(
+      collection(
+        db,
+        'conversations',
+        currentConvoId,
+        'messages'
+      ),
+      {
+
+        senderUid:
+          currentUser.uid,
+
+        senderName:
+          currentUser.displayName ||
+          currentUser.email ||
+          'Mtumiaji',
+
+        text,
+
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    await updateDoc(
+      doc(
+        db,
+        'conversations',
+        currentConvoId
+      ),
+      {
+
+        lastMessage:
+          text,
+
+        lastMessageAt:
+          serverTimestamp(),
+
+        lastSenderUid:
+          currentUser.uid,
+
+        [`lastReadBy.${currentUser.uid}`]:
+          serverTimestamp()
+      }
+    );
+
+
+    chatInput.value = '';
+
+    chatInput.style.height =
+      'auto';
+
+  }catch(err){
+
+    console.error(err);
+
+    alert(
+      'Imeshindikana kutuma ujumbe. Jaribu tena.'
+    );
+
+  }finally{
+
+    chatSendBtn.disabled =
+      false;
+  }
+}
+
+
+/* =========================================================
+   CHAT BACK
+========================================================= */
+
+document
+  .getElementById('chatBack')
+  .addEventListener(
+    'click',
+    () => {
+
+      openPanel(
+        inboxDrawer
+      );
+    }
+  );
+
 </script>
 
 </body>
