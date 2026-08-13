@@ -1610,10 +1610,14 @@ function compressImage(
 
 /* =========================================================
    AI IMAGE MODERATION (SOKO KUU AI)
+   MOJA KWA MOJA KWA XAI API (bila Worker)
+
+   ONYO: API key hii inaonekana kwa mtu yeyote
+   anayefungua "View Source" kwenye browser.
    ========================================================= */
 
-const SOKO_WORKER_URL =
-  "https://soko-kuu-ai.hermansade3.workers.dev/moderate-image";
+const XAI_API_KEY =
+  "xai-J3JyJmGzE2l3QYDpJol06FOueAwYfncc8Q32vecqi9tn0tNlAV4ZHGqHORg2GUjn9f96tYMoWBpcETE5";
 
 async function moderateImageDataUrl(dataUrl){
 
@@ -1626,27 +1630,67 @@ async function moderateImageDataUrl(dataUrl){
   const mimeType =
     mimeMatch ? mimeMatch[1] : "image/jpeg";
 
-  const imageBase64 =
-    parts[1];
-
   const res =
-    await fetch(SOKO_WORKER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        imageBase64,
-        mimeType
-      })
-    });
+    await fetch(
+      "https://api.x.ai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${XAI_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "grok-2-vision-1212",
+          temperature: 0,
+          messages: [
+            {
+              role: "system",
+              content:
+                "Wewe ni mfumo wa moderation kwa soko la mtandaoni la Tanzania (SOKO KUU). " +
+                "Kagua picha iliyotumwa na muuzaji. Kataa (unsafe) kama ina: uchi/ngono, " +
+                "silaha halisi, madawa ya kulevya, vurugu/damu, chuki/matusi ya picha, " +
+                "au maudhui yasiyofaa kwa soko la bidhaa. Ruhusu (safe) picha za kawaida " +
+                "za bidhaa, nyumba, magari, nguo, simu n.k. Jibu KWA JSON TU bila maelezo " +
+                "mengine: {\"status\":\"safe\"|\"unsafe\",\"reason\":\"sababu fupi kwa Kiswahili\"}"
+            },
+            {
+              role: "user",
+              content: [
+                { type: "text", text: "Kagua picha hii." },
+                {
+                  type: "image_url",
+                  image_url: { url: dataUrl }
+                }
+              ]
+            }
+          ]
+        })
+      }
+    );
 
   if(!res.ok)
     throw new Error(
       "Ukaguzi wa AI umeshindwa"
     );
 
-  return await res.json();
+  const data =
+    await res.json();
+
+  const raw =
+    data.choices?.[0]?.message?.content || "{}";
+
+  const clean =
+    raw.replace(/```json|```/g, "").trim();
+
+  try{
+    return JSON.parse(clean);
+  }
+  catch{
+    return {
+      status: "unsafe",
+      reason: "Imeshindikana kuchambua picha"
+    };
+  }
   // { status: "safe" | "unsafe", reason: "..." }
 
 }
