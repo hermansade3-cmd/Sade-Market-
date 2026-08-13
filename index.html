@@ -14,478 +14,427 @@
 
 <style>
 /* =========================================================
-   SOKO KUU - EXTRA STYLES
-========================================================= */
+   SOKO KUU - ADDITIONAL STYLES
+   ========================================================= */
 
 :root{
-  --card:#fff;
-  --border:#e8e8e8;
-  --primary:#ff7a00;
-  --primary-dark:#e66000;
-  --ink:#171717;
-  --muted:#777;
-  --bg:#f7f7f7;
-  --danger:#d93025;
+  --sk-primary:#0b7a4b;
+  --sk-primary-dark:#075b38;
+  --sk-gold:#f5b400;
+  --sk-bg:#f7f8fa;
+  --sk-card:#ffffff;
+  --sk-text:#17202a;
+  --sk-muted:#68717d;
+  --sk-border:#e4e7eb;
+  --sk-danger:#d93025;
 }
 
-*{
-  box-sizing:border-box;
+body.dark-mode{
+  --sk-bg:#101418;
+  --sk-card:#182027;
+  --sk-text:#f4f6f8;
+  --sk-muted:#aab4bf;
+  --sk-border:#2a333d;
 }
 
 body{
-  background:var(--bg);
-  color:var(--ink);
-  transition:.25s;
+  background:var(--sk-bg);
+  color:var(--sk-text);
 }
 
-button,
-input,
-textarea,
-select{
-  font-family:inherit;
+/* MAIN CHOICE */
+.main-choice{
+  margin:1rem 1.2rem 1.3rem;
+  border-radius:20px;
+  padding:1rem;
+  background:linear-gradient(135deg,#fff8df,#ffffff);
+  border:1px solid #f1d77b;
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
 }
 
-/* DARK MODE */
-
-body.dark-mode{
-  --bg:#101114;
-  --card:#181a1f;
-  --ink:#f5f5f5;
-  --muted:#aeb2ba;
-  --border:#2d3038;
+.dark-mode .main-choice{
+  background:linear-gradient(135deg,#292516,#182027);
+  border-color:#665a2a;
 }
 
-body.dark-mode .topbar,
-body.dark-mode .drawer,
-body.dark-mode .bottom-nav,
-body.dark-mode .card,
-body.dark-mode .quick-tile,
-body.dark-mode .pill,
-body.dark-mode .section-head,
-body.dark-mode .toggle-row{
-  background:#181a1f;
-  color:#fff;
-  border-color:#2d3038;
-}
-
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode select{
-  background:#111318;
-  color:#fff;
-  border-color:#30343d;
-}
-
-body.dark-mode .seller-row,
-body.dark-mode .posted-date,
-body.dark-mode .product-location{
-  color:#aeb2ba;
-}
-
-/* OWNER PUBLIC FAVORITES */
-
-.owner-choice-section{
-  margin:18px auto 25px;
-  max-width:1200px;
-  padding:0 15px;
-}
-
-.owner-choice-head{
+.main-choice-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:12px;
+  justify-content:space-between;
+  gap:.7rem;
+  margin-bottom:.8rem;
 }
 
-.owner-choice-head h2{
-  margin:0;
-  font-size:1.15rem;
+.main-choice-title{
+  font-size:1.05rem;
+  font-weight:800;
+  color:#8a6500;
 }
 
-.owner-choice-head span{
-  color:var(--muted);
-  font-size:.78rem;
+.dark-mode .main-choice-title{
+  color:#ffd95b;
 }
 
-.owner-choice-grid{
+.main-choice-sub{
+  color:var(--sk-muted);
+  font-size:.75rem;
+}
+
+.main-choice-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
+  gap:.7rem;
 }
 
-.owner-fav-card{
+.choice-card{
   position:relative;
-  background:var(--card);
-  border:1px solid var(--border);
+  background:var(--sk-card);
+  border:1px solid var(--sk-border);
   border-radius:14px;
   overflow:hidden;
   cursor:pointer;
 }
 
-.owner-fav-card img{
+.choice-card img{
   width:100%;
-  height:145px;
+  height:105px;
   object-fit:cover;
   display:block;
 }
 
-.owner-fav-info{
-  padding:9px;
+.choice-card-info{
+  padding:.55rem .65rem;
 }
 
-.owner-fav-info b{
-  display:block;
-  font-size:.88rem;
-}
-
-.owner-fav-price{
-  color:var(--primary-dark);
+.choice-price{
   font-weight:800;
-  margin-top:3px;
+  color:var(--sk-primary);
+  font-size:.85rem;
 }
 
-.owner-fav-location{
-  color:var(--muted);
-  font-size:.72rem;
-  margin-top:4px;
+.choice-name{
+  font-size:.78rem;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.owner-fav-remove{
-  position:absolute;
-  right:7px;
-  top:7px;
-  width:32px;
-  height:32px;
-  border:0;
-  border-radius:50%;
-  background:rgba(0,0,0,.65);
-  color:white;
-  cursor:pointer;
+/* RECENTLY ADDED */
+.recent-section{
+  padding:0 1.2rem 1rem;
 }
 
-/* PRODUCT IMAGES */
+.recent-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:.7rem;
+}
 
-.product-gallery{
-  position:relative;
-  width:100%;
-  height:100%;
+.recent-title h2{
+  font-size:1.05rem;
+  margin:0;
+}
+
+.recent-list{
+  display:flex;
+  gap:.7rem;
+  overflow-x:auto;
+  padding-bottom:.4rem;
+}
+
+.recent-card{
+  min-width:145px;
+  max-width:145px;
+  background:var(--sk-card);
+  border:1px solid var(--sk-border);
+  border-radius:15px;
   overflow:hidden;
 }
 
-.product-gallery img{
+.recent-card img{
   width:100%;
-  height:100%;
+  height:95px;
   object-fit:cover;
-  display:block;
+}
+
+.recent-card-body{
+  padding:.5rem;
+}
+
+.recent-card-name{
+  font-size:.76rem;
+  font-weight:800;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.recent-card-price{
+  color:var(--sk-primary);
+  font-weight:800;
+  font-size:.75rem;
+}
+
+/* PRODUCT IMAGE GALLERY */
+.product-gallery{
+  position:relative;
+  overflow:hidden;
+}
+
+.product-gallery-track{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+}
+
+.product-gallery-track::-webkit-scrollbar{
+  display:none;
+}
+
+.product-gallery-track img{
+  min-width:100%;
+  height:220px;
+  object-fit:cover;
+  scroll-snap-align:start;
 }
 
 .photo-count{
   position:absolute;
-  right:8px;
-  bottom:8px;
-  background:rgba(0,0,0,.68);
-  color:white;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:.72rem;
-  font-weight:700;
-}
-
-.image-preview-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:10px;
-}
-
-.image-preview-item{
-  position:relative;
-  aspect-ratio:1;
-}
-
-.image-preview-item img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-.image-number{
-  position:absolute;
-  left:5px;
-  top:5px;
+  right:.55rem;
+  bottom:.55rem;
   background:rgba(0,0,0,.65);
-  color:#fff;
-  border-radius:15px;
-  padding:3px 7px;
+  color:white;
+  padding:.25rem .5rem;
+  border-radius:20px;
   font-size:.7rem;
 }
 
 /* PRODUCT META */
-
 .product-location{
-  color:var(--muted);
-  font-size:.75rem;
-  margin-top:5px;
+  color:var(--sk-muted);
+  font-size:.76rem;
+  margin-top:.35rem;
+  line-height:1.5;
 }
 
-.posted-date{
-  color:var(--muted);
-  font-size:.72rem;
-  margin-top:4px;
+.product-date{
+  color:var(--sk-muted);
+  font-size:.7rem;
+  margin-top:.25rem;
 }
 
-/* SELLER */
-
-.seller-profile-btn{
-  border:0;
-  background:none;
-  color:var(--primary-dark);
-  font:inherit;
+.seller-click{
   cursor:pointer;
-  padding:0;
-  font-weight:700;
 }
 
-.seller-profile-btn:hover{
+.seller-click:hover{
   text-decoration:underline;
 }
 
-/* SELLER PROFILE */
+/* PHONE BUTTON */
+.call-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.3rem;
+  flex:1;
+  min-height:42px;
+  border:0;
+  border-radius:10px;
+  background:#128c4b;
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  font-size:.78rem;
+}
 
+.call-btn:hover{
+  background:#0b713b;
+}
+
+.msg-btn{
+  flex:1;
+  min-height:42px;
+  border:1px solid var(--sk-primary);
+  border-radius:10px;
+  background:transparent;
+  color:var(--sk-primary);
+  font-weight:800;
+}
+
+/* SELLER PROFILE */
 .seller-profile{
   text-align:center;
 }
 
-.seller-big-avatar{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  object-fit:cover;
-  margin:8px auto 12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--primary);
-  color:#fff;
-  font-size:2rem;
-  font-weight:800;
-}
-
-.seller-profile h2{
-  margin:4px 0;
-}
-
-.seller-location{
-  color:var(--muted);
-  margin-bottom:18px;
-}
-
-.seller-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin:15px 0;
-}
-
-.seller-stats div{
-  padding:14px 7px;
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:13px;
-}
-
-.seller-stats b{
-  display:block;
-  font-size:1.1rem;
-}
-
-.seller-stats span{
-  display:block;
-  color:var(--muted);
-  font-size:.7rem;
-}
-
-.joined-date{
-  color:var(--muted);
-  font-size:.82rem;
-}
-
-.seller-products{
-  display:grid;
-  gap:10px;
-  text-align:left;
-}
-
-.seller-product{
-  display:flex;
-  gap:10px;
-  padding:10px;
-  border:1px solid var(--border);
-  border-radius:13px;
-  background:var(--card);
-  cursor:pointer;
-}
-
-.seller-product img,
-.seller-product-placeholder{
-  width:70px;
-  height:70px;
-  flex:none;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-.seller-product-placeholder{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--bg);
-  color:var(--muted);
-  font-size:.65rem;
-}
-
-.seller-product b{
-  display:block;
-}
-
-.seller-product small{
-  display:block;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-/* DASHBOARD */
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-bottom:22px;
-}
-
-.dashboard-card{
-  text-align:center;
-  padding:17px 8px;
-  border:1px solid var(--border);
-  background:var(--card);
-  border-radius:15px;
-}
-
-.dashboard-card span{
-  display:block;
-  font-size:1.4rem;
-}
-
-.dashboard-card b{
-  display:block;
-  font-size:1.25rem;
-  margin-top:4px;
-}
-
-.dashboard-card small{
-  color:var(--muted);
-}
-
-.dashboard-product{
-  display:flex;
-  gap:10px;
-  padding:10px;
-  border:1px solid var(--border);
-  background:var(--card);
-  border-radius:13px;
-  margin-bottom:9px;
-}
-
-.dashboard-product img{
-  width:65px;
-  height:65px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-.dashboard-product b{
-  display:block;
-}
-
-.dashboard-product small{
-  display:block;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-/* RECENT */
-
-.recent-control{
-  max-width:1200px;
-  margin:0 auto 10px;
-  padding:0 15px;
-}
-
-.recent-btn{
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--ink);
-  padding:9px 14px;
-  border-radius:20px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.recent-btn.active{
-  background:var(--primary);
-  color:white;
-  border-color:var(--primary);
-}
-
-/* SEARCH FILTER */
-
-.search-info{
-  max-width:1200px;
-  margin:8px auto;
-  padding:0 15px;
-  color:var(--muted);
-  font-size:.78rem;
-}
-
-/* ACCOUNT PROFILE */
-
-.profile-avatar-wrap{
-  position:relative;
-}
-
-.profile-avatar{
+.seller-avatar-large{
   width:90px;
   height:90px;
   border-radius:50%;
   object-fit:cover;
+  display:block;
+  margin:0 auto .7rem;
+  border:3px solid var(--sk-primary);
 }
 
-.profile-avatar-edit{
-  position:absolute;
-  right:-2px;
-  bottom:0;
-  background:var(--primary);
-  color:#fff;
-  width:30px;
-  height:30px;
+.seller-avatar-placeholder{
+  width:90px;
+  height:90px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
+  margin:0 auto .7rem;
+  background:var(--sk-primary);
+  color:white;
+  font-size:2rem;
+  font-weight:800;
+}
+
+.seller-profile-name{
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.seller-profile-location{
+  color:var(--sk-muted);
+  font-size:.82rem;
+  margin:.3rem 0;
+}
+
+.seller-joined{
+  color:var(--sk-muted);
+  font-size:.75rem;
+}
+
+.seller-stat-box{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.7rem;
+  margin:1rem 0;
+}
+
+.seller-stat{
+  background:var(--sk-bg);
+  border:1px solid var(--sk-border);
+  padding:.8rem;
+  border-radius:12px;
+}
+
+.seller-stat b{
+  display:block;
+  font-size:1.15rem;
+}
+
+.seller-stat span{
+  color:var(--sk-muted);
+  font-size:.72rem;
+}
+
+/* DASHBOARD */
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.7rem;
+}
+
+.dashboard-box{
+  padding:1rem;
+  border-radius:14px;
+  background:var(--sk-bg);
+  border:1px solid var(--sk-border);
+}
+
+.dashboard-box .number{
+  font-size:1.35rem;
+  font-weight:800;
+  color:var(--sk-primary);
+}
+
+.dashboard-box .label{
+  font-size:.75rem;
+  color:var(--sk-muted);
+}
+
+/* IMAGE UPLOAD */
+.multi-image-preview{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.5rem;
+  margin-top:.7rem;
+}
+
+.multi-image-item{
+  position:relative;
+}
+
+.multi-image-item img{
+  width:100%;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.remove-photo{
+  position:absolute;
+  top:4px;
+  right:4px;
+  width:24px;
+  height:24px;
+  border:0;
+  border-radius:50%;
+  background:rgba(0,0,0,.7);
+  color:#fff;
+}
+
+/* DARK MODE BUTTON */
+.dark-toggle{
+  border:1px solid var(--sk-border);
+  background:var(--sk-card);
+  color:var(--sk-text);
+  border-radius:10px;
+  padding:.5rem .7rem;
   cursor:pointer;
 }
 
-/* MOBILE */
+/* SEARCH */
+.power-search{
+  position:relative;
+}
 
-@media(min-width:700px){
+.search-help{
+  font-size:.7rem;
+  color:var(--sk-muted);
+  margin-top:.35rem;
+}
 
-  .owner-choice-grid{
-    grid-template-columns:repeat(4,1fr);
+.search-filter-row{
+  display:flex;
+  gap:.5rem;
+  overflow-x:auto;
+  padding:.5rem 1.2rem;
+}
+
+.search-filter-row select{
+  min-width:130px;
+  padding:.55rem;
+  border-radius:10px;
+  border:1px solid var(--sk-border);
+  background:var(--sk-card);
+  color:var(--sk-text);
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .main-choice-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .dashboard-grid{
-    grid-template-columns:repeat(4,1fr);
+  .product-gallery-track img{
+    height:205px;
   }
 }
 </style>
@@ -495,8 +444,7 @@ body.dark-mode .product-location{
 
 <!-- =========================================================
      TOP BAR
-========================================================= -->
-
+     ========================================================= -->
 <div class="topbar">
 
   <div class="brand">
@@ -505,78 +453,145 @@ body.dark-mode .product-location{
   </div>
 
   <div class="topbar-actions" id="authArea">
-
-    <button
-      class="icon-btn"
-      id="darkModeBtn"
-      type="button"
-      title="Dark Mode"
-    >🌙</button>
-
     <a class="login-btn" href="login.html">Ingia</a>
-
   </div>
 
 </div>
 
 
 <!-- =========================================================
-     HERO / SEARCH
-========================================================= -->
-
+     HERO + POWERFUL SEARCH
+     ========================================================= -->
 <div class="hero">
 
   <h1>Unatafuta nini leo?</h1>
 
-  <div class="search-box">
+  <div class="search-box power-search">
 
     <input
       type="text"
       id="searchInput"
-      placeholder="Tafuta bidhaa, mkoa, location, seller..."
+      placeholder="Tafuta bidhaa, aina, mkoa au location..."
       autocomplete="off"
     >
 
-    <button
-      type="button"
-      id="searchBtn"
-      aria-label="Tafuta"
-    >
-      🔍
+    <button type="button" aria-label="Tafuta">
+
+      <svg width="18" height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round">
+
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+
+      </svg>
+
     </button>
 
+  </div>
+
+  <div class="search-help">
+    Mfano: <b>Gari Dar es Salaam</b>, <b>Nyumba Lindi</b>, <b>iPhone</b>
   </div>
 
 </div>
 
 
-<!-- =========================================================
-     QUICK PILLS
-========================================================= -->
+<!-- SEARCH FILTERS -->
+<div class="search-filter-row">
 
+  <select id="filterCategory">
+    <option value="">Aina zote</option>
+    <option value="nyumba">🏠 Nyumba</option>
+    <option value="gari">🚗 Gari</option>
+    <option value="pikipiki">🏍️ Pikipiki</option>
+    <option value="ardhi">📐 Ardhi</option>
+    <option value="simu">📱 Simu</option>
+    <option value="tv">📺 TV/Elektroniki</option>
+    <option value="nguo">👕 Nguo</option>
+    <option value="nyingine">📦 Nyingine</option>
+  </select>
+
+  <select id="filterRegion">
+    <option value="">Mikoa yote</option>
+    <option>Arusha</option>
+    <option>Dar es Salaam</option>
+    <option>Dodoma</option>
+    <option>Geita</option>
+    <option>Iringa</option>
+    <option>Kagera</option>
+    <option>Katavi</option>
+    <option>Kigoma</option>
+    <option>Kilimanjaro</option>
+    <option>Lindi</option>
+    <option>Manyara</option>
+    <option>Mara</option>
+    <option>Mbeya</option>
+    <option>Morogoro</option>
+    <option>Mtwara</option>
+    <option>Mwanza</option>
+    <option>Njombe</option>
+    <option>Pwani</option>
+    <option>Rukwa</option>
+    <option>Ruvuma</option>
+    <option>Shinyanga</option>
+    <option>Simiyu</option>
+    <option>Singida</option>
+    <option>Songwe</option>
+    <option>Tabora</option>
+    <option>Tanga</option>
+  </select>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN CHOICE - OWNER PUBLIC FAVORITES
+     ========================================================= -->
+<section class="main-choice">
+
+  <div class="main-choice-head">
+
+    <div>
+      <div class="main-choice-title">
+        ❤️ Chaguo la SOKO KUU
+      </div>
+
+      <div class="main-choice-sub">
+        Bidhaa zilizochaguliwa na SOKO KUU
+      </div>
+    </div>
+
+    <span>👑</span>
+
+  </div>
+
+  <div class="main-choice-grid" id="mainChoiceGrid">
+    <div style="color:var(--sk-muted);font-size:.8rem;">
+      Inapakia Chaguo la SOKO KUU...
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK ACTIONS
+     ========================================================= -->
 <div class="pill-row">
 
-  <button
-    class="pill"
-    id="pillAll"
-    type="button"
-  >
+  <button class="pill" id="pillAll" type="button">
     🛍️ Bidhaa za Kila Mtu
   </button>
 
-  <button
-    class="pill"
-    id="pillVerified"
-    type="button"
-  >
+  <button class="pill" id="pillVerified" type="button">
     ✅ Wachuuzi Halisi
   </button>
 
-  <button
-    class="pill"
-    id="pillContact"
-    type="button"
-  >
+  <button class="pill" id="pillContact" type="button">
     💬 Wasiliana Moja kwa Moja
   </button>
 
@@ -584,53 +599,30 @@ body.dark-mode .product-location{
 
 
 <!-- =========================================================
-     OWNER PUBLIC FAVORITES
-========================================================= -->
+     RECENTLY ADDED
+     ========================================================= -->
+<section class="recent-section">
 
-<section
-  class="owner-choice-section"
-  id="ownerChoiceSection"
->
+  <div class="recent-title">
 
-  <div class="owner-choice-head">
+    <h2>🕐 Zilizoongezwa Hivi Karibuni</h2>
 
-    <h2>❤️ Chaguo la SOKO KUU</h2>
-
-    <span>
-      Bidhaa zilizochaguliwa na SOKO KUU
+    <span
+      id="recentCount"
+      style="font-size:.75rem;color:var(--sk-muted);">
+      0
     </span>
 
   </div>
 
-  <div
-    class="owner-choice-grid"
-    id="ownerChoiceGrid"
-  ></div>
+  <div class="recent-list" id="recentList"></div>
 
 </section>
 
 
 <!-- =========================================================
-     RECENTLY ADDED
-========================================================= -->
-
-<div class="recent-control">
-
-  <button
-    class="recent-btn"
-    id="recentBtn"
-    type="button"
-  >
-    🕐 Zilizowekwa Hivi Karibuni
-  </button>
-
-</div>
-
-
-<!-- =========================================================
-     SECTION HEAD
-========================================================= -->
-
+     PRODUCTS
+     ========================================================= -->
 <div class="section-head">
 
   <h2>Bidhaa Zilizopo</h2>
@@ -642,40 +634,24 @@ body.dark-mode .product-location{
 </div>
 
 
-<!-- =========================================================
-     TABS
-========================================================= -->
-
 <div class="toggle-row">
 
   <button
     class="toggle-btn active"
     id="tabAll"
-    type="button"
-  >
+    type="button">
     Bidhaa Zote
   </button>
 
   <button
     class="toggle-btn"
     id="tabMine"
-    type="button"
-  >
+    type="button">
     Bidhaa Zangu
   </button>
 
 </div>
 
-
-<div
-  class="search-info"
-  id="searchInfo"
-></div>
-
-
-<!-- =========================================================
-     LOADING
-========================================================= -->
 
 <div id="loading">
 
@@ -686,52 +662,37 @@ body.dark-mode .product-location{
 </div>
 
 
-<!-- =========================================================
-     EMPTY
-========================================================= -->
-
 <div id="empty">
 
-  <div class="ring">
-    ＋
-  </div>
+  <div class="ring">＋</div>
 
   <h3 id="emptyTitle">
     Bado hakuna bidhaa
   </h3>
 
   <p id="emptyText">
-    Kuwa wa kwanza kuposti bidhaa SOKO KUU.
+    Kuwa wa kwanza kuposti bidhaa hapa.
   </p>
 
 </div>
 
 
-<div
-  class="grid"
-  id="grid"
-></div>
+<div class="grid" id="grid"></div>
 
 
-<!-- =========================================================
-     TERMS
-========================================================= -->
-
-<p
-  style="
-  text-align:center;
-  color:var(--muted);
-  font-size:.78rem;
-  padding:2rem 1.2rem 1rem;
-  "
->
+<!-- TERMS -->
+<p style="
+text-align:center;
+color:var(--muted);
+font-size:.78rem;
+padding:2rem 1.2rem 1rem;
+">
 
   Kwa kutumia SOKO KUU, unakubaliana na
 
   <a
     href="terms.html"
-    style="color:var(--primary-dark);font-weight:700;"
-  >
+    style="color:var(--primary-dark);font-weight:700;">
     Masharti ya Matumizi
   </a>.
 
@@ -740,74 +701,76 @@ body.dark-mode .product-location{
 
 <!-- =========================================================
      BOTTOM NAV
-========================================================= -->
-
+     ========================================================= -->
 <div class="bottom-nav">
 
   <button
     class="active"
     type="button"
-    onclick="window.scrollTo({top:0,behavior:'smooth'})"
-  >
+    onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
     <span class="nav-icon">🏠</span>
     Nyumbani
+
   </button>
+
 
   <button
     type="button"
     onclick="
       document.getElementById('searchInput').focus();
       window.scrollTo({top:0,behavior:'smooth'})
-    "
-  >
+    ">
+
     <span class="nav-icon">🔍</span>
     Tafuta
+
   </button>
+
 
   <button
     type="button"
-    id="fabAdd"
-  >
+    id="fabAdd">
+
     <span class="center-fab">＋</span>
+
   </button>
+
 
   <button
     type="button"
-    id="navMessages"
-  >
+    id="navMessages">
+
     <span class="nav-badge-wrap">
 
-      <span class="nav-icon">
-        ✉️
-      </span>
+      <span class="nav-icon">💬</span>
 
       <span
         class="nav-dot"
         id="msgDot"
-        style="display:none;"
-      ></span>
+        style="display:none;">
+      </span>
 
     </span>
 
     Ujumbe
+
   </button>
+
 
   <button
     type="button"
-    id="navAccount"
-  >
+    id="navAccount">
 
     <span class="nav-badge-wrap">
 
-      <span class="nav-icon">
-        👤
-      </span>
+      <span class="nav-icon">👤</span>
 
       <span
         class="nav-dot"
         id="acctDot"
-        style="display:none;"
-      ></span>
+        style="display:none;">
+      </span>
 
     </span>
 
@@ -820,22 +783,19 @@ body.dark-mode .product-location{
 
 <!-- =========================================================
      OVERLAY
-========================================================= -->
-
+     ========================================================= -->
 <div
   class="overlay"
-  id="overlay"
-></div>
+  id="overlay">
+</div>
 
 
 <!-- =========================================================
-     ADD PRODUCT DRAWER
-========================================================= -->
-
+     ADD / EDIT PRODUCT DRAWER
+     ========================================================= -->
 <div
   class="drawer"
-  id="drawer"
->
+  id="drawer">
 
   <div class="drawer-head">
 
@@ -846,8 +806,7 @@ body.dark-mode .product-location{
     <button
       class="close-x"
       data-close
-      type="button"
-    >
+      type="button">
       ✕
     </button>
 
@@ -858,8 +817,8 @@ body.dark-mode .product-location{
 
     <div class="panel-block">
 
-      <!-- CATEGORY -->
 
+      <!-- CATEGORY -->
       <div class="field">
 
         <label for="pCategory">
@@ -906,7 +865,6 @@ body.dark-mode .product-location{
 
 
       <!-- NAME -->
-
       <div class="field">
 
         <label for="pName">
@@ -916,14 +874,12 @@ body.dark-mode .product-location{
         <input
           type="text"
           id="pName"
-          placeholder="Mfano: Toyota IST"
-        >
+          placeholder="Mfano: Toyota Harrier">
 
       </div>
 
 
       <!-- PRICE -->
-
       <div class="field">
 
         <label for="pPrice">
@@ -933,30 +889,12 @@ body.dark-mode .product-location{
         <input
           type="number"
           id="pPrice"
-          placeholder="250000"
-        >
-
-      </div>
-
-
-      <!-- DESCRIPTION -->
-
-      <div class="field">
-
-        <label for="pDesc">
-          Maelezo
-        </label>
-
-        <textarea
-          id="pDesc"
-          placeholder="Eleza kuhusu bidhaa hii..."
-        ></textarea>
+          placeholder="2500000">
 
       </div>
 
 
       <!-- REGION -->
-
       <div class="field">
 
         <label for="pRegion">
@@ -966,7 +904,7 @@ body.dark-mode .product-location{
         <select id="pRegion">
 
           <option value="">
-            Chagua mkoa
+            Chagua mkoa...
           </option>
 
           <option>Arusha</option>
@@ -1002,69 +940,72 @@ body.dark-mode .product-location{
 
 
       <!-- LOCATION -->
-
       <div class="field">
 
         <label for="pLocation">
-          Location ya Bidhaa
+          📍 Location ya Bidhaa
         </label>
 
         <input
           type="text"
           id="pLocation"
-          placeholder="Mfano: Mjimwema, Lindi Mjini"
-        >
+          placeholder="Mfano: Mjini, Mkwajuni, Kariakoo">
+
+      </div>
+
+
+      <!-- DESCRIPTION -->
+      <div class="field">
+
+        <label for="pDesc">
+          Maelezo
+        </label>
+
+        <textarea
+          id="pDesc"
+          placeholder="Eleza kuhusu bidhaa hii...">
+        </textarea>
 
       </div>
 
 
       <!-- PHONE -->
-
       <div class="field">
 
         <label for="pPhone">
-          Namba yako ya WhatsApp
+          📞 Namba ya Simu ya Muuzaji
         </label>
 
         <input
           type="tel"
           id="pPhone"
-          placeholder="255700000000"
-        >
+          placeholder="255700000000">
 
       </div>
 
 
-      <!-- IMAGES -->
-
+      <!-- PHOTOS -->
       <div class="field">
 
         <label>
-          Picha za Bidhaa
+          🖼️ Picha za Bidhaa
         </label>
 
-        <div class="file-drop">
+        <input
+          type="file"
+          id="pImages"
+          accept="image/*"
+          multiple>
 
-          <input
-            type="file"
-            id="pImage"
-            accept="image/*"
-            multiple
-          >
-
-          <span
-            class="file-drop-label"
-            id="fileLabel"
-          >
-            Chagua picha 1 hadi 3
-          </span>
-
-        </div>
+        <p class="hint">
+          Unaweza kuweka picha <b>1, 2 au 3</b>.
+          Chagua unazotaka.
+        </p>
 
         <div
-          id="pImagePreview"
-          class="image-preview-grid"
-        ></div>
+          class="multi-image-preview"
+          id="multiImagePreview">
+        </div>
 
       </div>
 
@@ -1072,16 +1013,18 @@ body.dark-mode .product-location{
       <button
         class="btn-full btn-orange"
         id="addProduct"
-        type="button"
-      >
+        type="button">
+
         Chapisha Bidhaa
+
       </button>
 
 
       <p class="hint">
 
-        Unaweza kuweka picha moja, mbili au tatu.
-        Bidhaa yako itaonekana kwa watumiaji wa SOKO KUU.
+        Bidhaa yako itaonekana kwa watumiaji wote.
+        Namba ya simu itaonekana kwenye bidhaa na
+        mteja ataweza kubonyeza <b>Piga Simu</b>.
 
       </p>
 
@@ -1094,12 +1037,10 @@ body.dark-mode .product-location{
 
 <!-- =========================================================
      INFO DRAWER
-========================================================= -->
-
+     ========================================================= -->
 <div
   class="drawer"
-  id="infoDrawer"
->
+  id="infoDrawer">
 
   <div class="drawer-head">
 
@@ -1110,8 +1051,7 @@ body.dark-mode .product-location{
     <button
       class="close-x"
       data-close
-      type="button"
-    >
+      type="button">
       ✕
     </button>
 
@@ -1119,20 +1059,48 @@ body.dark-mode .product-location{
 
   <div
     class="drawer-body"
-    id="infoBody"
-  ></div>
+    id="infoBody">
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     SELLER PROFILE DRAWER
+     ========================================================= -->
+<div
+  class="drawer"
+  id="sellerDrawer">
+
+  <div class="drawer-head">
+
+    <h2>
+      👤 Seller Profile
+    </h2>
+
+    <button
+      class="close-x"
+      data-close
+      type="button">
+      ✕
+    </button>
+
+  </div>
+
+  <div
+    class="drawer-body"
+    id="sellerBody">
+  </div>
 
 </div>
 
 
 <!-- =========================================================
      ACCOUNT DRAWER
-========================================================= -->
-
+     ========================================================= -->
 <div
   class="drawer"
-  id="accountDrawer"
->
+  id="accountDrawer">
 
   <div class="drawer-head">
 
@@ -1143,8 +1111,7 @@ body.dark-mode .product-location{
     <button
       class="close-x"
       data-close
-      type="button"
-    >
+      type="button">
       ✕
     </button>
 
@@ -1153,48 +1120,41 @@ body.dark-mode .product-location{
 
   <div
     class="acct-tabs"
-    id="acctTabs"
-  >
+    id="acctTabs">
 
     <button
       class="acct-tab"
-      data-tab="profile"
-    >
+      data-tab="profile">
       👤 Profile
     </button>
 
     <button
       class="acct-tab"
-      data-tab="dashboard"
-    >
-      📈 Dashboard
-    </button>
-
-    <button
-      class="acct-tab"
-      data-tab="listings"
-    >
+      data-tab="listings">
       📢 Matangazo
     </button>
 
     <button
       class="acct-tab"
-      data-tab="favorites"
-    >
+      data-tab="favorites">
       ❤️ Pendwa
     </button>
 
     <button
       class="acct-tab"
-      data-tab="notifications"
-    >
+      data-tab="dashboard">
+      📈 Dashboard
+    </button>
+
+    <button
+      class="acct-tab"
+      data-tab="notifications">
       🔔 Arifa
     </button>
 
     <button
       class="acct-tab"
-      data-tab="settings"
-    >
+      data-tab="settings">
       ⚙️ Mipangilio
     </button>
 
@@ -1203,53 +1163,18 @@ body.dark-mode .product-location{
 
   <div
     class="drawer-body"
-    id="accountBody"
-  ></div>
-
-</div>
-
-
-<!-- =========================================================
-     SELLER PROFILE
-========================================================= -->
-
-<div
-  class="drawer"
-  id="sellerDrawer"
->
-
-  <div class="drawer-head">
-
-    <h2>
-      Profile ya Muuzaji
-    </h2>
-
-    <button
-      class="close-x"
-      id="closeSellerDrawer"
-      type="button"
-    >
-      ✕
-    </button>
-
+    id="accountBody">
   </div>
-
-  <div
-    class="drawer-body"
-    id="sellerBody"
-  ></div>
 
 </div>
 
 
 <!-- =========================================================
      INBOX
-========================================================= -->
-
+     ========================================================= -->
 <div
   class="drawer"
-  id="inboxDrawer"
->
+  id="inboxDrawer">
 
   <div class="drawer-head">
 
@@ -1260,8 +1185,7 @@ body.dark-mode .product-location{
     <button
       class="close-x"
       data-close
-      type="button"
-    >
+      type="button">
       ✕
     </button>
 
@@ -1269,28 +1193,26 @@ body.dark-mode .product-location{
 
   <div
     class="drawer-body"
-    id="inboxBody"
-  ></div>
+    id="inboxBody">
+
+  </div>
 
 </div>
 
 
 <!-- =========================================================
      CHAT
-========================================================= -->
-
+     ========================================================= -->
 <div
   class="drawer"
-  id="chatDrawer"
->
+  id="chatDrawer">
 
   <div class="drawer-head">
 
     <button
       class="close-x"
       id="chatBack"
-      type="button"
-    >
+      type="button">
       ‹
     </button>
 
@@ -1298,15 +1220,13 @@ body.dark-mode .product-location{
 
       <span
         class="chat-name"
-        id="chatName"
-      >
+        id="chatName">
         Muuzaji
       </span>
 
       <span
         class="chat-product"
-        id="chatProduct"
-      >
+        id="chatProduct">
         Bidhaa
       </span>
 
@@ -1315,8 +1235,7 @@ body.dark-mode .product-location{
     <button
       class="close-x"
       data-close
-      type="button"
-    >
+      type="button">
       ✕
     </button>
 
@@ -1325,8 +1244,8 @@ body.dark-mode .product-location{
 
   <div
     class="chat-body"
-    id="chatBody"
-  ></div>
+    id="chatBody">
+  </div>
 
 
   <div class="chat-input-row">
@@ -1334,14 +1253,13 @@ body.dark-mode .product-location{
     <textarea
       id="chatInput"
       rows="1"
-      placeholder="Andika ujumbe..."
-    ></textarea>
+      placeholder="Andika ujumbe...">
+    </textarea>
 
     <button
       class="chat-send-btn"
       id="chatSendBtn"
-      type="button"
-    >
+      type="button">
       ➤
     </button>
 
@@ -1352,15 +1270,12 @@ body.dark-mode .product-location{
 
 <!-- =========================================================
      JAVASCRIPT
-========================================================= -->
-
+     ========================================================= -->
 <script type="module">
 
 import {
-
   auth,
   db,
-
   onAuthStateChanged,
   signOut,
 
@@ -1392,11 +1307,9 @@ import {
 
 /* =========================================================
    CONSTANTS
-========================================================= */
+   ========================================================= */
 
-const OWNER_EMAIL =
-  "hermansade3@gmail.com";
-
+const OWNER_EMAIL = "hermansade3@gmail.com";
 
 const CATEGORIES = {
 
@@ -1412,63 +1325,235 @@ const CATEGORIES = {
 };
 
 
-const MAX_IMAGES = 3;
-const MAX_IMAGE_KB = 450;
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let currentUser = null;
+
+let allProducts = [];
+
+let myProfile = null;
+
+let searchTerm = "";
+
+let selectedCategory = "";
+
+let selectedRegion = "";
+
+let viewMode = "all";
+
+let editingProductId = null;
+
+let pendingImages = [];
+
+let myNotifications = [];
+
+let myConversations = [];
+
+let currentSeller = null;
+
+let unsubProfile = null;
+
+let unsubNotifications = null;
+
+let unsubInbox = null;
+
+let unsubChatMsgs = null;
+
+let currentConvoId = null;
+
+let currentAcctTab = "profile";
+
+const viewedThisSession = new Set();
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const authArea =
+  document.getElementById("authArea");
+
+const drawer =
+  document.getElementById("drawer");
+
+const infoDrawer =
+  document.getElementById("infoDrawer");
+
+const sellerDrawer =
+  document.getElementById("sellerDrawer");
+
+const accountDrawer =
+  document.getElementById("accountDrawer");
+
+const inboxDrawer =
+  document.getElementById("inboxDrawer");
+
+const chatDrawer =
+  document.getElementById("chatDrawer");
+
+const overlay =
+  document.getElementById("overlay");
+
+const allPanels = [
+
+  drawer,
+  infoDrawer,
+  sellerDrawer,
+  accountDrawer,
+  inboxDrawer,
+  chatDrawer
+
+];
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+function applyDarkMode(){
+
+  const enabled =
+    localStorage.getItem("soko_dark_mode") === "on";
+
+  document.body.classList.toggle(
+    "dark-mode",
+    enabled
+  );
+
+}
+
+applyDarkMode();
+
+
+function toggleDarkMode(){
+
+  const enabled =
+    document.body.classList.toggle("dark-mode");
+
+  localStorage.setItem(
+    "soko_dark_mode",
+    enabled ? "on" : "off"
+  );
+
+}
+
+
+/* =========================================================
+   DRAWERS
+   ========================================================= */
+
+function openPanel(panel){
+
+  allPanels.forEach(p =>
+    p.classList.remove("open")
+  );
+
+  panel.classList.add("open");
+
+  overlay.classList.add("open");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeAllPanels(){
+
+  allPanels.forEach(p =>
+    p.classList.remove("open")
+  );
+
+  overlay.classList.remove("open");
+
+  document.body.style.overflow = "";
+
+}
+
+
+overlay.addEventListener(
+  "click",
+  closeAllPanels
+);
+
+
+document
+  .querySelectorAll("[data-close]")
+  .forEach(btn =>
+    btn.addEventListener(
+      "click",
+      closeAllPanels
+    )
+  );
 
 
 /* =========================================================
    IMAGE COMPRESSION
-========================================================= */
+   ========================================================= */
+
+const MAX_IMAGE_KB = 450;
+
 
 function compressImage(
   file,
-  maxDim=900,
-  startQuality=.75
+  maxDim = 900,
+  quality = .75
 ){
 
   return new Promise((resolve,reject)=>{
 
-    const reader = new FileReader();
+    const reader =
+      new FileReader();
 
-    reader.onerror = () =>
-      reject(new Error("Imeshindikana kusoma picha"));
+    reader.onerror =
+      () => reject(
+        new Error("Imeshindikana kusoma picha")
+      );
 
     reader.onload = e => {
 
-      const img = new Image();
+      const img =
+        new Image();
 
-      img.onerror = () =>
-        reject(new Error("Picha si sahihi"));
+      img.onerror =
+        () => reject(
+          new Error("Picha si sahihi")
+        );
 
-      img.onload = () => {
+      img.onload = ()=>{
 
         let width = img.width;
+
         let height = img.height;
 
         if(width > height && width > maxDim){
 
           height =
             Math.round(
-              height * (maxDim / width)
+              height * maxDim / width
             );
 
           width = maxDim;
 
-        }else if(height > maxDim){
+        }
+        else if(height > maxDim){
 
           width =
             Math.round(
-              width * (maxDim / height)
+              width * maxDim / height
             );
 
           height = maxDim;
 
         }
 
+
         const canvas =
           document.createElement("canvas");
 
         canvas.width = width;
+
         canvas.height = height;
 
         canvas
@@ -1481,29 +1566,32 @@ function compressImage(
             height
           );
 
-        let quality = startQuality;
+
+        let q = quality;
 
         let dataUrl =
           canvas.toDataURL(
             "image/jpeg",
-            quality
+            q
           );
 
+
         while(
-          dataUrl.length * .75 / 1024 > MAX_IMAGE_KB
-          &&
-          quality > .25
+          dataUrl.length * .75 / 1024 >
+          MAX_IMAGE_KB &&
+          q > .3
         ){
 
-          quality -= .1;
+          q -= .08;
 
           dataUrl =
             canvas.toDataURL(
               "image/jpeg",
-              quality
+              q
             );
 
         }
+
 
         resolve(dataUrl);
 
@@ -1521,119 +1609,102 @@ function compressImage(
 
 
 /* =========================================================
-   STATE
-========================================================= */
-
-let currentUser = null;
-
-let allProducts = [];
-
-let searchTerm = "";
-
-let viewMode = "all";
-
-let recentOnly = false;
-
-let myProfile = null;
-
-let unsubProfile = null;
-
-let myNotifications = [];
-
-let unsubNotifications = null;
-
-let myConversations = [];
-
-let unsubInbox = null;
-
-let unsubChatMsgs = null;
-
-let currentConvoId = null;
-
-let currentAcctTab = "profile";
-
-let editingProductId = null;
-
-let pendingImageData = [];
-
-let profileEditing = false;
-
-const viewedThisSession = new Set();
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const authArea =
-  document.getElementById("authArea");
-
-const drawer =
-  document.getElementById("drawer");
-
-const infoDrawer =
-  document.getElementById("infoDrawer");
-
-const accountDrawer =
-  document.getElementById("accountDrawer");
-
-const sellerDrawer =
-  document.getElementById("sellerDrawer");
-
-const inboxDrawer =
-  document.getElementById("inboxDrawer");
-
-const chatDrawer =
-  document.getElementById("chatDrawer");
-
-const overlay =
-  document.getElementById("overlay");
-
-const allPanels = [
-
-  drawer,
-  infoDrawer,
-  accountDrawer,
-  sellerDrawer,
-  inboxDrawer,
-  chatDrawer
-
-];
-
-
-/* =========================================================
-   DARK MODE
-========================================================= */
-
-const savedTheme =
-  localStorage.getItem("soko_theme");
-
-if(savedTheme === "dark"){
-
-  document.body.classList.add(
-    "dark-mode"
-  );
-
-}
+   MULTIPLE IMAGES
+   MAXIMUM = 3
+   ========================================================= */
 
 document
-  .getElementById("darkModeBtn")
-  ?.addEventListener(
-    "click",
-    () => {
+  .getElementById("pImages")
+  .addEventListener(
+    "change",
+    async e => {
 
-      document.body.classList.toggle(
-        "dark-mode"
-      );
+      const files =
+        Array.from(e.target.files || []);
 
-      localStorage.setItem(
-        "soko_theme",
-        document.body.classList.contains(
-          "dark-mode"
-        )
-        ? "dark"
-        : "light"
-      );
+      if(files.length > 3){
+
+        alert(
+          "Unaweza kuweka picha 1, 2 au 3 tu."
+        );
+
+        e.target.value = "";
+
+        return;
+
+      }
+
+
+      pendingImages = [];
+
+      const preview =
+        document.getElementById(
+          "multiImagePreview"
+        );
+
+      preview.innerHTML = "";
+
+
+      for(const file of files){
+
+        try{
+
+          const compressed =
+            await compressImage(file);
+
+          pendingImages.push(
+            compressed
+          );
+
+          const item =
+            document.createElement("div");
+
+          item.className =
+            "multi-image-item";
+
+          item.innerHTML = `
+
+            <img src="${compressed}">
+
+            <button
+              class="remove-photo"
+              type="button">
+              ✕
+            </button>
+
+          `;
+
+          item
+            .querySelector(".remove-photo")
+            .addEventListener(
+              "click",
+              ()=>{
+                const index =
+                  pendingImages.indexOf(
+                    compressed
+                  );
+
+                if(index >= 0)
+                  pendingImages.splice(
+                    index,
+                    1
+                  );
+
+                item.remove();
+
+              }
+            );
+
+          preview.appendChild(item);
+
+        }
+        catch(err){
+
+          console.error(err);
+
+        }
+
+      }
 
     }
   );
@@ -1641,13 +1712,14 @@ document
 
 /* =========================================================
    AUTH
-========================================================= */
+   ========================================================= */
 
 onAuthStateChanged(
   auth,
-  async user => {
+  user => {
 
     currentUser = user;
+
 
     if(user){
 
@@ -1657,25 +1729,13 @@ onAuthStateChanged(
         "Mtumiaji";
 
       const initial =
-        label.trim()
+        label
+          .trim()
           .charAt(0)
           .toUpperCase();
 
-      authArea.innerHTML = `
 
-        <button
-          class="icon-btn"
-          id="darkModeBtn2"
-          type="button"
-        >
-          ${
-            document.body.classList.contains(
-              "dark-mode"
-            )
-            ? "☀️"
-            : "🌙"
-          }
-        </button>
+      authArea.innerHTML = `
 
         <div class="user-chip">
 
@@ -1692,43 +1752,27 @@ onAuthStateChanged(
         </div>
 
         <button
+          class="dark-toggle"
+          id="darkModeBtn"
+          title="Dark mode">
+          🌙
+        </button>
+
+        <button
           class="icon-btn"
           id="logoutBtn"
-          title="Toka"
-        >
+          title="Toka">
           ⎋
         </button>
 
       `;
-
-      document
-        .getElementById("darkModeBtn2")
-        .addEventListener(
-          "click",
-          () => {
-
-            document.body.classList.toggle(
-              "dark-mode"
-            );
-
-            localStorage.setItem(
-              "soko_theme",
-              document.body.classList.contains(
-                "dark-mode"
-              )
-              ? "dark"
-              : "light"
-            );
-
-          }
-        );
 
 
       document
         .getElementById("logoutBtn")
         .addEventListener(
           "click",
-          async () => {
+          async ()=>{
 
             await signOut(auth);
 
@@ -1742,7 +1786,13 @@ onAuthStateChanged(
         );
 
 
-      await ensureUserProfile();
+      document
+        .getElementById("darkModeBtn")
+        .addEventListener(
+          "click",
+          toggleDarkMode
+        );
+
 
       startProfileListener();
 
@@ -1750,47 +1800,32 @@ onAuthStateChanged(
 
       startInboxListener();
 
-    }else{
+    }
+    else{
 
       authArea.innerHTML = `
 
-        <button
-          class="icon-btn"
-          id="darkModeBtn3"
-          type="button"
-        >
-          🌙
-        </button>
-
         <a
           class="login-btn"
-          href="login.html"
-        >
+          href="login.html">
           Ingia
         </a>
 
+        <button
+          class="dark-toggle"
+          id="darkModeBtn"
+          title="Dark mode">
+          🌙
+        </button>
+
       `;
 
+
       document
-        .getElementById("darkModeBtn3")
+        .getElementById("darkModeBtn")
         .addEventListener(
           "click",
-          () => {
-
-            document.body.classList.toggle(
-              "dark-mode"
-            );
-
-            localStorage.setItem(
-              "soko_theme",
-              document.body.classList.contains(
-                "dark-mode"
-              )
-              ? "dark"
-              : "light"
-            );
-
-          }
+          toggleDarkMode
         );
 
 
@@ -1800,117 +1835,25 @@ onAuthStateChanged(
 
       stopInboxListener();
 
-    }
+      myProfile = null;
 
-    render();
+      render();
+
+    }
 
   }
 );
 
 
 /* =========================================================
-   ENSURE PROFILE
-========================================================= */
-
-async function ensureUserProfile(){
-
-  if(!currentUser) return;
-
-  const ref =
-    doc(
-      db,
-      "users",
-      currentUser.uid
-    );
-
-  const snap =
-    await getDoc(ref);
-
-  if(!snap.exists()){
-
-    await setDoc(
-      ref,
-      {
-
-        name:
-          currentUser.displayName || "",
-
-        email:
-          currentUser.email || "",
-
-        username:"",
-        phone:"",
-        photoBase64:"",
-
-        region:"",
-        location:"",
-
-        favorites:[],
-        publicFavorites:[],
-
-        createdAt:
-          serverTimestamp()
-
-      },
-      {merge:true}
-    );
-
-  }else{
-
-    const data = snap.data();
-
-    const updates = {};
-
-    if(!data.createdAt){
-
-      updates.createdAt =
-        serverTimestamp();
-
-    }
-
-    if(
-      !Array.isArray(
-        data.favorites
-      )
-    ){
-
-      updates.favorites = [];
-
-    }
-
-    if(
-      !Array.isArray(
-        data.publicFavorites
-      )
-    ){
-
-      updates.publicFavorites = [];
-
-    }
-
-    if(Object.keys(updates).length){
-
-      await setDoc(
-        ref,
-        updates,
-        {merge:true}
-      );
-
-    }
-
-  }
-
-}
-
-
-/* =========================================================
    PROFILE LISTENER
-========================================================= */
+   ========================================================= */
 
 function startProfileListener(){
 
   if(unsubProfile)
     unsubProfile();
+
 
   unsubProfile =
     onSnapshot(
@@ -1919,16 +1862,17 @@ function startProfileListener(){
         "users",
         currentUser.uid
       ),
+
       snap => {
 
         myProfile =
           snap.exists()
-          ? snap.data()
-          : {};
+            ? snap.data()
+            : {};
 
         render();
 
-        renderOwnerChoices();
+        renderMainChoice();
 
         if(
           accountDrawer.classList.contains(
@@ -1942,7 +1886,14 @@ function startProfileListener(){
 
         }
 
-      }
+      },
+
+      err =>
+        console.error(
+          "profile listener",
+          err
+        )
+
     );
 
 }
@@ -1964,3230 +1915,8 @@ function stopProfileListener(){
 
 
 /* =========================================================
-   DATE
-========================================================= */
-
-function formatDate(timestamp){
-
-  if(
-    !timestamp ||
-    !timestamp.toDate
-  ){
-
-    return "Tarehe haijawekwa";
-
-  }
-
-  return timestamp
-    .toDate()
-    .toLocaleDateString(
-      "sw-TZ",
-      {
-        day:"numeric",
-        month:"long",
-        year:"numeric"
-      }
-    );
-
-}
-
-
-function timestampMs(timestamp){
-
-  return timestamp &&
-    timestamp.toMillis
-    ? timestamp.toMillis()
-    : 0;
-
-}
-
-
-/* =========================================================
-   DRAWERS
-========================================================= */
-
-function openPanel(panel){
-
-  allPanels.forEach(
-    p => p.classList.remove("open")
-  );
-
-  panel.classList.add("open");
-
-  overlay.classList.add("open");
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
-
-function closeAllPanels(){
-
-  allPanels.forEach(
-    p => p.classList.remove("open")
-  );
-
-  overlay.classList.remove("open");
-
-  document.body.style.overflow = "";
-
-}
-
-
-overlay.addEventListener(
-  "click",
-  closeAllPanels
-);
-
-
-document
-  .querySelectorAll("[data-close]")
-  .forEach(
-    btn =>
-      btn.addEventListener(
-        "click",
-        closeAllPanels
-      )
-  );
-
-
-/* =========================================================
-   ADD PRODUCT DRAWER
-========================================================= */
-
-function resetProductForm(){
-
-  editingProductId = null;
-
-  document
-    .getElementById(
-      "productDrawerTitle"
-    )
-    .textContent =
-      "Posti Bidhaa Yako";
-
-  document
-    .getElementById("addProduct")
-    .textContent =
-      "Chapisha Bidhaa";
-
-  document
-    .getElementById("pCategory")
-    .value =
-      "nyingine";
-
-  [
-    "pName",
-    "pPrice",
-    "pDesc",
-    "pRegion",
-    "pLocation",
-    "pPhone"
-  ].forEach(id => {
-
-    document.getElementById(id).value = "";
-
-  });
-
-  document
-    .getElementById("pImage")
-    .value = "";
-
-  document
-    .getElementById(
-      "pImagePreview"
-    )
-    .innerHTML = "";
-
-  document
-    .getElementById(
-      "fileLabel"
-    )
-    .textContent =
-      "Chagua picha 1 hadi 3";
-
-  pendingImageData = [];
-
-}
-
-
-function openDrawer(){
-
-  if(!currentUser){
-
-    window.location.href =
-      "login.html";
-
-    return;
-
-  }
-
-  resetProductForm();
-
-  openPanel(drawer);
-
-}
-
-
-document
-  .getElementById(
-    "fabAdd"
-  )
-  .addEventListener(
-    "click",
-    openDrawer
-  );
-
-
-window.openEditProduct =
-  id => {
-
-    const p =
-      allProducts.find(
-        x => x.id === id
-      );
-
-    if(
-      !p ||
-      !currentUser ||
-      p.ownerUid !== currentUser.uid
-    ) return;
-
-
-    editingProductId = id;
-
-
-    document
-      .getElementById(
-        "productDrawerTitle"
-      )
-      .textContent =
-        "Hariri Bidhaa";
-
-
-    document
-      .getElementById(
-        "addProduct"
-      )
-      .textContent =
-        "Hifadhi Mabadiliko";
-
-
-    document
-      .getElementById(
-        "pCategory"
-      )
-      .value =
-        p.category || "nyingine";
-
-
-    document
-      .getElementById("pName")
-      .value =
-        p.name || "";
-
-
-    document
-      .getElementById("pPrice")
-      .value =
-        p.price || "";
-
-
-    document
-      .getElementById("pDesc")
-      .value =
-        p.desc || "";
-
-
-    document
-      .getElementById("pRegion")
-      .value =
-        p.region || "";
-
-
-    document
-      .getElementById("pLocation")
-      .value =
-        p.location || "";
-
-
-    document
-      .getElementById("pPhone")
-      .value =
-        p.phone || "";
-
-
-    const images =
-      Array.isArray(p.images)
-      ? p.images
-      : p.imageUrl
-      ? [p.imageUrl]
-      : [];
-
-
-    pendingImageData =
-      [...images];
-
-
-    renderImagePreview();
-
-
-    document
-      .getElementById(
-        "fileLabel"
-      )
-      .textContent =
-        images.length
-        ? `${images.length} picha`
-        : "Chagua picha 1 hadi 3";
-
-
-    openPanel(drawer);
-
-  };
-
-
-/* =========================================================
-   IMAGE SELECT
-========================================================= */
-
-document
-  .getElementById("pImage")
-  .addEventListener(
-    "change",
-    async e => {
-
-      const files =
-        Array.from(
-          e.target.files || []
-        );
-
-      if(!files.length)
-        return;
-
-
-      if(files.length > MAX_IMAGES){
-
-        alert(
-          "Unaweza kuweka picha 1 hadi 3 tu."
-        );
-
-        e.target.value = "";
-
-        return;
-
-      }
-
-
-      pendingImageData = [];
-
-      renderImagePreview();
-
-
-      document
-        .getElementById(
-          "fileLabel"
-        )
-        .textContent =
-          "Inabana picha...";
-
-
-      try{
-
-        for(
-          const file of files
-        ){
-
-          const compressed =
-            await compressImage(
-              file
-            );
-
-          pendingImageData.push(
-            compressed
-          );
-
-        }
-
-
-        renderImagePreview();
-
-
-        document
-          .getElementById(
-            "fileLabel"
-          )
-          .textContent =
-            `${pendingImageData.length} picha zimechaguliwa`;
-
-      }catch(err){
-
-        console.error(err);
-
-        pendingImageData = [];
-
-        alert(
-          "Imeshindikana kusoma picha."
-        );
-
-      }
-
-    }
-  );
-
-
-function renderImagePreview(){
-
-  const box =
-    document.getElementById(
-      "pImagePreview"
-    );
-
-  box.innerHTML = "";
-
-
-  pendingImageData
-    .slice(0,MAX_IMAGES)
-    .forEach(
-      (src,index) => {
-
-        const item =
-          document.createElement(
-            "div"
-          );
-
-        item.className =
-          "image-preview-item";
-
-        item.innerHTML = `
-
-          <img src="${src}">
-
-          <span class="image-number">
-            ${index+1}
-          </span>
-
-        `;
-
-        box.appendChild(item);
-
-      }
-    );
-
-}
-
-
-/* =========================================================
-   SAVE PRODUCT
-========================================================= */
-
-document
-  .getElementById("addProduct")
-  .addEventListener(
-    "click",
-    async () => {
-
-      if(!currentUser){
-
-        window.location.href =
-          "login.html";
-
-        return;
-
-      }
-
-
-      const category =
-        document.getElementById(
-          "pCategory"
-        ).value;
-
-
-      const name =
-        document.getElementById(
-          "pName"
-        ).value.trim();
-
-
-      const price =
-        document.getElementById(
-          "pPrice"
-        ).value.trim();
-
-
-      const desc =
-        document.getElementById(
-          "pDesc"
-        ).value.trim();
-
-
-      const region =
-        document.getElementById(
-          "pRegion"
-        ).value.trim();
-
-
-      const location =
-        document.getElementById(
-          "pLocation"
-        ).value.trim();
-
-
-      const phone =
-        document.getElementById(
-          "pPhone"
-        ).value
-        .trim()
-        .replace(/\D/g,"");
-
-
-      if(
-        !name ||
-        !price ||
-        !phone ||
-        !region ||
-        !location
-      ){
-
-        alert(
-          "Tafadhali jaza jina, bei, WhatsApp, mkoa na location."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        pendingImageData.length < 1 ||
-        pendingImageData.length > 3
-      ){
-
-        alert(
-          "Chagua picha moja, mbili au tatu."
-        );
-
-        return;
-
-      }
-
-
-      const btn =
-        document.getElementById(
-          "addProduct"
-        );
-
-      btn.disabled = true;
-
-      btn.textContent =
-        editingProductId
-        ? "Inahifadhi..."
-        : "Inachapisha...";
-
-
-      try{
-
-        if(editingProductId){
-
-          await updateDoc(
-            doc(
-              db,
-              "products",
-              editingProductId
-            ),
-            {
-
-              category,
-              name,
-              price,
-              desc,
-              region,
-              location,
-              phone,
-
-              images:
-                pendingImageData,
-
-              imageUrl:
-                pendingImageData[0]
-
-            }
-          );
-
-
-        }else{
-
-          await addDoc(
-            collection(
-              db,
-              "products"
-            ),
-            {
-
-              category,
-              name,
-              price,
-              desc,
-              region,
-              location,
-              phone,
-
-              images:
-                pendingImageData,
-
-              imageUrl:
-                pendingImageData[0],
-
-              ownerUid:
-                currentUser.uid,
-
-              ownerName:
-                currentUser.displayName ||
-                currentUser.email ||
-                "Muuzaji",
-
-              ownerEmail:
-                currentUser.email || "",
-
-              sold:false,
-
-              views:0,
-
-              createdAt:
-                serverTimestamp()
-
-            }
-          );
-
-        }
-
-
-        resetProductForm();
-
-        closeAllPanels();
-
-
-      }catch(err){
-
-        console.error(err);
-
-        alert(
-          "Samahani, imeshindikana kuhifadhi bidhaa."
-        );
-
-      }finally{
-
-        btn.disabled = false;
-
-        btn.textContent =
-          editingProductId
-          ? "Hifadhi Mabadiliko"
-          : "Chapisha Bidhaa";
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   DELETE
-========================================================= */
-
-window.removeProduct =
-  async id => {
-
-    if(
-      !confirm(
-        "Una uhakika unataka kuondoa bidhaa hii?"
-      )
-    ) return;
-
-
-    try{
-
-      await deleteDoc(
-        doc(
-          db,
-          "products",
-          id
-        )
-      );
-
-    }catch(err){
-
-      console.error(err);
-
-      alert(
-        "Imeshindikana kuondoa bidhaa."
-      );
-
-    }
-
-  };
-
-
-/* =========================================================
-   SOLD
-========================================================= */
-
-window.toggleSold =
-  async id => {
-
-    const p =
-      allProducts.find(
-        x => x.id === id
-      );
-
-    if(
-      !p ||
-      !currentUser ||
-      p.ownerUid !== currentUser.uid
-    ) return;
-
-
-    try{
-
-      await updateDoc(
-        doc(
-          db,
-          "products",
-          id
-        ),
-        {
-          sold:!p.sold
-        }
-      );
-
-    }catch(err){
-
-      console.error(err);
-
-      alert(
-        "Imeshindikana kubadilisha hali."
-      );
-
-    }
-
-  };
-
-
-/* =========================================================
-   FAVORITES
-========================================================= */
-
-window.toggleFavorite =
-  async id => {
-
-    if(!currentUser){
-
-      window.location.href =
-        "login.html";
-
-      return;
-
-    }
-
-
-    const p =
-      allProducts.find(
-        x => x.id === id
-      );
-
-    if(!p) return;
-
-
-    const isOwner =
-      currentUser.email
-        ?.toLowerCase() ===
-      OWNER_EMAIL;
-
-
-    const userRef =
-      doc(
-        db,
-        "users",
-        currentUser.uid
-      );
-
-
-    try{
-
-      if(isOwner){
-
-        const current =
-          Array.isArray(
-            myProfile?.publicFavorites
-          )
-          ? myProfile.publicFavorites
-          : [];
-
-
-        const isFav =
-          current.includes(id);
-
-
-        await setDoc(
-          userRef,
-          {
-
-            publicFavorites:
-              isFav
-              ? arrayRemove(id)
-              : arrayUnion(id)
-
-          },
-          {merge:true}
-        );
-
-
-      }else{
-
-        const current =
-          Array.isArray(
-            myProfile?.favorites
-          )
-          ? myProfile.favorites
-          : [];
-
-
-        const isFav =
-          current.includes(id);
-
-
-        await setDoc(
-          userRef,
-          {
-
-            favorites:
-              isFav
-              ? arrayRemove(id)
-              : arrayUnion(id)
-
-          },
-          {merge:true}
-        );
-
-
-        if(
-          !isFav &&
-          p.ownerUid !== currentUser.uid
-        ){
-
-          addDoc(
-            collection(
-              db,
-              "notifications"
-            ),
-            {
-
-              toUid:p.ownerUid,
-
-              fromUid:
-                currentUser.uid,
-
-              type:"favorite",
-
-              productId:id,
-
-              productName:
-                p.name,
-
-              fromName:
-                currentUser.displayName ||
-                currentUser.email ||
-                "Mtumiaji",
-
-              read:false,
-
-              createdAt:
-                serverTimestamp()
-
-            }
-          ).catch(
-            () => {}
-          );
-
-        }
-
-      }
-
-    }catch(err){
-
-      console.error(err);
-
-      alert(
-        "Imeshindikana kuhifadhi Pendwa."
-      );
-
-    }
-
-  };
-
-
-/* =========================================================
-   OWNER CHOICE
-========================================================= */
-
-function renderOwnerChoices(){
-
-  const section =
-    document.getElementById(
-      "ownerChoiceSection"
-    );
-
-  const grid =
-    document.getElementById(
-      "ownerChoiceGrid"
-    );
-
-
-  const owner =
-    allProducts.filter(
-      p =>
-        Array.isArray(
-          myProfile?.publicFavorites
-        )
-        &&
-        myProfile.publicFavorites
-          .includes(p.id)
-    );
-
-
-  if(!owner.length){
-
-    section.style.display =
-      "none";
-
-    grid.innerHTML = "";
-
-    return;
-
-  }
-
-
-  section.style.display =
-    "block";
-
-
-  grid.innerHTML =
-    owner.map(
-      p => {
-
-        const image =
-          (
-            Array.isArray(p.images)
-            ? p.images[0]
-            : p.imageUrl
-          ) || "";
-
-
-        return `
-
-          <div
-            class="owner-fav-card"
-            onclick="scrollToProduct('${p.id}')"
-          >
-
-            ${
-              image
-              ? `<img src="${image}">`
-              : `<div
-                  style="
-                  height:145px;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  background:var(--bg);
-                  color:var(--muted);
-                  "
-                >
-                  HAKUNA PICHA
-                </div>`
-            }
-
-
-            <button
-              class="owner-fav-remove"
-              onclick="
-                event.stopPropagation();
-                toggleFavorite('${p.id}')
-              "
-            >
-              ❤️
-            </button>
-
-
-            <div class="owner-fav-info">
-
-              <b>
-                ${escapeHtml(p.name)}
-              </b>
-
-              <div class="owner-fav-price">
-                TSh
-                ${Number(
-                  p.price
-                ).toLocaleString()}
-              </div>
-
-              <div class="owner-fav-location">
-
-                📍
-                ${escapeHtml(
-                  p.region || ""
-                )}
-                —
-                ${escapeHtml(
-                  p.location || ""
-                )}
-
-              </div>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
-
-}
-
-
-window.scrollToProduct =
-  id => {
-
-    const element =
-      document.querySelector(
-        `[data-product-id="${id}"]`
-      );
-
-    if(element){
-
-      element.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
-
-      element.style.outline =
-        "3px solid var(--primary)";
-
-      setTimeout(
-        () =>
-          element.style.outline =
-            "",
-        1800
-      );
-
-    }
-
-  };
-
-
-/* =========================================================
-   VIEWS
-========================================================= */
-
-function registerView(p){
-
-  if(
-    !currentUser ||
-    !p ||
-    p.ownerUid === currentUser.uid
-  ) return;
-
-
-  if(
-    viewedThisSession
-      .has(p.id)
-  ) return;
-
-
-  viewedThisSession
-    .add(p.id);
-
-
-  updateDoc(
-    doc(
-      db,
-      "products",
-      p.id
-    ),
-    {
-      views:
-        increment(1)
-    }
-  ).catch(
-    () => {}
-  );
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-document
-  .getElementById(
-    "searchInput"
-  )
-  .addEventListener(
-    "input",
-    e => {
-
-      searchTerm =
-        e.target.value
-          .trim()
-          .toLowerCase();
-
-      render();
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "searchBtn"
-  )
-  .addEventListener(
-    "click",
-    render
-  );
-
-
-/* =========================================================
-   TABS
-========================================================= */
-
-document
-  .getElementById(
-    "tabAll"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      viewMode = "all";
-
-      setActiveTab();
-
-      render();
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "tabMine"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(!currentUser){
-
-        window.location.href =
-          "login.html";
-
-        return;
-
-      }
-
-      viewMode = "mine";
-
-      setActiveTab();
-
-      render();
-
-    }
-  );
-
-
-function setActiveTab(){
-
-  document
-    .getElementById(
-      "tabAll"
-    )
-    .classList.toggle(
-      "active",
-      viewMode === "all"
-    );
-
-
-  document
-    .getElementById(
-      "tabMine"
-    )
-    .classList.toggle(
-      "active",
-      viewMode === "mine"
-    );
-
-}
-
-
-/* =========================================================
-   RECENT
-========================================================= */
-
-document
-  .getElementById(
-    "recentBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      recentOnly =
-        !recentOnly;
-
-      document
-        .getElementById(
-          "recentBtn"
-        )
-        .classList.toggle(
-          "active",
-          recentOnly
-        );
-
-      render();
-
-    }
-  );
-
-
-/* =========================================================
-   POWERFUL RENDER
-========================================================= */
-
-function render(){
-
-  let list =
-    [...allProducts];
-
-
-  if(
-    viewMode === "mine" &&
-    currentUser
-  ){
-
-    list =
-      list.filter(
-        p =>
-          p.ownerUid ===
-          currentUser.uid
-      );
-
-  }
-
-
-  if(searchTerm){
-
-    const words =
-      searchTerm
-        .split(/\s+/)
-        .filter(Boolean);
-
-
-    list =
-      list.filter(
-        p => {
-
-          const searchable = [
-
-            p.name,
-            p.desc,
-            p.category,
-            CATEGORIES[p.category],
-            p.region,
-            p.location,
-            p.ownerName,
-            p.ownerEmail,
-            p.phone
-
-          ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-
-
-          return words.every(
-            word =>
-              searchable.includes(
-                word
-              )
-          );
-
-        }
-      );
-
-  }
-
-
-  if(recentOnly){
-
-    list =
-      list
-        .sort(
-          (a,b) =>
-            timestampMs(
-              b.createdAt
-            )
-            -
-            timestampMs(
-              a.createdAt
-            )
-        )
-        .slice(0,30);
-
-  }
-
-
-  document
-    .getElementById(
-      "statCount"
-    )
-    .textContent =
-      `${list.length} bidhaa`;
-
-
-  document
-    .getElementById(
-      "searchInfo"
-    )
-    .textContent =
-      searchTerm
-      ? `🔎 Matokeo ya: "${searchTerm}"`
-      : "";
-
-
-  const grid =
-    document.getElementById(
-      "grid"
-    );
-
-
-  const empty =
-    document.getElementById(
-      "empty"
-    );
-
-
-  if(!list.length){
-
-    empty.style.display =
-      "block";
-
-    grid.innerHTML = "";
-
-    return;
-
-  }
-
-
-  empty.style.display =
-    "none";
-
-
-  grid.innerHTML =
-    list.map(
-      p => {
-
-        const isMine =
-          currentUser &&
-          p.ownerUid ===
-          currentUser.uid;
-
-
-        if(!isMine)
-          registerView(p);
-
-
-        const isOwner =
-          currentUser &&
-          currentUser.email
-            ?.toLowerCase() ===
-          OWNER_EMAIL;
-
-
-        const publicFav =
-          Array.isArray(
-            myProfile?.publicFavorites
-          )
-          &&
-          myProfile.publicFavorites
-            .includes(p.id);
-
-
-        const privateFav =
-          Array.isArray(
-            myProfile?.favorites
-          )
-          &&
-          myProfile.favorites
-            .includes(p.id);
-
-
-        const isFav =
-          isOwner
-          ? publicFav
-          : privateFav;
-
-
-        const images =
-          Array.isArray(p.images)
-          ? p.images
-          : p.imageUrl
-          ? [p.imageUrl]
-          : [];
-
-
-        const image =
-          images[0] || "";
-
-
-        const created =
-          timestampMs(
-            p.createdAt
-          );
-
-
-        const isNew =
-          created &&
-          Date.now() - created <
-          1000*60*60*24*2;
-
-
-        const catLabel =
-          CATEGORIES[
-            p.category
-          ] || "";
-
-
-        let actionsHtml;
-
-
-        if(isMine){
-
-          actionsHtml = `
-
-            <div class="card-actions">
-
-              <button
-                class="owner-btn"
-                onclick="
-                  openEditProduct('${p.id}')
-                "
-              >
-                ✏️ Hariri
-              </button>
-
-              <button
-                class="
-                  owner-btn
-                  ${p.sold ? "active" : ""}
-                "
-                onclick="
-                  toggleSold('${p.id}')
-                "
-              >
-                ${
-                  p.sold
-                  ? "↩️ Rejesha"
-                  : "✅ Imeuzwa"
-                }
-              </button>
-
-              <button
-                class="owner-btn danger"
-                onclick="
-                  removeProduct('${p.id}')
-                "
-              >
-                🗑️
-              </button>
-
-            </div>
-
-          `;
-
-        }else if(p.sold){
-
-          actionsHtml = `
-
-            <div class="card-actions">
-
-              <span class="buy-btn disabled">
-                Bidhaa Imeuzwa
-              </span>
-
-            </div>
-
-          `;
-
-        }else{
-
-          const msg =
-            encodeURIComponent(
-              `Habari, nataka kununua bidhaa: ${p.name} (TSh ${Number(p.price).toLocaleString()})`
-            );
-
-
-          const buyBtn =
-            p.phone
-            ? `
-              <a
-                class="buy-btn"
-                href="
-                  https://wa.me/${p.phone}?text=${msg}
-                "
-                target="_blank"
-                rel="noopener"
-              >
-                Nunua Sasa
-              </a>
-            `
-            : `
-              <span class="buy-btn disabled">
-                Hakuna namba
-              </span>
-            `;
-
-
-          const msgBtn = `
-
-            <button
-              class="msg-btn"
-              onclick="
-                openChatForProduct('${p.id}')
-              "
-            >
-              ✉️ Ujumbe
-            </button>
-
-          `;
-
-
-          actionsHtml = `
-
-            <div class="card-actions">
-
-              ${buyBtn}
-
-              ${msgBtn}
-
-            </div>
-
-          `;
-
-        }
-
-
-        return `
-
-          <div
-            class="card"
-            data-product-id="${p.id}"
-          >
-
-            <div class="card-media">
-
-              ${
-                p.sold
-                ? `<span class="badge-sold">
-                    IMEUZWA
-                  </span>`
-                : isNew
-                ? `<span class="badge-new">
-                    Mpya
-                  </span>`
-                : ""
-              }
-
-
-              <button
-                class="
-                  heart-btn
-                  ${isFav ? "active" : ""}
-                "
-                onclick="
-                  toggleFavorite('${p.id}')
-                "
-                title="Hifadhi Pendwa"
-              >
-                ${
-                  isFav
-                  ? "❤️"
-                  : "🤍"
-                }
-              </button>
-
-
-              ${
-                image
-                ? `
-
-                  <div class="product-gallery">
-
-                    <img
-                      src="${image}"
-                      alt="${escapeHtml(p.name)}"
-                      loading="lazy"
-                    >
-
-                    ${
-                      images.length > 1
-                      ? `
-                        <span class="photo-count">
-                          📷 ${images.length}
-                        </span>
-                      `
-                      : ""
-                    }
-
-                  </div>
-
-                `
-                : `
-                  <div class="no-img">
-                    HAKUNA PICHA
-                  </div>
-                `
-              }
-
-
-              ${
-                isMine
-                ? `
-                  <span class="badge-mine">
-                    Yako
-                  </span>
-                `
-                : ""
-              }
-
-            </div>
-
-
-            <div class="card-body">
-
-              ${
-                catLabel
-                ? `
-                  <div class="cat-tag">
-                    ${catLabel}
-                  </div>
-                `
-                : ""
-              }
-
-
-              <div class="price">
-                TSh
-                ${Number(
-                  p.price
-                ).toLocaleString()}
-              </div>
-
-
-              <div class="title">
-                ${escapeHtml(p.name)}
-              </div>
-
-
-              <div class="product-location">
-
-                📍
-                ${escapeHtml(
-                  p.region || "Mkoa haujawekwa"
-                )}
-
-                ${
-                  p.location
-                  ? ` — ${escapeHtml(p.location)}`
-                  : ""
-                }
-
-              </div>
-
-
-              <div class="posted-date">
-
-                🕐 Imewekwa:
-                ${formatDate(p.createdAt)}
-
-              </div>
-
-
-              <div class="seller-row">
-
-                <button
-                  class="seller-profile-btn"
-                  onclick="
-                    openSellerProfile(
-                      '${p.ownerUid}'
-                    )
-                  "
-                >
-
-                  👤
-                  ${escapeHtml(
-                    p.ownerName ||
-                    "Muuzaji"
-                  )}
-
-                </button>
-
-
-                <span class="views">
-
-                  👁
-                  ${p.views || 0}
-
-                </span>
-
-              </div>
-
-
-              ${actionsHtml}
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
-
-}
-
-
-/* =========================================================
-   REALTIME PRODUCTS
-========================================================= */
-
-const productsQuery =
-  query(
-    collection(
-      db,
-      "products"
-    ),
-    orderBy(
-      "createdAt",
-      "desc"
-    )
-  );
-
-
-onSnapshot(
-  productsQuery,
-  snapshot => {
-
-    document
-      .getElementById(
-        "loading"
-      )
-      .style.display =
-        "none";
-
-
-    allProducts =
-      snapshot.docs.map(
-        d => ({
-          id:d.id,
-          ...d.data()
-        })
-      );
-
-
-    render();
-
-    renderOwnerChoices();
-
-  },
-  err => {
-
-    console.error(err);
-
-    document
-      .getElementById(
-        "loading"
-      )
-      .innerHTML =
-        "Imeshindikana kupakia bidhaa. Angalia Firestore.";
-
-  }
-);
-
-
-/* =========================================================
-   SELLER PROFILE
-========================================================= */
-
-window.openSellerProfile =
-  async uid => {
-
-    if(!uid) return;
-
-
-    const body =
-      document.getElementById(
-        "sellerBody"
-      );
-
-
-    body.innerHTML = `
-
-      <p style="
-        text-align:center;
-        padding:2rem;
-        color:var(--muted);
-      ">
-        Inapakia profile...
-      </p>
-
-    `;
-
-
-    openPanel(
-      sellerDrawer
-    );
-
-
-    try{
-
-      const snap =
-        await getDoc(
-          doc(
-            db,
-            "users",
-            uid
-          )
-        );
-
-
-      const profile =
-        snap.exists()
-        ? snap.data()
-        : {};
-
-
-      const products =
-        allProducts.filter(
-          p =>
-            p.ownerUid === uid
-        );
-
-
-      const name =
-        profile.name ||
-        profile.username ||
-        products[0]?.ownerName ||
-        "Muuzaji";
-
-
-      const photo =
-        profile.photoBase64 ||
-        "";
-
-
-      const location =
-        profile.location ||
-        profile.region ||
-        products[0]?.location ||
-        "Location haijawekwa";
-
-
-      const joined =
-        profile.createdAt;
-
-
-      const totalViews =
-        products.reduce(
-          (sum,p) =>
-            sum +
-            Number(
-              p.views || 0
-            ),
-          0
-        );
-
-
-      body.innerHTML = `
-
-        <div class="seller-profile">
-
-          ${
-            photo
-            ? `
-              <img
-                class="seller-big-avatar"
-                src="${photo}"
-              >
-            `
-            : `
-              <div
-                class="seller-big-avatar"
-              >
-                ${escapeHtml(
-                  name
-                    .charAt(0)
-                    .toUpperCase()
-                )}
-              </div>
-            `
-          }
-
-
-          <h2>
-            ${escapeHtml(name)}
-          </h2>
-
-
-          <div class="seller-location">
-
-            📍
-            ${escapeHtml(location)}
-
-          </div>
-
-
-          <div class="seller-stats">
-
-            <div>
-              <b>
-                ${products.length}
-              </b>
-              <span>
-                Bidhaa
-              </span>
-            </div>
-
-            <div>
-              <b>
-                ${products.filter(
-                  p => p.sold
-                ).length}
-              </b>
-              <span>
-                Zimeuzwa
-              </span>
-            </div>
-
-            <div>
-              <b>
-                ${totalViews}
-              </b>
-              <span>
-                Views
-              </span>
-            </div>
-
-          </div>
-
-
-          <p class="joined-date">
-
-            📅 Amejiunga:
-            ${
-              joined
-              ? formatDate(joined)
-              : "Tarehe haijawekwa"
-            }
-
-          </p>
-
-
-          <h3>
-            Bidhaa za
-            ${escapeHtml(name)}
-          </h3>
-
-
-          <div class="seller-products">
-
-            ${
-              products.length
-
-              ? products.map(
-                  p => {
-
-                    const img =
-                      Array.isArray(
-                        p.images
-                      )
-                      ? p.images[0]
-                      : p.imageUrl;
-
-
-                    return `
-
-                      <div
-                        class="seller-product"
-                        onclick="
-                          closeAllPanels();
-                          scrollToProduct(
-                            '${p.id}'
-                          )
-                        "
-                      >
-
-                        ${
-                          img
-                          ? `
-                            <img
-                              src="${img}"
-                            >
-                          `
-                          : `
-                            <div
-                              class="
-                                seller-product-placeholder
-                              "
-                            >
-                              Hakuna
-                            </div>
-                          `
-                        }
-
-
-                        <div>
-
-                          <b>
-                            ${escapeHtml(
-                              p.name
-                            )}
-                          </b>
-
-                          <div>
-                            TSh
-                            ${Number(
-                              p.price
-                            ).toLocaleString()}
-                          </div>
-
-                          <small>
-                            📍
-                            ${escapeHtml(
-                              p.region || ""
-                            )}
-                          </small>
-
-                          <small>
-                            👁
-                            ${p.views || 0}
-                          </small>
-
-                        </div>
-
-                      </div>
-
-                    `;
-
-                  }
-                ).join("")
-
-              : `
-                <p
-                  style="
-                    color:var(--muted);
-                  "
-                >
-                  Muuzaji bado hana bidhaa.
-                </p>
-              `
-            }
-
-          </div>
-
-        </div>
-
-      `;
-
-    }catch(err){
-
-      console.error(err);
-
-      body.innerHTML = `
-        <p>
-          Imeshindikana kupakia profile.
-        </p>
-      `;
-
-    }
-
-  };
-
-
-document
-  .getElementById(
-    "closeSellerDrawer"
-  )
-  .addEventListener(
-    "click",
-    closeAllPanels
-  );
-
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-const acctTabsEl =
-  document.getElementById(
-    "acctTabs"
-  );
-
-
-document
-  .getElementById(
-    "navAccount"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(!currentUser){
-
-        window.location.href =
-          "login.html";
-
-        return;
-
-      }
-
-      acctTabsEl.style.display =
-        "flex";
-
-      switchAcctTab(
-        "profile"
-      );
-
-      openPanel(
-        accountDrawer
-      );
-
-    }
-  );
-
-
-acctTabsEl.addEventListener(
-  "click",
-  e => {
-
-    const btn =
-      e.target.closest(
-        ".acct-tab"
-      );
-
-    if(btn){
-
-      switchAcctTab(
-        btn.dataset.tab
-      );
-
-    }
-
-  }
-);
-
-
-function switchAcctTab(tab){
-
-  currentAcctTab =
-    tab;
-
-
-  document
-    .querySelectorAll(
-      ".acct-tab"
-    )
-    .forEach(
-      b =>
-        b.classList.toggle(
-          "active",
-          b.dataset.tab === tab
-        )
-    );
-
-
-  renderAccountDrawer(tab);
-
-}
-
-
-function renderAccountDrawer(tab){
-
-  const body =
-    document.getElementById(
-      "accountBody"
-    );
-
-
-  if(!currentUser){
-
-    body.innerHTML = `
-      <p>
-        Ingia ili kuona akaunti yako.
-      </p>
-    `;
-
-    return;
-
-  }
-
-
-  if(tab === "profile")
-    renderProfileTab(body);
-
-  else if(tab === "dashboard")
-    renderDashboardTab(body);
-
-  else if(tab === "listings")
-    renderListingsTab(body);
-
-  else if(tab === "favorites")
-    renderFavoritesTab(body);
-
-  else if(tab === "notifications")
-    renderNotificationsTab(body);
-
-  else if(tab === "settings")
-    renderSettingsTab(body);
-
-}
-
-
-/* =========================================================
-   PROFILE TAB
-========================================================= */
-
-function renderProfileTab(body){
-
-  const displayName =
-    currentUser.displayName ||
-    myProfile?.name ||
-    currentUser.email ||
-    "Mtumiaji";
-
-
-  const initial =
-    displayName
-      .trim()
-      .charAt(0)
-      .toUpperCase();
-
-
-  const username =
-    myProfile?.username || "";
-
-
-  const phone =
-    myProfile?.phone || "";
-
-
-  const photo =
-    myProfile?.photoBase64 || "";
-
-
-  if(!profileEditing){
-
-    body.innerHTML = `
-
-      <div class="profile-head">
-
-        <div class="profile-avatar-wrap">
-
-          ${
-            photo
-            ? `
-              <img
-                class="profile-avatar"
-                src="${photo}"
-              >
-            `
-            : `
-              <div class="profile-avatar">
-                ${initial}
-              </div>
-            `
-          }
-
-        </div>
-
-
-        <div class="profile-name">
-          ${escapeHtml(
-            displayName
-          )}
-        </div>
-
-
-        ${
-          username
-          ? `
-            <div class="profile-username">
-              @${escapeHtml(username)}
-            </div>
-          `
-          : ""
-        }
-
-
-        <div class="profile-meta">
-
-          ${escapeHtml(
-            currentUser.email || ""
-          )}
-
-        </div>
-
-
-        ${
-          phone
-          ? `
-            <div class="profile-meta">
-              📞 ${escapeHtml(phone)}
-            </div>
-          `
-          : ""
-        }
-
-      </div>
-
-
-      <button
-        class="btn-full btn-primary"
-        id="editProfileBtn"
-      >
-        ✏️ Edit Profile
-      </button>
-
-    `;
-
-
-    document
-      .getElementById(
-        "editProfileBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          profileEditing = true;
-
-          renderProfileTab(body);
-
-        }
-      );
-
-
-    return;
-
-  }
-
-
-  body.innerHTML = `
-
-    <div
-      class="profile-head"
-    >
-
-      <div
-        class="profile-avatar-wrap"
-      >
-
-        ${
-          photo
-          ? `
-            <img
-              class="profile-avatar"
-              id="editAvatarImg"
-              src="${photo}"
-            >
-          `
-          : `
-            <div
-              class="profile-avatar"
-              id="editAvatarImg"
-            >
-              ${initial}
-            </div>
-          `
-        }
-
-
-        <label
-          class="profile-avatar-edit"
-          title="Badili picha"
-        >
-
-          ✏️
-
-          <input
-            type="file"
-            accept="image/*"
-            id="avatarInput"
-            style="display:none;"
-          >
-
-        </label>
-
-      </div>
-
-    </div>
-
-
-    <div class="panel-block">
-
-      <div class="field">
-
-        <label>
-          Jina
-        </label>
-
-        <input
-          type="text"
-          id="editName"
-          value="${escapeHtml(
-            displayName
-          )}"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Username
-        </label>
-
-        <input
-          type="text"
-          id="editUsername"
-          value="${escapeHtml(
-            username
-          )}"
-          placeholder="mfano: hermansade"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Mkoa
-        </label>
-
-        <input
-          type="text"
-          id="editRegion"
-          value="${escapeHtml(
-            myProfile?.region || ""
-          )}"
-          placeholder="Mfano: Lindi"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Location
-        </label>
-
-        <input
-          type="text"
-          id="editLocation"
-          value="${escapeHtml(
-            myProfile?.location || ""
-          )}"
-          placeholder="Mfano: Lindi Mjini"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Namba ya Simu
-        </label>
-
-        <input
-          type="tel"
-          id="editPhone"
-          value="${escapeHtml(
-            phone
-          )}"
-        >
-
-      </div>
-
-
-      <button
-        class="btn-full btn-primary"
-        id="saveProfileBtn"
-      >
-        Hifadhi
-      </button>
-
-
-      <button
-        class="btn-full"
-        id="cancelProfileBtn"
-        style="
-          background:var(--bg);
-          color:var(--muted);
-          margin-top:8px;
-        "
-      >
-        Ghairi
-      </button>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById(
-      "avatarInput"
-    )
-    .addEventListener(
-      "change",
-      async e => {
-
-        const file =
-          e.target.files[0];
-
-        if(!file) return;
-
-
-        try{
-
-          const compressed =
-            await compressImage(
-              file,
-              320,
-              .8
-            );
-
-
-          document
-            .getElementById(
-              "editAvatarImg"
-            )
-            .outerHTML = `
-
-              <img
-                class="profile-avatar"
-                id="editAvatarImg"
-                src="${compressed}"
-              >
-
-            `;
-
-
-          e.target.dataset.pending =
-            compressed;
-
-
-        }catch(err){
-
-          console.error(err);
-
-          alert(
-            "Imeshindikana kusoma picha."
-          );
-
-        }
-
-      }
-    );
-
-
-  document
-    .getElementById(
-      "cancelProfileBtn"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        profileEditing = false;
-
-        renderProfileTab(body);
-
-      }
-    );
-
-
-  document
-    .getElementById(
-      "saveProfileBtn"
-    )
-    .addEventListener(
-      "click",
-      async () => {
-
-        const btn =
-          document.getElementById(
-            "saveProfileBtn"
-          );
-
-        btn.disabled = true;
-
-        btn.textContent =
-          "Inahifadhi...";
-
-
-        try{
-
-          const newName =
-            document
-              .getElementById(
-                "editName"
-              )
-              .value
-              .trim();
-
-
-          const newUsername =
-            document
-              .getElementById(
-                "editUsername"
-              )
-              .value
-              .trim()
-              .replace(
-                /\s+/g,
-                ""
-              )
-              .toLowerCase();
-
-
-          const newRegion =
-            document
-              .getElementById(
-                "editRegion"
-              )
-              .value
-              .trim();
-
-
-          const newLocation =
-            document
-              .getElementById(
-                "editLocation"
-              )
-              .value
-              .trim();
-
-
-          const newPhone =
-            document
-              .getElementById(
-                "editPhone"
-              )
-              .value
-              .trim();
-
-
-          const pendingAvatar =
-            document
-              .getElementById(
-                "avatarInput"
-              )
-              .dataset
-              .pending;
-
-
-          if(
-            newName &&
-            newName !==
-            currentUser.displayName
-          ){
-
-            await updateProfile(
-              currentUser,
-              {
-                displayName:newName
-              }
-            );
-
-          }
-
-
-          const data = {
-
-            name:newName,
-
-            username:newUsername,
-
-            region:newRegion,
-
-            location:newLocation,
-
-            phone:newPhone
-
-          };
-
-
-          if(pendingAvatar){
-
-            data.photoBase64 =
-              pendingAvatar;
-
-          }
-
-
-          await setDoc(
-            doc(
-              db,
-              "users",
-              currentUser.uid
-            ),
-            data,
-            {merge:true}
-          );
-
-
-          profileEditing = false;
-
-          renderProfileTab(body);
-
-
-        }catch(err){
-
-          console.error(err);
-
-          alert(
-            "Imeshindikana kuhifadhi profile."
-          );
-
-        }finally{
-
-          btn.disabled = false;
-
-          btn.textContent =
-            "Hifadhi";
-
-        }
-
-      }
-    );
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function renderDashboardTab(body){
-
-  const mine =
-    allProducts.filter(
-      p =>
-        p.ownerUid ===
-        currentUser.uid
-    );
-
-
-  const views =
-    mine.reduce(
-      (sum,p) =>
-        sum +
-        Number(
-          p.views || 0
-        ),
-      0
-    );
-
-
-  const sold =
-    mine.filter(
-      p => p.sold
-    ).length;
-
-
-  const active =
-    mine.filter(
-      p => !p.sold
-    ).length;
-
-
-  const recent =
-    [...mine]
-      .sort(
-        (a,b) =>
-          timestampMs(
-            b.createdAt
-          )
-          -
-          timestampMs(
-            a.createdAt
-          )
-      )
-      .slice(0,5);
-
-
-  body.innerHTML = `
-
-    <div class="dashboard-grid">
-
-      <div class="dashboard-card">
-
-        <span>📦</span>
-
-        <b>
-          ${mine.length}
-        </b>
-
-        <small>
-          Bidhaa Zote
-        </small>
-
-      </div>
-
-
-      <div class="dashboard-card">
-
-        <span>👁️</span>
-
-        <b>
-          ${views}
-        </b>
-
-        <small>
-          Product Views
-        </small>
-
-      </div>
-
-
-      <div class="dashboard-card">
-
-        <span>🟢</span>
-
-        <b>
-          ${active}
-        </b>
-
-        <small>
-          Zilizo Hai
-        </small>
-
-      </div>
-
-
-      <div class="dashboard-card">
-
-        <span>✅</span>
-
-        <b>
-          ${sold}
-        </b>
-
-        <small>
-          Zimeuzwa
-        </small>
-
-      </div>
-
-    </div>
-
-
-    <h3>
-      🕐 Recently Added
-    </h3>
-
-
-    ${
-      recent.length
-
-      ? recent.map(
-          p => {
-
-            const img =
-              Array.isArray(
-                p.images
-              )
-              ? p.images[0]
-              : p.imageUrl;
-
-
-            return `
-
-              <div
-                class="dashboard-product"
-              >
-
-                ${
-                  img
-                  ? `
-                    <img
-                      src="${img}"
-                    >
-                  `
-                  : ""
-                }
-
-
-                <div>
-
-                  <b>
-                    ${escapeHtml(
-                      p.name
-                    )}
-                  </b>
-
-                  <small>
-                    TSh
-                    ${Number(
-                      p.price
-                    ).toLocaleString()}
-                  </small>
-
-                  <small>
-                    👁
-                    ${p.views || 0}
-                    views
-                  </small>
-
-                  <small>
-                    📍
-                    ${escapeHtml(
-                      p.region || ""
-                    )}
-                  </small>
-
-                </div>
-
-              </div>
-
-            `;
-
-          }
-        ).join("")
-
-      : `
-        <p
-          style="
-          color:var(--muted);
-          "
-        >
-          Bado hujaposti bidhaa.
-        </p>
-      `
-    }
-
-  `;
-
-}
-
-
-/* =========================================================
-   LISTINGS
-========================================================= */
-
-function renderListingsTab(body){
-
-  const mine =
-    allProducts.filter(
-      p =>
-        p.ownerUid ===
-        currentUser.uid
-    );
-
-
-  if(!mine.length){
-
-    body.innerHTML = `
-      <p
-        style="
-        text-align:center;
-        color:var(--muted);
-        padding:2rem;
-        "
-      >
-        Bado hujaposti bidhaa.
-      </p>
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    mine.map(
-      p => {
-
-        const img =
-          Array.isArray(
-            p.images
-          )
-          ? p.images[0]
-          : p.imageUrl;
-
-
-        return `
-
-          <div class="listing-row">
-
-            ${
-              img
-              ? `
-                <img
-                  class="listing-thumb"
-                  src="${img}"
-                >
-              `
-              : `
-                <div
-                  class="listing-thumb"
-                >
-                  Hakuna
-                </div>
-              `
-            }
-
-
-            <div class="listing-info">
-
-              <div class="listing-name">
-
-                ${escapeHtml(
-                  p.name
-                )}
-
-                ${
-                  p.sold
-                  ? `
-                    <span
-                      style="
-                      color:var(--danger);
-                      "
-                    >
-                      (Imeuzwa)
-                    </span>
-                  `
-                  : ""
-                }
-
-              </div>
-
-
-              <div class="listing-meta">
-
-                <span>
-                  TSh
-                  ${Number(
-                    p.price
-                  ).toLocaleString()}
-                </span>
-
-                <span>
-                  👁
-                  ${p.views || 0}
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div
-              class="listing-actions"
-            >
-
-              <button
-                class="icon-sq"
-                onclick="
-                  openEditProduct(
-                    '${p.id}'
-                  )
-                "
-              >
-                ✏️
-              </button>
-
-              <button
-                class="icon-sq"
-                onclick="
-                  toggleSold(
-                    '${p.id}'
-                  )
-                "
-              >
-                ${
-                  p.sold
-                  ? "↩️"
-                  : "✅"
-                }
-              </button>
-
-              <button
-                class="icon-sq"
-                onclick="
-                  removeProduct(
-                    '${p.id}'
-                  )
-                "
-              >
-                🗑️
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
-
-}
-
-
-/* =========================================================
-   PRIVATE FAVORITES
-========================================================= */
-
-function renderFavoritesTab(body){
-
-  const ids =
-    Array.isArray(
-      myProfile?.favorites
-    )
-    ? myProfile.favorites
-    : [];
-
-
-  const favs =
-    allProducts.filter(
-      p =>
-        ids.includes(p.id)
-    );
-
-
-  if(!favs.length){
-
-    body.innerHTML = `
-
-      <p
-        style="
-        text-align:center;
-        color:var(--muted);
-        padding:2rem;
-        "
-      >
-        Bado hujahifadhi bidhaa.
-      </p>
-
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    favs.map(
-      p => {
-
-        const img =
-          Array.isArray(
-            p.images
-          )
-          ? p.images[0]
-          : p.imageUrl;
-
-
-        return `
-
-          <div class="fav-row">
-
-            ${
-              img
-              ? `
-                <img
-                  class="fav-thumb"
-                  src="${img}"
-                >
-              `
-              : ""
-            }
-
-
-            <div
-              class="fav-info"
-            >
-
-              <div
-                class="fav-price"
-              >
-                TSh
-                ${Number(
-                  p.price
-                ).toLocaleString()}
-              </div>
-
-              <div
-                class="fav-name"
-              >
-                ${escapeHtml(
-                  p.name
-                )}
-              </div>
-
-              <small>
-                📍
-                ${escapeHtml(
-                  p.region || ""
-                )}
-              </small>
-
-            </div>
-
-
-            <button
-              class="icon-sq"
-              onclick="
-                toggleFavorite(
-                  '${p.id}'
-                )
-              "
-            >
-              ❤️
-            </button>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
-
-}
-
-
-/* =========================================================
    NOTIFICATIONS
-========================================================= */
+   ========================================================= */
 
 function startNotificationsListener(){
 
@@ -5195,7 +1924,7 @@ function startNotificationsListener(){
     unsubNotifications();
 
 
-  const nq =
+  const q =
     query(
       collection(
         db,
@@ -5211,7 +1940,7 @@ function startNotificationsListener(){
 
   unsubNotifications =
     onSnapshot(
-      nq,
+      q,
       snap => {
 
         myNotifications =
@@ -5221,7 +1950,6 @@ function startNotificationsListener(){
               ...d.data()
             })
           );
-
 
         updateNotifBadge();
 
@@ -5237,8 +1965,7 @@ function stopNotificationsListener(){
 
     unsubNotifications();
 
-    unsubNotifications =
-      null;
+    unsubNotifications = null;
 
   }
 
@@ -5256,410 +1983,22 @@ function updateNotifBadge(){
       "acctDot"
     );
 
-
-  if(!dot) return;
-
-
-  const unread =
-    myNotifications.some(
-      n => !n.read
-    );
-
-
-  dot.style.display =
-    unread
-    ? "block"
-    : "none";
-
-}
-
-
-function renderNotificationsTab(body){
-
-  if(!myNotifications.length){
-
-    body.innerHTML = `
-      <p
-        style="
-        text-align:center;
-        color:var(--muted);
-        padding:2rem;
-        "
-      >
-        Hakuna arifa kwa sasa.
-      </p>
-    `;
-
+  if(!dot)
     return;
 
-  }
-
-
-  body.innerHTML =
-    myNotifications.map(
-      n => `
-
-        <div
-          class="
-            notif-row
-            ${n.read ? "" : "unread"}
-          "
-          onclick="
-            markNotifRead(
-              '${n.id}'
-            )
-          "
-        >
-
-          <div
-            class="notif-icon"
-          >
-            ❤️
-          </div>
-
-          <div
-            class="notif-text"
-          >
-
-            <b>
-              ${escapeHtml(
-                n.fromName ||
-                "Mtu"
-              )}
-            </b>
-
-            amependa bidhaa yako
-
-            <b>
-              ${escapeHtml(
-                n.productName ||
-                ""
-              )}
-            </b>
-
-          </div>
-
-        </div>
-
-      `
-    ).join("");
-
-
-}
-
-
-window.markNotifRead =
-  id => {
-
-    updateDoc(
-      doc(
-        db,
-        "notifications",
-        id
-      ),
-      {
-        read:true
-      }
-    ).catch(
-      () => {}
-    );
-
-  };
-
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-function renderSettingsTab(body){
-
-  body.innerHTML = `
-
-    <div
-      class="panel-block"
-    >
-
-      <div class="settings-row">
-
-        <div>
-
-          <div class="settings-label">
-            Dark Mode
-          </div>
-
-          <div class="settings-sub">
-            Badili muonekano wa SOKO KUU
-          </div>
-
-        </div>
-
-
-        <div
-          class="
-            toggle-switch
-            ${
-              document.body.classList.contains(
-                "dark-mode"
-              )
-              ? "on"
-              : ""
-            }
-          "
-          id="settingsDarkToggle"
-        ></div>
-
-      </div>
-
-
-      <div class="settings-row">
-
-        <div>
-
-          <div class="settings-label">
-            Email
-          </div>
-
-          <div class="settings-sub">
-            ${escapeHtml(
-              currentUser.email || ""
-            )}
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="settings-row">
-
-        <div>
-
-          <div class="settings-label">
-            Privacy
-          </div>
-
-          <div class="settings-sub">
-            Pendwa zako ni private.
-            Chaguo la SOKO KUU ni public.
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById(
-      "settingsDarkToggle"
+  dot.style.display =
+    myNotifications.some(
+      n => !n.read
     )
-    .addEventListener(
-      "click",
-      () => {
-
-        document.body.classList.toggle(
-          "dark-mode"
-        );
-
-        localStorage.setItem(
-          "soko_theme",
-          document.body.classList.contains(
-            "dark-mode"
-          )
-          ? "dark"
-          : "light"
-        );
-
-        renderSettingsTab(body);
-
-      }
-    );
+      ? "block"
+      : "none";
 
 }
-
-
-/* =========================================================
-   INFO PILLS
-========================================================= */
-
-document
-  .getElementById(
-    "pillAll"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      viewMode = "all";
-
-      recentOnly = false;
-
-      setActiveTab();
-
-      render();
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "pillVerified"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "infoTitle"
-        )
-        .textContent =
-          "Wachuuzi Halisi";
-
-
-      document
-        .getElementById(
-          "infoBody"
-        )
-        .innerHTML = `
-
-          <p
-            style="
-            color:var(--muted);
-            line-height:1.7;
-            "
-          >
-            SOKO KUU ni marketplace huru.
-            Kabla ya kulipa, hakikisha umejiridhisha
-            kuhusu bidhaa na muuzaji.
-          </p>
-
-          <ul
-            style="
-            color:var(--muted);
-            line-height:2;
-            "
-          >
-
-            <li>
-              Ongea na muuzaji kabla ya kulipa.
-            </li>
-
-            <li>
-              Omba picha/video zaidi.
-            </li>
-
-            <li>
-              Pendelea kukutana eneo salama.
-            </li>
-
-            <li>
-              Usilipe bila kuhakiki bidhaa.
-            </li>
-
-          </ul>
-
-        `;
-
-
-      openPanel(
-        infoDrawer
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "pillContact"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "infoTitle"
-        )
-        .textContent =
-          "Wasiliana Moja kwa Moja";
-
-
-      document
-        .getElementById(
-          "infoBody"
-        )
-        .innerHTML = `
-
-          <p
-            style="
-            color:var(--muted);
-            line-height:1.7;
-            "
-          >
-
-            Kila bidhaa ina namba ya WhatsApp
-            ya muuzaji wake.
-
-          </p>
-
-          <p
-            style="
-            color:var(--muted);
-            line-height:1.7;
-            "
-          >
-
-            Bonyeza
-            <b>
-              Nunua Sasa
-            </b>
-            ili kuwasiliana na muuzaji.
-
-          </p>
-
-        `;
-
-
-      openPanel(
-        infoDrawer
-      );
-
-    }
-  );
 
 
 /* =========================================================
    INBOX
-========================================================= */
-
-document
-  .getElementById(
-    "navMessages"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(!currentUser){
-
-        window.location.href =
-          "login.html";
-
-        return;
-
-      }
-
-      openInbox();
-
-    }
-  );
-
+   ========================================================= */
 
 function startInboxListener(){
 
@@ -5694,19 +2033,25 @@ function startInboxListener(){
             })
           );
 
+        myConversations.sort(
+          (a,b)=>
+            getTimestamp(
+              b.lastMessageAt
+            ) -
+            getTimestamp(
+              a.lastMessageAt
+            )
+        );
+
 
         updateUnreadBadge();
-
 
         if(
           inboxDrawer.classList.contains(
             "open"
           )
-        ){
-
+        )
           renderInbox();
-
-        }
 
       }
     );
@@ -5720,8 +2065,7 @@ function stopInboxListener(){
 
     unsubInbox();
 
-    unsubInbox =
-      null;
+    unsubInbox = null;
 
   }
 
@@ -5735,24 +2079,22 @@ function stopInboxListener(){
 function isConvoUnread(c){
 
   const last =
-    timestampMs(
+    getTimestamp(
       c.lastMessageAt
     );
 
-
   const read =
     c.lastReadBy &&
-    c.lastReadBy[
-      currentUser.uid
-    ];
-
-
-  const readMs =
-    timestampMs(read);
-
+    c.lastReadBy[currentUser.uid]
+      ? getTimestamp(
+          c.lastReadBy[
+            currentUser.uid
+          ]
+        )
+      : 0;
 
   return (
-    last > readMs &&
+    last > read &&
     c.lastSenderUid !==
       currentUser.uid
   );
@@ -5767,29 +2109,3070 @@ function updateUnreadBadge(){
       "msgDot"
     );
 
-
-  if(!dot) return;
-
+  if(!dot)
+    return;
 
   dot.style.display =
+    currentUser &&
     myConversations.some(
       isConvoUnread
     )
-    ? "block"
-    : "none";
+      ? "block"
+      : "none";
 
 }
 
 
-function openInbox(){
+/* =========================================================
+   MAIN CHOICE - OWNER FAVORITES ONLY
+   ========================================================= */
 
-  renderInbox();
+function isOwnerUser(){
 
-  openPanel(
-    inboxDrawer
+  return !!(
+    currentUser &&
+    currentUser.email &&
+    currentUser.email.toLowerCase() ===
+      OWNER_EMAIL
   );
 
 }
+
+
+async function getOwnerFavorites(){
+
+  try{
+
+    const snap =
+      await getDoc(
+        doc(
+          db,
+          "users",
+          getOwnerUid()
+        )
+      );
+
+    if(!snap.exists())
+      return [];
+
+    return (
+      snap.data().favorites || []
+    );
+
+  }
+  catch(err){
+
+    console.error(
+      "owner favorites",
+      err
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/*
+  Tunatumia UID ya owner iliyohifadhiwa
+  kwenye products.ownerEmail.
+
+  Kwa bidhaa mpya tunaweka ownerEmail.
+  Hii inafanya mfumo uwe rahisi kutambua
+  mmiliki wa SOKO KUU.
+*/
+
+function getOwnerUid(){
+
+  const ownerProduct =
+    allProducts.find(
+      p =>
+        (
+          p.ownerEmail || ""
+        ).toLowerCase() ===
+        OWNER_EMAIL
+    );
+
+  return ownerProduct
+    ? ownerProduct.ownerUid
+    : "";
+
+}
+
+
+async function renderMainChoice(){
+
+  const grid =
+    document.getElementById(
+      "mainChoiceGrid"
+    );
+
+  if(!grid)
+    return;
+
+
+  let ownerUid =
+    getOwnerUid();
+
+
+  if(!ownerUid){
+
+    grid.innerHTML = `
+      <div style="
+        color:var(--sk-muted);
+        font-size:.8rem;
+        grid-column:1/-1;
+      ">
+        Chaguo la SOKO KUU litaonekana
+        baada ya mmiliki kuweka bidhaa
+        anazozipenda.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  try{
+
+    const snap =
+      await getDoc(
+        doc(
+          db,
+          "users",
+          ownerUid
+        )
+      );
+
+
+    const favorites =
+      snap.exists()
+        ? snap.data().favorites || []
+        : [];
+
+
+    const products =
+      allProducts.filter(
+        p =>
+          favorites.includes(
+            p.id
+          )
+      );
+
+
+    if(products.length === 0){
+
+      grid.innerHTML = `
+        <div style="
+          color:var(--sk-muted);
+          font-size:.8rem;
+          grid-column:1/-1;
+        ">
+          Hakuna bidhaa iliyochaguliwa
+          na SOKO KUU bado.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    grid.innerHTML =
+      products.map(
+        p => choiceCard(p)
+      ).join("");
+
+  }
+  catch(err){
+
+    console.error(err);
+
+  }
+
+}
+
+
+function choiceCard(p){
+
+  const image =
+    getProductImages(p)[0];
+
+
+  return `
+
+    <div
+      class="choice-card"
+      onclick="scrollToProduct('${p.id}')">
+
+      ${
+        image
+          ? `<img src="${image}">`
+          : `<div style="
+              height:105px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              color:var(--sk-muted);
+            ">
+              Hakuna picha
+            </div>`
+      }
+
+      <div class="choice-card-info">
+
+        <div class="choice-price">
+          TSh ${Number(
+            p.price || 0
+          ).toLocaleString()}
+        </div>
+
+        <div class="choice-name">
+          ${escapeHtml(p.name)}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+window.scrollToProduct = id => {
+
+  const el =
+    document.querySelector(
+      `[data-product-id="${id}"]`
+    );
+
+  if(el){
+
+    el.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+
+};
+
+
+/* =========================================================
+   PRODUCT PHOTOS
+   ========================================================= */
+
+function getProductImages(p){
+
+  if(
+    Array.isArray(p.images) &&
+    p.images.length
+  )
+    return p.images.slice(0,3);
+
+  if(p.imageUrl)
+    return [p.imageUrl];
+
+  return [];
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+   ========================================================= */
+
+function openDrawer(){
+
+  if(!currentUser){
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  editingProductId = null;
+
+  pendingImages = [];
+
+
+  document.getElementById(
+    "productDrawerTitle"
+  ).textContent =
+    "Posti Bidhaa Yako";
+
+
+  document.getElementById(
+    "addProduct"
+  ).textContent =
+    "Chapisha Bidhaa";
+
+
+  [
+    "pName",
+    "pPrice",
+    "pDesc",
+    "pPhone",
+    "pLocation"
+  ].forEach(id =>
+    document.getElementById(id).value = ""
+  );
+
+
+  document.getElementById(
+    "pCategory"
+  ).value =
+    "nyingine";
+
+
+  document.getElementById(
+    "pRegion"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "pImages"
+  ).value = "";
+
+
+  document.getElementById(
+    "multiImagePreview"
+  ).innerHTML = "";
+
+
+  openPanel(drawer);
+
+}
+
+
+document
+  .getElementById(
+    "fabAdd"
+  )
+  .addEventListener(
+    "click",
+    openDrawer
+  );
+
+
+/* =========================================================
+   SAVE PRODUCT
+   ========================================================= */
+
+document
+  .getElementById(
+    "addProduct"
+  )
+  .addEventListener(
+    "click",
+    async ()=>{
+
+      if(!currentUser){
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+
+      const category =
+        document.getElementById(
+          "pCategory"
+        ).value;
+
+      const name =
+        document.getElementById(
+          "pName"
+        ).value.trim();
+
+      const price =
+        document.getElementById(
+          "pPrice"
+        ).value.trim();
+
+      const desc =
+        document.getElementById(
+          "pDesc"
+        ).value.trim();
+
+      const phone =
+        document.getElementById(
+          "pPhone"
+        ).value
+        .trim()
+        .replace(/\D/g,"");
+
+      const region =
+        document.getElementById(
+          "pRegion"
+        ).value;
+
+      const location =
+        document.getElementById(
+          "pLocation"
+        ).value.trim();
+
+
+      if(
+        !name ||
+        !price ||
+        !phone ||
+        !region ||
+        !location
+      ){
+
+        alert(
+          "Jaza jina, bei, namba ya simu, mkoa na location ya bidhaa."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        !editingProductId &&
+        pendingImages.length > 3
+      ){
+
+        alert(
+          "Picha zisizidi 3."
+        );
+
+        return;
+
+      }
+
+
+      const btn =
+        document.getElementById(
+          "addProduct"
+        );
+
+      btn.disabled = true;
+
+      btn.textContent =
+        editingProductId
+          ? "Inahifadhi..."
+          : "Inachapisha...";
+
+
+      try{
+
+        if(editingProductId){
+
+          const data = {
+
+            category,
+            name,
+            price,
+            desc,
+            phone,
+            region,
+            location
+
+          };
+
+
+          if(
+            pendingImages.length
+          ){
+
+            data.images =
+              pendingImages
+                .slice(0,3);
+
+            data.imageUrl =
+              pendingImages[0];
+
+          }
+
+
+          await updateDoc(
+            doc(
+              db,
+              "products",
+              editingProductId
+            ),
+            data
+          );
+
+        }
+        else{
+
+          await addDoc(
+            collection(
+              db,
+              "products"
+            ),
+            {
+
+              category,
+
+              name,
+
+              price,
+
+              desc,
+
+              phone,
+
+              region,
+
+              location,
+
+              images:
+                pendingImages
+                  .slice(0,3),
+
+              imageUrl:
+                pendingImages[0] || "",
+
+              ownerUid:
+                currentUser.uid,
+
+              ownerEmail:
+                currentUser.email,
+
+              ownerName:
+                currentUser.displayName ||
+                currentUser.email ||
+                "Muuzaji",
+
+              ownerPhoto:
+                myProfile?.photoBase64 ||
+                "",
+
+              sold:false,
+
+              views:0,
+
+              createdAt:
+                serverTimestamp()
+
+            }
+          );
+
+        }
+
+
+        pendingImages = [];
+
+        editingProductId = null;
+
+        closeAllPanels();
+
+      }
+      catch(err){
+
+        console.error(err);
+
+        alert(
+          "Imeshindikana kuhifadhi bidhaa. Jaribu tena."
+        );
+
+      }
+      finally{
+
+        btn.disabled = false;
+
+        btn.textContent =
+          "Chapisha Bidhaa";
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+window.toggleFavorite =
+  async id => {
+
+    if(!currentUser){
+
+      window.location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    const product =
+      allProducts.find(
+        p => p.id === id
+      );
+
+    if(!product)
+      return;
+
+
+    const favorites =
+      Array.isArray(
+        myProfile?.favorites
+      )
+        ? myProfile.favorites
+        : [];
+
+
+    const isFav =
+      favorites.includes(id);
+
+
+    const userRef =
+      doc(
+        db,
+        "users",
+        currentUser.uid
+      );
+
+
+    try{
+
+      await setDoc(
+        userRef,
+        {
+          favorites:
+            isFav
+              ? arrayRemove(id)
+              : arrayUnion(id)
+        },
+        {merge:true}
+      );
+
+
+      /*
+        MUHIMU:
+
+        Kama email ni OWNER_EMAIL,
+        favorite hii ndiyo itakuwa
+        sehemu ya public:
+        "Chaguo la SOKO KUU".
+
+        Kama si owner,
+        favorite inabaki private.
+      */
+
+
+      if(
+        !isFav &&
+        product.ownerUid !==
+          currentUser.uid
+      ){
+
+        await addDoc(
+          collection(
+            db,
+            "notifications"
+          ),
+          {
+
+            toUid:
+              product.ownerUid,
+
+            fromUid:
+              currentUser.uid,
+
+            type:
+              "favorite",
+
+            productId:
+              id,
+
+            productName:
+              product.name,
+
+            fromName:
+              currentUser.displayName ||
+              currentUser.email ||
+              "Mtumiaji",
+
+            read:false,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        ).catch(()=>{});
+
+      }
+
+
+      setTimeout(
+        renderMainChoice,
+        200
+      );
+
+    }
+    catch(err){
+
+      console.error(err);
+
+      alert(
+        "Imeshindikana kuhifadhi Pendwa."
+      );
+
+    }
+
+  };
+
+
+/* =========================================================
+   RENDER PRODUCTS
+   ========================================================= */
+
+function render(){
+
+  let list =
+    [...allProducts];
+
+
+  if(viewMode === "mine" &&
+     currentUser){
+
+    list =
+      list.filter(
+        p =>
+          p.ownerUid ===
+          currentUser.uid
+      );
+
+  }
+
+
+  if(selectedCategory){
+
+    list =
+      list.filter(
+        p =>
+          p.category ===
+          selectedCategory
+      );
+
+  }
+
+
+  if(selectedRegion){
+
+    list =
+      list.filter(
+        p =>
+          (p.region || "")
+            .toLowerCase() ===
+          selectedRegion
+            .toLowerCase()
+      );
+
+  }
+
+
+  if(searchTerm){
+
+    list =
+      list.filter(p => {
+
+        const haystack = [
+
+          p.name,
+          p.desc,
+          p.category,
+          p.region,
+          p.location,
+          p.ownerName,
+          p.ownerEmail
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        const words =
+          searchTerm
+            .split(/\s+/)
+            .filter(Boolean);
+
+
+        return words.every(
+          word =>
+            haystack.includes(
+              word
+            )
+        );
+
+      });
+
+  }
+
+
+  document.getElementById(
+    "statCount"
+  ).textContent =
+    `${list.length} bidhaa`;
+
+
+  const grid =
+    document.getElementById(
+      "grid"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "empty"
+    );
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    grid.innerHTML = "";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  grid.innerHTML =
+    list.map(
+      productCard
+    ).join("");
+
+
+  renderMainChoice();
+
+  renderRecentlyAdded();
+
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+function productCard(p){
+
+  const isMine =
+    currentUser &&
+    p.ownerUid ===
+      currentUser.uid;
+
+
+  const favorites =
+    Array.isArray(
+      myProfile?.favorites
+    )
+      ? myProfile.favorites
+      : [];
+
+
+  const isFav =
+    favorites.includes(
+      p.id
+    );
+
+
+  const images =
+    getProductImages(p);
+
+
+  const date =
+    formatDate(
+      getTimestamp(
+        p.createdAt
+      )
+    );
+
+
+  if(!isMine)
+    registerView(p);
+
+
+  const gallery =
+    images.length
+      ? `
+
+        <div class="product-gallery">
+
+          <div class="product-gallery-track">
+
+            ${
+              images.map(
+                image =>
+                  `<img
+                    src="${image}"
+                    alt="${escapeHtml(
+                      p.name
+                    )}"
+                    loading="lazy">`
+              ).join("")
+            }
+
+          </div>
+
+          ${
+            images.length > 1
+              ? `<span class="photo-count">
+                  ${images.length} picha
+                 </span>`
+              : ""
+          }
+
+        </div>
+
+      `
+      : `
+
+        <div class="no-img">
+          HAKUNA PICHA
+        </div>
+
+      `;
+
+
+  const phone =
+    p.phone
+      ? p.phone
+      : "";
+
+
+  let actions = "";
+
+
+  if(isMine){
+
+    actions = `
+
+      <div class="card-actions">
+
+        <button
+          class="owner-btn"
+          onclick="openEditProduct('${p.id}')">
+          ✏️ Hariri
+        </button>
+
+        <button
+          class="owner-btn"
+          onclick="toggleSold('${p.id}')">
+          ${p.sold
+            ? "↩️ Rejesha"
+            : "✅ Imeuzwa"}
+        </button>
+
+        <button
+          class="owner-btn danger"
+          onclick="removeProduct('${p.id}')">
+          🗑️
+        </button>
+
+      </div>
+
+    `;
+
+  }
+  else if(p.sold){
+
+    actions = `
+
+      <div class="card-actions">
+
+        <span class="buy-btn disabled">
+          Bidhaa Imeuzwa
+        </span>
+
+      </div>
+
+    `;
+
+  }
+  else{
+
+    const call =
+      phone
+        ? `<a
+            class="call-btn"
+            href="tel:${phone}">
+            📞 Piga Simu
+           </a>`
+        : `<span
+            class="call-btn"
+            style="opacity:.5">
+            📞 Hakuna namba
+           </span>`;
+
+
+    const chat =
+      `<button
+        class="msg-btn"
+        type="button"
+        onclick="openChatForProduct('${p.id}')">
+        💬 Wasiliana / Chat
+       </button>`;
+
+
+    actions = `
+
+      <div class="card-actions">
+
+        ${call}
+
+        ${chat}
+
+      </div>
+
+    `;
+
+  }
+
+
+  return `
+
+    <div
+      class="card"
+      data-product-id="${p.id}">
+
+      <div class="card-media">
+
+        ${
+          p.sold
+            ? `<span class="badge-sold">
+                IMEUZWA
+               </span>`
+            : ""
+        }
+
+
+        ${
+          isFav
+            ? `<button
+                class="heart-btn active"
+                onclick="toggleFavorite('${p.id}')">
+                ❤️
+               </button>`
+            : `<button
+                class="heart-btn"
+                onclick="toggleFavorite('${p.id}')">
+                🤍
+               </button>`
+        }
+
+
+        ${gallery}
+
+
+        ${
+          isMine
+            ? `<span class="badge-mine">
+                Yako
+               </span>`
+            : ""
+        }
+
+      </div>
+
+
+      <div class="card-body">
+
+        ${
+          CATEGORIES[p.category]
+            ? `<div class="cat-tag">
+                ${CATEGORIES[p.category]}
+               </div>`
+            : ""
+        }
+
+
+        <div class="price">
+          TSh ${Number(
+            p.price || 0
+          ).toLocaleString()}
+        </div>
+
+
+        <div class="title">
+          ${escapeHtml(
+            p.name
+          )}
+        </div>
+
+
+        <div
+          class="seller-row seller-click"
+          onclick="openSellerProfile('${p.ownerUid}')">
+
+          <span class="seller">
+
+            👤 ${escapeHtml(
+              p.ownerName ||
+              "Muuzaji"
+            )}
+
+          </span>
+
+          <span class="views">
+            👁 ${p.views || 0}
+          </span>
+
+        </div>
+
+
+        <div class="product-location">
+
+          📍 ${
+            escapeHtml(
+              p.location ||
+              "Location haijawekwa"
+            )
+          }
+
+          ${
+            p.region
+              ? ` • ${escapeHtml(
+                  p.region
+                )}`
+              : ""
+          }
+
+        </div>
+
+
+        <div class="product-date">
+
+          📅 Imewekwa:
+          ${date || "Leo"}
+
+        </div>
+
+
+        ${
+          phone
+            ? `<div
+                style="
+                  margin-top:.4rem;
+                  font-size:.76rem;
+                  color:var(--sk-muted);
+                ">
+                📞 ${escapeHtml(phone)}
+               </div>`
+            : ""
+        }
+
+
+        ${actions}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   RECENTLY ADDED
+   ========================================================= */
+
+function renderRecentlyAdded(){
+
+  const box =
+    document.getElementById(
+      "recentList"
+    );
+
+  const count =
+    document.getElementById(
+      "recentCount"
+    );
+
+
+  const products =
+    [...allProducts]
+      .sort(
+        (a,b)=>
+          getTimestamp(
+            b.createdAt
+          ) -
+          getTimestamp(
+            a.createdAt
+          )
+      )
+      .slice(0,8);
+
+
+  count.textContent =
+    products.length;
+
+
+  box.innerHTML =
+    products.map(
+      p => {
+
+        const image =
+          getProductImages(p)[0];
+
+
+        return `
+
+          <div class="recent-card"
+            onclick="scrollToProduct('${p.id}')">
+
+            ${
+              image
+                ? `<img src="${image}">`
+                : `<div style="
+                    height:95px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    color:var(--sk-muted);
+                  ">
+                    Hakuna picha
+                  </div>`
+            }
+
+            <div class="recent-card-body">
+
+              <div class="recent-card-name">
+                ${escapeHtml(
+                  p.name
+                )}
+              </div>
+
+              <div class="recent-card-price">
+                TSh ${Number(
+                  p.price || 0
+                ).toLocaleString()}
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
+   SELLER PROFILE
+   ========================================================= */
+
+window.openSellerProfile =
+  async uid => {
+
+    if(!uid)
+      return;
+
+
+    const products =
+      allProducts.filter(
+        p =>
+          p.ownerUid ===
+          uid
+      );
+
+
+    let profile = {};
+
+
+    try{
+
+      const snap =
+        await getDoc(
+          doc(
+            db,
+            "users",
+            uid
+          )
+        );
+
+
+      if(snap.exists())
+        profile =
+          snap.data();
+
+    }
+    catch(err){
+
+      console.error(err);
+
+    }
+
+
+    const first =
+      products[0];
+
+
+    const name =
+      profile.name ||
+      first?.ownerName ||
+      "Muuzaji";
+
+
+    const photo =
+      profile.photoBase64 ||
+      first?.ownerPhoto ||
+      "";
+
+
+    const region =
+      profile.region ||
+      first?.region ||
+      "";
+
+
+    const location =
+      profile.location ||
+      first?.location ||
+      "";
+
+
+    const joined =
+      profile.createdAt ||
+      first?.createdAt;
+
+
+    const totalViews =
+      products.reduce(
+        (sum,p)=>
+          sum +
+          Number(
+            p.views || 0
+          ),
+        0
+      );
+
+
+    document.getElementById(
+      "sellerBody"
+    ).innerHTML = `
+
+      <div class="seller-profile">
+
+        ${
+          photo
+            ? `<img
+                class="seller-avatar-large"
+                src="${photo}">
+               `
+            : `<div
+                class="seller-avatar-placeholder">
+                ${escapeHtml(
+                  name
+                    .charAt(0)
+                    .toUpperCase()
+                )}
+               </div>`
+        }
+
+
+        <div class="seller-profile-name">
+          ${escapeHtml(name)}
+        </div>
+
+
+        <div class="seller-profile-location">
+
+          📍 ${
+            escapeHtml(
+              location ||
+              region ||
+              "Location haijawekwa"
+            )
+          }
+
+        </div>
+
+
+        <div class="seller-joined">
+
+          📅 Joined:
+          ${formatDate(
+            getTimestamp(joined)
+          ) || "Tarehe haijulikani"}
+
+        </div>
+
+
+        <div class="seller-stat-box">
+
+          <div class="seller-stat">
+
+            <b>
+              ${products.length}
+            </b>
+
+            <span>
+              Bidhaa
+            </span>
+
+          </div>
+
+
+          <div class="seller-stat">
+
+            <b>
+              ${totalViews}
+            </b>
+
+            <span>
+              Product Views
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <h3
+          style="
+            text-align:left;
+            margin-top:1rem;
+          ">
+          🛍️ Bidhaa zake zote
+        </h3>
+
+
+        <div
+          style="
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:.7rem;
+          ">
+
+          ${
+            products.length
+              ? products.map(
+                  p => {
+
+                    const img =
+                      getProductImages(p)[0];
+
+                    return `
+
+                      <div
+                        class="choice-card"
+                        onclick="
+                          closeAllPanels();
+                          scrollToProduct('${p.id}')
+                        ">
+
+                        ${
+                          img
+                            ? `<img src="${img}">`
+                            : `<div style="
+                                height:100px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                              ">
+                                Hakuna picha
+                              </div>`
+                        }
+
+                        <div
+                          class="choice-card-info">
+
+                          <div
+                            class="choice-price">
+                            TSh ${Number(
+                              p.price || 0
+                            ).toLocaleString()}
+                          </div>
+
+                          <div
+                            class="choice-name">
+                            ${escapeHtml(
+                              p.name
+                            )}
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    `;
+
+                  }
+                ).join("")
+              : `
+                <p
+                  style="
+                    color:var(--sk-muted);
+                    font-size:.8rem;
+                  ">
+                  Muuzaji bado hana bidhaa.
+                </p>
+              `
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    openPanel(
+      sellerDrawer
+    );
+
+  };
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+function renderProfileTab(body){
+
+  const name =
+    currentUser.displayName ||
+    myProfile?.name ||
+    currentUser.email ||
+    "Mtumiaji";
+
+
+  const photo =
+    myProfile?.photoBase64 ||
+    "";
+
+
+  const username =
+    myProfile?.username ||
+    "";
+
+
+  const phone =
+    myProfile?.phone ||
+    "";
+
+
+  const mine =
+    allProducts.filter(
+      p =>
+        p.ownerUid ===
+        currentUser.uid
+    );
+
+
+  const views =
+    mine.reduce(
+      (s,p)=>
+        s +
+        Number(
+          p.views || 0
+        ),
+      0
+    );
+
+
+  body.innerHTML = `
+
+    <div class="profile-head">
+
+      ${
+        photo
+          ? `<img
+              class="profile-avatar"
+              src="${photo}">
+             `
+          : `<div
+              class="profile-avatar">
+              ${escapeHtml(
+                name.charAt(0)
+              )}
+             </div>`
+      }
+
+
+      <div class="profile-name">
+        ${escapeHtml(name)}
+      </div>
+
+
+      ${
+        username
+          ? `<div class="profile-username">
+              @${escapeHtml(
+                username
+              )}
+             </div>`
+          : ""
+      }
+
+
+      <div class="profile-meta">
+        ${escapeHtml(
+          currentUser.email ||
+          ""
+        )}
+      </div>
+
+
+      ${
+        phone
+          ? `<div class="profile-meta">
+              📞 ${escapeHtml(phone)}
+             </div>`
+          : ""
+      }
+
+    </div>
+
+
+    <div class="profile-stats">
+
+      <div>
+        <b>${mine.length}</b>
+        <span>Matangazo</span>
+      </div>
+
+      <div>
+        <b>${views}</b>
+        <span>Views</span>
+      </div>
+
+      <div>
+        <b>${myProfile?.favorites?.length || 0}</b>
+        <span>Pendwa</span>
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-full btn-primary"
+      onclick="editMyProfile()">
+      ✏️ Edit Profile
+    </button>
+
+
+    <button
+      class="btn-full"
+      onclick="toggleDarkMode()"
+      style="
+        margin-top:.6rem;
+        background:var(--sk-bg);
+        color:var(--sk-text);
+      ">
+      🌙 Dark Mode
+    </button>
+
+
+    <button
+      class="btn-full"
+      onclick="signOutUser()"
+      style="
+        margin-top:.6rem;
+        background:#fdecec;
+        color:var(--danger);
+      ">
+      ⎋ Toka
+    </button>
+
+  `;
+
+}
+
+
+window.signOutUser =
+  async ()=>{
+    await signOut(auth);
+    closeAllPanels();
+  };
+
+
+/* =========================================================
+   EDIT PROFILE WITH PHOTO
+   ========================================================= */
+
+window.editMyProfile =
+  ()=>{
+
+    const body =
+      document.getElementById(
+        "accountBody"
+      );
+
+
+    const name =
+      currentUser.displayName ||
+      myProfile?.name ||
+      "";
+
+
+    const username =
+      myProfile?.username ||
+      "";
+
+
+    const phone =
+      myProfile?.phone ||
+      "";
+
+
+    body.innerHTML = `
+
+      <div class="panel-block">
+
+        <div class="field">
+
+          <label>
+            Picha ya Profile
+          </label>
+
+          <input
+            type="file"
+            id="profileImageInput"
+            accept="image/*">
+
+          <div
+            id="profilePreview"
+            style="margin-top:.6rem;">
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Jina</label>
+
+          <input
+            id="profileName"
+            value="${escapeHtml(name)}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Username</label>
+
+          <input
+            id="profileUsername"
+            value="${escapeHtml(username)}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Namba ya Simu</label>
+
+          <input
+            id="profilePhone"
+            value="${escapeHtml(phone)}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Mkoa</label>
+
+          <select id="profileRegion">
+
+            <option value="">
+              Chagua mkoa
+            </option>
+
+            ${[
+              "Arusha",
+              "Dar es Salaam",
+              "Dodoma",
+              "Geita",
+              "Iringa",
+              "Kagera",
+              "Katavi",
+              "Kigoma",
+              "Kilimanjaro",
+              "Lindi",
+              "Manyara",
+              "Mara",
+              "Mbeya",
+              "Morogoro",
+              "Mtwara",
+              "Mwanza",
+              "Njombe",
+              "Pwani",
+              "Rukwa",
+              "Ruvuma",
+              "Shinyanga",
+              "Simiyu",
+              "Singida",
+              "Songwe",
+              "Tabora",
+              "Tanga"
+            ].map(
+              r =>
+                `<option
+                  ${myProfile?.region === r
+                    ? "selected"
+                    : ""}>
+                  ${r}
+                 </option>`
+            ).join("")}
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Location
+          </label>
+
+          <input
+            id="profileLocation"
+            value="${escapeHtml(
+              myProfile?.location || ""
+            )}"
+            placeholder="Mfano: Lindi Mjini">
+
+        </div>
+
+
+        <button
+          class="btn-full btn-primary"
+          id="saveProfile">
+          Hifadhi Profile
+        </button>
+
+
+        <button
+          class="btn-full"
+          onclick="switchAcctTabGlobal('profile')"
+          style="
+            margin-top:.6rem;
+            background:var(--sk-bg);
+            color:var(--sk-text);
+          ">
+          Ghairi
+        </button>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById(
+        "profileImageInput"
+      )
+      .addEventListener(
+        "change",
+        async e => {
+
+          const file =
+            e.target.files[0];
+
+          if(!file)
+            return;
+
+          const img =
+            await compressImage(
+              file,
+              320,
+              .8
+            );
+
+
+          document.getElementById(
+            "profilePreview"
+          ).innerHTML = `
+
+            <img
+              src="${img}"
+              style="
+                width:90px;
+                height:90px;
+                object-fit:cover;
+                border-radius:50%;
+                border:3px solid var(--sk-primary);
+              ">
+
+          `;
+
+
+          e.target.dataset.photo =
+            img;
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "saveProfile"
+      )
+      .addEventListener(
+        "click",
+        async ()=>{
+
+          const btn =
+            document.getElementById(
+              "saveProfile"
+            );
+
+          btn.disabled = true;
+
+          try{
+
+            const newName =
+              document.getElementById(
+                "profileName"
+              ).value.trim();
+
+
+            const username =
+              document.getElementById(
+                "profileUsername"
+              ).value
+                .trim()
+                .replace(/\s+/g,"")
+                .toLowerCase();
+
+
+            const phone =
+              document.getElementById(
+                "profilePhone"
+              ).value.trim();
+
+
+            const region =
+              document.getElementById(
+                "profileRegion"
+              ).value;
+
+
+            const location =
+              document.getElementById(
+                "profileLocation"
+              ).value.trim();
+
+
+            const photo =
+              document
+                .getElementById(
+                  "profileImageInput"
+                )
+                .dataset.photo;
+
+
+            if(
+              newName &&
+              newName !==
+                currentUser.displayName
+            ){
+
+              await updateProfile(
+                currentUser,
+                {
+                  displayName:
+                    newName
+                }
+              );
+
+            }
+
+
+            const data = {
+
+              name:newName,
+
+              username,
+
+              phone,
+
+              region,
+
+              location
+
+            };
+
+
+            if(photo)
+              data.photoBase64 =
+                photo;
+
+
+            if(
+              !myProfile?.createdAt
+            )
+              data.createdAt =
+                serverTimestamp();
+
+
+            await setDoc(
+              doc(
+                db,
+                "users",
+                currentUser.uid
+              ),
+              data,
+              {merge:true}
+            );
+
+
+            switchAcctTab(
+              "profile"
+            );
+
+          }
+          catch(err){
+
+            console.error(err);
+
+            alert(
+              "Imeshindikana kuhifadhi profile."
+            );
+
+          }
+          finally{
+
+            btn.disabled = false;
+
+          }
+
+        }
+      );
+
+  };
+
+
+/* =========================================================
+   FAVORITES PRIVATE
+   ========================================================= */
+
+function renderFavoritesTab(body){
+
+  const ids =
+    myProfile?.favorites ||
+    [];
+
+
+  const favs =
+    allProducts.filter(
+      p =>
+        ids.includes(
+          p.id
+        )
+    );
+
+
+  body.innerHTML = `
+
+    <div style="
+      padding:.5rem 0;
+      color:var(--sk-muted);
+      font-size:.78rem;
+      margin-bottom:.8rem;
+    ">
+
+      ❤️ Hizi ni Pendwa zako binafsi.
+      Watumiaji wengine hawazioni.
+
+    </div>
+
+
+    ${
+      favs.length
+        ? favs.map(
+            p => `
+
+              <div class="fav-row">
+
+                ${
+                  getProductImages(p)[0]
+                    ? `<img
+                        class="fav-thumb"
+                        src="${getProductImages(p)[0]}">`
+                    : ""
+                }
+
+                <div class="fav-info">
+
+                  <div class="fav-price">
+                    TSh ${Number(
+                      p.price || 0
+                    ).toLocaleString()}
+                  </div>
+
+                  <div class="fav-name">
+                    ${escapeHtml(
+                      p.name
+                    )}
+                  </div>
+
+                </div>
+
+                <button
+                  class="icon-sq"
+                  onclick="toggleFavorite('${p.id}')">
+                  ✕
+                </button>
+
+              </div>
+
+            `
+          ).join("")
+        : `
+          <p
+            style="
+              text-align:center;
+              color:var(--sk-muted);
+              padding:2rem 0;
+            ">
+            Bado hujahifadhi bidhaa.
+          </p>
+        `
+    }
+
+  `;
+
+}
+
+
+/* =========================================================
+   SELLER DASHBOARD
+   ========================================================= */
+
+function renderDashboardTab(body){
+
+  const mine =
+    allProducts.filter(
+      p =>
+        p.ownerUid ===
+        currentUser.uid
+    );
+
+
+  const views =
+    mine.reduce(
+      (s,p)=>
+        s +
+        Number(
+          p.views || 0
+        ),
+      0
+    );
+
+
+  const sold =
+    mine.filter(
+      p => p.sold
+    ).length;
+
+
+  body.innerHTML = `
+
+    <h3>
+      📈 Seller Dashboard
+    </h3>
+
+    <div class="dashboard-grid">
+
+      <div class="dashboard-box">
+
+        <div class="number">
+          ${mine.length}
+        </div>
+
+        <div class="label">
+          Bidhaa Zote
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-box">
+
+        <div class="number">
+          ${views}
+        </div>
+
+        <div class="label">
+          Product Views
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-box">
+
+        <div class="number">
+          ${sold}
+        </div>
+
+        <div class="label">
+          Zilizouzwa
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-box">
+
+        <div class="number">
+          ${mine.length - sold}
+        </div>
+
+        <div class="label">
+          Zinazopatikana
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <h3
+      style="margin-top:1.2rem;">
+      🕐 Recently Added
+    </h3>
+
+
+    ${
+      [...mine]
+        .sort(
+          (a,b)=>
+            getTimestamp(
+              b.createdAt
+            ) -
+            getTimestamp(
+              a.createdAt
+            )
+        )
+        .slice(0,5)
+        .map(
+          p => `
+
+            <div
+              class="listing-row">
+
+              <div
+                class="listing-info">
+
+                <div
+                  class="listing-name">
+                  ${escapeHtml(
+                    p.name
+                  )}
+                </div>
+
+                <div
+                  class="listing-meta">
+
+                  <span>
+                    👁 ${p.views || 0}
+                  </span>
+
+                  <span>
+                    📅 ${formatDate(
+                      getTimestamp(
+                        p.createdAt
+                      )
+                    )}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          `
+        ).join("")
+    }
+
+  `;
+
+}
+
+
+/* =========================================================
+   ACCOUNT DRAWER
+   ========================================================= */
+
+function switchAcctTab(tab){
+
+  currentAcctTab = tab;
+
+  document
+    .querySelectorAll(
+      ".acct-tab"
+    )
+    .forEach(
+      b =>
+        b.classList.toggle(
+          "active",
+          b.dataset.tab === tab
+        )
+    );
+
+
+  renderAccountDrawer(tab);
+
+}
+
+
+function renderAccountDrawer(tab){
+
+  const body =
+    document.getElementById(
+      "accountBody"
+    );
+
+
+  if(!currentUser){
+
+    body.innerHTML = `
+
+      <p
+        style="
+          text-align:center;
+          color:var(--sk-muted);
+          padding:2rem;
+        ">
+        Ingia ili kutumia akaunti yako.
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  if(tab === "profile")
+    renderProfileTab(body);
+
+  else if(tab === "listings")
+    renderListingsTab(body);
+
+  else if(tab === "favorites")
+    renderFavoritesTab(body);
+
+  else if(tab === "dashboard")
+    renderDashboardTab(body);
+
+  else if(tab === "notifications")
+    renderNotificationsTab(body);
+
+  else
+    renderSettingsTab(body);
+
+}
+
+
+document
+  .getElementById(
+    "navAccount"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(!currentUser){
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+      switchAcctTab(
+        "profile"
+      );
+
+      openPanel(
+        accountDrawer
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "acctTabs"
+  )
+  .addEventListener(
+    "click",
+    e => {
+
+      const btn =
+        e.target.closest(
+          ".acct-tab"
+        );
+
+      if(btn)
+        switchAcctTab(
+          btn.dataset.tab
+        );
+
+    }
+  );
+
+
+window.switchAcctTabGlobal =
+  switchAcctTab;
+
+
+/* =========================================================
+   LISTINGS
+   ========================================================= */
+
+function renderListingsTab(body){
+
+  const mine =
+    allProducts.filter(
+      p =>
+        p.ownerUid ===
+        currentUser.uid
+    );
+
+
+  if(!mine.length){
+
+    body.innerHTML = `
+
+      <p
+        style="
+          text-align:center;
+          color:var(--sk-muted);
+          padding:2rem;
+        ">
+        Bado hujaposti bidhaa.
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    mine.map(
+      p => `
+
+        <div class="listing-row">
+
+          <div class="listing-info">
+
+            <div class="listing-name">
+
+              ${escapeHtml(
+                p.name
+              )}
+
+            </div>
+
+            <div class="listing-meta">
+
+              <span>
+                TSh ${Number(
+                  p.price || 0
+                ).toLocaleString()}
+              </span>
+
+              <span>
+                👁 ${p.views || 0}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="listing-actions">
+
+            <button
+              class="icon-sq"
+              onclick="
+                openEditProduct('${p.id}')
+              ">
+              ✏️
+            </button>
+
+            <button
+              class="icon-sq"
+              onclick="
+                toggleSold('${p.id}')
+              ">
+              ${p.sold
+                ? "↩️"
+                : "✅"}
+            </button>
+
+            <button
+              class="icon-sq"
+              onclick="
+                removeProduct('${p.id}')
+              ">
+              🗑️
+            </button>
+
+          </div>
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   EDIT PRODUCT
+   ========================================================= */
+
+window.openEditProduct =
+  id => {
+
+    const p =
+      allProducts.find(
+        x => x.id === id
+      );
+
+
+    if(
+      !p ||
+      !currentUser ||
+      p.ownerUid !==
+        currentUser.uid
+    )
+      return;
+
+
+    editingProductId = id;
+
+
+    document.getElementById(
+      "productDrawerTitle"
+    ).textContent =
+      "Hariri Bidhaa";
+
+
+    document.getElementById(
+      "addProduct"
+    ).textContent =
+      "Hifadhi Mabadiliko";
+
+
+    document.getElementById(
+      "pCategory"
+    ).value =
+      p.category || "nyingine";
+
+
+    document.getElementById(
+      "pName"
+    ).value =
+      p.name || "";
+
+
+    document.getElementById(
+      "pPrice"
+    ).value =
+      p.price || "";
+
+
+    document.getElementById(
+      "pDesc"
+    ).value =
+      p.desc || "";
+
+
+    document.getElementById(
+      "pPhone"
+    ).value =
+      p.phone || "";
+
+
+    document.getElementById(
+      "pRegion"
+    ).value =
+      p.region || "";
+
+
+    document.getElementById(
+      "pLocation"
+    ).value =
+      p.location || "";
+
+
+    pendingImages =
+      getProductImages(p);
+
+
+    document.getElementById(
+      "multiImagePreview"
+    ).innerHTML =
+      pendingImages.map(
+        image => `
+
+          <div
+            class="multi-image-item">
+
+            <img
+              src="${image}">
+
+          </div>
+
+        `
+      ).join("");
+
+
+    openPanel(
+      drawer
+    );
+
+  };
+
+
+/* =========================================================
+   DELETE
+   ========================================================= */
+
+window.removeProduct =
+  async id => {
+
+    if(
+      !confirm(
+        "Una uhakika unataka kufuta bidhaa hii?"
+      )
+    )
+      return;
+
+
+    try{
+
+      await deleteDoc(
+        doc(
+          db,
+          "products",
+          id
+        )
+      );
+
+    }
+    catch(err){
+
+      console.error(err);
+
+      alert(
+        "Imeshindikana kufuta bidhaa."
+      );
+
+    }
+
+  };
+
+
+/* =========================================================
+   SOLD
+   ========================================================= */
+
+window.toggleSold =
+  async id => {
+
+    const p =
+      allProducts.find(
+        x => x.id === id
+      );
+
+
+    if(
+      !p ||
+      !currentUser ||
+      p.ownerUid !==
+        currentUser.uid
+    )
+      return;
+
+
+    await updateDoc(
+      doc(
+        db,
+        "products",
+        id
+      ),
+      {
+        sold:!p.sold
+      }
+    );
+
+  };
+
+
+/* =========================================================
+   PRODUCT VIEWS
+   ========================================================= */
+
+function registerView(p){
+
+  if(
+    !currentUser ||
+    !p ||
+    p.ownerUid ===
+      currentUser.uid
+  )
+    return;
+
+
+  if(
+    viewedThisSession.has(
+      p.id
+    )
+  )
+    return;
+
+
+  viewedThisSession.add(
+    p.id
+  );
+
+
+  updateDoc(
+    doc(
+      db,
+      "products",
+      p.id
+    ),
+    {
+      views:
+        increment(1)
+    }
+  ).catch(()=>{});
+
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+document
+  .getElementById(
+    "searchInput"
+  )
+  .addEventListener(
+    "input",
+    e => {
+
+      searchTerm =
+        e.target.value
+          .trim()
+          .toLowerCase();
+
+      render();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "filterCategory"
+  )
+  .addEventListener(
+    "change",
+    e => {
+
+      selectedCategory =
+        e.target.value;
+
+      render();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "filterRegion"
+  )
+  .addEventListener(
+    "change",
+    e => {
+
+      selectedRegion =
+        e.target.value;
+
+      render();
+
+    }
+  );
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+document
+  .getElementById(
+    "tabAll"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+      viewMode = "all";
+      setActiveTab();
+      render();
+    }
+  );
+
+
+document
+  .getElementById(
+    "tabMine"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(!currentUser){
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+
+      viewMode =
+        "mine";
+
+      setActiveTab();
+
+      render();
+
+    }
+  );
+
+
+function setActiveTab(){
+
+  document
+    .getElementById(
+      "tabAll"
+    )
+    .classList.toggle(
+      "active",
+      viewMode === "all"
+    );
+
+
+  document
+    .getElementById(
+      "tabMine"
+    )
+    .classList.toggle(
+      "active",
+      viewMode === "mine"
+    );
+
+}
+
+
+/* =========================================================
+   INFO BUTTONS
+   ========================================================= */
+
+document
+  .getElementById(
+    "pillAll"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+      viewMode="all";
+      setActiveTab();
+      render();
+    }
+  );
+
+
+document
+  .getElementById(
+    "pillVerified"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      document.getElementById(
+        "infoTitle"
+      ).textContent =
+        "Wachuuzi Halisi";
+
+
+      document.getElementById(
+        "infoBody"
+      ).innerHTML = `
+
+        <p style="
+          color:var(--sk-muted);
+          line-height:1.7;
+        ">
+
+          SOKO KUU ni jukwaa la biashara
+          linalowaunganisha wanunuzi na
+          wauzaji.
+
+        </p>
+
+        <ul style="
+          color:var(--sk-muted);
+          line-height:2;
+        ">
+
+          <li>
+            Hakikisha unaona bidhaa halisi.
+          </li>
+
+          <li>
+            Thibitisha namba ya muuzaji.
+          </li>
+
+          <li>
+            Pendelea kukutana sehemu salama.
+          </li>
+
+          <li>
+            Usitume pesa bila kuthibitisha bidhaa.
+          </li>
+
+        </ul>
+
+      `;
+
+
+      openPanel(
+        infoDrawer
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "pillContact"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      document.getElementById(
+        "infoTitle"
+      ).textContent =
+        "Wasiliana Moja kwa Moja";
+
+
+      document.getElementById(
+        "infoBody"
+      ).innerHTML = `
+
+        <p style="
+          color:var(--sk-muted);
+          line-height:1.7;
+        ">
+
+          Kwenye kila bidhaa unaweza
+          kutumia:
+
+        </p>
+
+        <ul style="
+          color:var(--sk-muted);
+          line-height:2;
+        ">
+
+          <li>
+            📞 <b>Piga Simu</b>
+            kumpigia muuzaji moja kwa moja.
+          </li>
+
+          <li>
+            💬 <b>Wasiliana / Chat</b>
+            kuanza mazungumzo ndani ya SOKO KUU.
+          </li>
+
+        </ul>
+
+      `;
+
+
+      openPanel(
+        infoDrawer
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   CHAT
+   ========================================================= */
+
+document
+  .getElementById(
+    "navMessages"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(!currentUser){
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+
+      renderInbox();
+
+      openPanel(
+        inboxDrawer
+      );
+
+    }
+  );
 
 
 function renderInbox(){
@@ -5803,14 +5186,19 @@ function renderInbox(){
   if(!myConversations.length){
 
     body.innerHTML = `
-      <p
-        style="
-        color:var(--muted);
-        padding:1rem;
-        "
-      >
-        Bado huna ujumbe.
+
+      <p style="
+        text-align:center;
+        color:var(--sk-muted);
+        padding:2rem;
+      ">
+
+        Bado huna mazungumzo.
+        Bonyeza "Wasiliana / Chat"
+        kwenye bidhaa.
+
       </p>
+
     `;
 
     return;
@@ -5820,68 +5208,87 @@ function renderInbox(){
 
   body.innerHTML =
     myConversations.map(
-      c => `
+      c => {
 
-        <div
-          class="
-            inbox-item
-            ${
-              isConvoUnread(c)
-              ? "unread"
-              : ""
-            }
-          "
-          onclick="
-            openChatFromInbox(
-              '${c.id}'
-            )
-          "
-        >
+        const seller =
+          c.sellerUid ===
+          currentUser.uid;
 
-          <div class="inbox-info">
 
-            <b>
+        const name =
+          seller
+            ? c.buyerName
+            : c.sellerName;
+
+
+        return `
+
+          <div
+            class="inbox-item"
+            onclick="
+              openChatFromInbox('${c.id}')
+            ">
+
+            <div
+              class="inbox-avatar">
               ${escapeHtml(
-                c.sellerName ||
-                c.buyerName ||
-                "Mtumiaji"
-              )}
-            </b>
-
-            <div>
-              ${escapeHtml(
-                c.productName ||
-                ""
+                (name || "M")
+                  .charAt(0)
+                  .toUpperCase()
               )}
             </div>
 
-            <small>
-              ${escapeHtml(
-                c.lastMessage ||
-                "Anza mazungumzo..."
-              )}
-            </small>
+
+            <div
+              class="inbox-info">
+
+              <div
+                class="inbox-name">
+                ${escapeHtml(
+                  name ||
+                  "Mtumiaji"
+                )}
+              </div>
+
+              <div
+                class="inbox-product">
+                ${escapeHtml(
+                  c.productName ||
+                  ""
+                )}
+              </div>
+
+              <div
+                class="inbox-preview">
+                ${escapeHtml(
+                  c.lastMessage ||
+                  "Anza mazungumzo..."
+                )}
+              </div>
+
+            </div>
 
           </div>
 
-        </div>
+        `;
 
-      `
+      }
     ).join("");
 
 }
 
 
 window.openChatFromInbox =
-  convoId => {
+  id => {
 
     const c =
       myConversations.find(
-        x =>
-          x.id === convoId
+        x => x.id === id
       );
 
-    if(!c) return;
+
+    if(!c)
+      return;
 
 
     const seller =
@@ -5890,10 +5297,10 @@ window.openChatFromInbox =
 
 
     openChat(
-      convoId,
+      id,
       seller
-      ? c.buyerName
-      : c.sellerName,
+        ? c.buyerName
+        : c.sellerName,
       c.productName || "",
       null
     );
@@ -5916,12 +5323,12 @@ window.openChatForProduct =
 
     const p =
       allProducts.find(
-        x =>
-          x.id === productId
+        x => x.id === productId
       );
 
 
-    if(!p) return;
+    if(!p)
+      return;
 
 
     const convoId =
@@ -5964,7 +5371,7 @@ window.openChatForProduct =
     openChat(
       convoId,
       p.ownerName ||
-      "Muuzaji",
+        "Muuzaji",
       p.name,
       data
     );
@@ -5974,7 +5381,7 @@ window.openChatForProduct =
 
 async function openChat(
   convoId,
-  otherName,
+  name,
   productName,
   createData
 ){
@@ -5983,22 +5390,16 @@ async function openChat(
     convoId;
 
 
-  document
-    .getElementById(
-      "chatName"
-    )
-    .textContent =
-      otherName ||
-      "Mtumiaji";
+  document.getElementById(
+    "chatName"
+  ).textContent =
+    name || "Muuzaji";
 
 
-  document
-    .getElementById(
-      "chatProduct"
-    )
-    .textContent =
-      productName ||
-      "";
+  document.getElementById(
+    "chatProduct"
+  ).textContent =
+    productName;
 
 
   if(createData){
@@ -6026,9 +5427,7 @@ async function openChat(
       [`lastReadBy.${currentUser.uid}`]:
         serverTimestamp()
     }
-  ).catch(
-    () => {}
-  );
+  ).catch(()=>{});
 
 
   if(unsubChatMsgs)
@@ -6079,7 +5478,9 @@ async function openChat(
 }
 
 
-function renderChatMessages(messages){
+function renderChatMessages(
+  messages
+){
 
   const body =
     document.getElementById(
@@ -6090,13 +5491,8 @@ function renderChatMessages(messages){
   if(!messages.length){
 
     body.innerHTML = `
-      <p
-        style="
-        color:var(--muted);
-        text-align:center;
-        "
-      >
-        Andika ujumbe wako wa kwanza.
+      <p id="chatEmpty">
+        Andika ujumbe wako wa kwanza hapa chini.
       </p>
     `;
 
@@ -6114,22 +5510,12 @@ function renderChatMessages(messages){
           currentUser.uid;
 
 
-        const ms =
-          timestampMs(
-            m.createdAt
-          ) ||
-          Date.now();
-
-
         const time =
-          new Date(ms)
-            .toLocaleTimeString(
-              "sw-TZ",
-              {
-                hour:"2-digit",
-                minute:"2-digit"
-              }
-            );
+          formatTime(
+            getTimestamp(
+              m.createdAt
+            )
+          );
 
 
         return `
@@ -6138,16 +5524,14 @@ function renderChatMessages(messages){
             class="
               bubble
               ${mine ? "me" : "them"}
-            "
-          >
+            ">
 
             ${escapeHtml(
               m.text
             )}
 
             <span
-              class="bubble-time"
-            >
+              class="bubble-time">
               ${time}
             </span>
 
@@ -6165,42 +5549,63 @@ function renderChatMessages(messages){
 }
 
 
-document
-  .getElementById(
-    "chatSendBtn"
-  )
-  .addEventListener(
-    "click",
-    sendChatMessage
+/* =========================================================
+   SEND CHAT
+   ========================================================= */
+
+const chatInput =
+  document.getElementById(
+    "chatInput"
   );
+
+
+const chatSendBtn =
+  document.getElementById(
+    "chatSendBtn"
+  );
+
+
+chatSendBtn.addEventListener(
+  "click",
+  sendChatMessage
+);
+
+
+chatInput.addEventListener(
+  "keydown",
+  e => {
+
+    if(
+      e.key === "Enter" &&
+      !e.shiftKey
+    ){
+
+      e.preventDefault();
+
+      sendChatMessage();
+
+    }
+
+  }
+);
 
 
 async function sendChatMessage(){
 
-  const input =
-    document.getElementById(
-      "chatInput"
-    );
-
-
   const text =
-    input.value.trim();
+    chatInput.value.trim();
 
 
   if(
     !text ||
     !currentConvoId ||
     !currentUser
-  ) return;
+  )
+    return;
 
 
-  const btn =
-    document.getElementById(
-      "chatSendBtn"
-    );
-
-
-  btn.disabled = true;
+  chatSendBtn.disabled =
+    true;
 
 
   try{
@@ -6254,10 +5659,10 @@ async function sendChatMessage(){
     );
 
 
-    input.value = "";
+    chatInput.value = "";
 
-
-  }catch(err){
+  }
+  catch(err){
 
     console.error(err);
 
@@ -6265,9 +5670,11 @@ async function sendChatMessage(){
       "Imeshindikana kutuma ujumbe."
     );
 
-  }finally{
+  }
+  finally{
 
-    btn.disabled = false;
+    chatSendBtn.disabled =
+      false;
 
   }
 
@@ -6280,34 +5687,411 @@ document
   )
   .addEventListener(
     "click",
-    () => {
-
+    ()=>{
       openPanel(
         inboxDrawer
       );
-
     }
   );
 
 
 /* =========================================================
+   NOTIFICATIONS TAB
+   ========================================================= */
+
+function renderNotificationsTab(body){
+
+  if(!myNotifications.length){
+
+    body.innerHTML = `
+
+      <p
+        style="
+          text-align:center;
+          color:var(--sk-muted);
+          padding:2rem;
+        ">
+        Hakuna arifa kwa sasa.
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    myNotifications.map(
+      n => `
+
+        <div
+          class="
+            notif-row
+            ${n.read ? "" : "unread"}
+          ">
+
+          <div
+            class="notif-icon">
+            ❤️
+          </div>
+
+          <div
+            class="notif-text">
+
+            <b>
+              ${escapeHtml(
+                n.fromName ||
+                "Mtu"
+              )}
+            </b>
+
+            amependa bidhaa yako
+
+            <b>
+              ${escapeHtml(
+                n.productName ||
+                ""
+              )}
+            </b>
+
+          </div>
+
+        </div>
+
+      `
+    ).join("");
+
+
+  myNotifications
+    .filter(n => !n.read)
+    .forEach(
+      n =>
+        updateDoc(
+          doc(
+            db,
+            "notifications",
+            n.id
+          ),
+          {read:true}
+        ).catch(()=>{})
+    );
+
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function renderSettingsTab(body){
+
+  const showEmail =
+    myProfile?.privacyShowEmail ||
+    false;
+
+
+  body.innerHTML = `
+
+    <div
+      class="settings-row">
+
+      <div>
+
+        <div class="settings-label">
+          🌙 Dark Mode
+        </div>
+
+        <div class="settings-sub">
+          Badili mwonekano wa SOKO KUU
+        </div>
+
+      </div>
+
+
+      <button
+        class="dark-toggle"
+        onclick="toggleDarkMode()">
+        🌙
+      </button>
+
+    </div>
+
+
+    <div
+      class="settings-row">
+
+      <div>
+
+        <div class="settings-label">
+          Email
+        </div>
+
+        <div class="settings-sub">
+          ${escapeHtml(
+            currentUser.email ||
+            ""
+          )}
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="settings-row">
+
+      <div>
+
+        <div class="settings-label">
+          Privacy
+        </div>
+
+        <div class="settings-sub">
+          Onyesha email yangu
+        </div>
+
+      </div>
+
+      <div
+        class="
+          toggle-switch
+          ${showEmail ? "on" : ""}
+        "
+        id="privacyToggle">
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById(
+      "privacyToggle"
+    )
+    .addEventListener(
+      "click",
+      async e => {
+
+        const el =
+          e.currentTarget;
+
+
+        const val =
+          !el.classList.contains(
+            "on"
+          );
+
+
+        el.classList.toggle(
+          "on",
+          val
+        );
+
+
+        await setDoc(
+          doc(
+            db,
+            "users",
+            currentUser.uid
+          ),
+          {
+            privacyShowEmail:
+              val
+          },
+          {merge:true}
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   REALTIME PRODUCTS
+   ========================================================= */
+
+const productsQuery =
+  query(
+    collection(
+      db,
+      "products"
+    ),
+    orderBy(
+      "createdAt",
+      "desc"
+    )
+  );
+
+
+onSnapshot(
+  productsQuery,
+  snapshot => {
+
+    document.getElementById(
+      "loading"
+    ).style.display =
+      "none";
+
+
+    allProducts =
+      snapshot.docs.map(
+        d => ({
+          id:d.id,
+          ...d.data()
+        })
+      );
+
+
+    render();
+
+  },
+  err => {
+
+    console.error(err);
+
+    document.getElementById(
+      "loading"
+    ).textContent =
+      "Imeshindikana kupakia bidhaa.";
+
+  }
+);
+
+
+/* =========================================================
    HELPERS
-========================================================= */
+   ========================================================= */
 
 function escapeHtml(str){
 
-  const d =
+  const div =
     document.createElement(
       "div"
     );
 
-  d.textContent =
+  div.textContent =
     str || "";
 
-  return d.innerHTML;
+  return div.innerHTML;
 
 }
 
+
+function getTimestamp(value){
+
+  if(
+    value &&
+    typeof value.toMillis ===
+      "function"
+  )
+    return value.toMillis();
+
+
+  if(
+    typeof value ===
+      "number"
+  )
+    return value;
+
+
+  if(value instanceof Date)
+    return value.getTime();
+
+
+  return 0;
+
+}
+
+
+function formatDate(ms){
+
+  if(!ms)
+    return "";
+
+
+  return new Date(ms)
+    .toLocaleDateString(
+      "sw-TZ",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+}
+
+
+function formatTime(ms){
+
+  if(!ms)
+    return "";
+
+
+  return new Date(ms)
+    .toLocaleTimeString(
+      "sw-TZ",
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+}
+
+
+function timeAgo(ms){
+
+  if(!ms)
+    return "";
+
+  const diff =
+    Date.now() - ms;
+
+  const minutes =
+    Math.floor(
+      diff / 60000
+    );
+
+
+  if(minutes < 1)
+    return "sasa hivi";
+
+
+  if(minutes < 60)
+    return `dakika ${minutes}`;
+
+
+  const hours =
+    Math.floor(
+      minutes / 60
+    );
+
+
+  if(hours < 24)
+    return `saa ${hours}`;
+
+
+  const days =
+    Math.floor(
+      hours / 24
+    );
+
+
+  return `siku ${days}`;
+
+}
+
+
+/* =========================================================
+   INITIAL RENDER
+   ========================================================= */
+
+render();
 
 </script>
 
