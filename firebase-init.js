@@ -24,13 +24,9 @@ import {
   orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+// Kumbuka: Firebase Storage haitumiki tena kwenye mfumo huu (inahitaji Blaze plan).
+// Picha za bidhaa sasa zinabanwa (compress) kwa JavaScript kisha kuhifadhiwa
+// moja kwa moja ndani ya Firestore kama maandishi ya base64.
 
 const firebaseConfig = {
   apiKey: "AIzaSyCqOQQbxa4QkmaxTh8QCaJ1EN_ORkKNWPE",
@@ -45,7 +41,6 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const storage = getStorage(app);
 
 export {
   onAuthStateChanged,
@@ -62,9 +57,5 @@ export {
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject
+  serverTimestamp
 };
